@@ -1,0 +1,23 @@
+---
+import Dash from "./Dash.astro";
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="Footer">
+  <small>© {currentYear}</small>
+  <Dash />
+  <small>
+    <a href="/">Cartogram Inc.</a>
+  </small>
+  <Dash isFullWidth />
+  <small>All Rights Reserved.</small>
+</footer>
+
+<style>
+  .Footer {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+</style>

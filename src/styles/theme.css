@@ -1,0 +1,26 @@
+:root {
+  --background-image-noise: url("/assets/noise.png");
+
+  --main-background-image: var(--background-image-noise);
+  --main-background-color: light-dark(var(--color-white), var(--color-black));
+
+  --main-color: light-dark(var(--color-blue), var(--color-cyan));
+  --main-font-body: var(--font-body);
+  --main-line-height-md: var(--line-height-md);
+
+  --dash-color: var(--main-color);
+
+  --anchor-color: var(--main-color);
+}
+
+:root.theme-dark {
+  --main-background-image: none;
+}
+
+html {
+  color-scheme: light;
+
+  &.theme-dark {
+    color-scheme: dark;
+  }
+}
