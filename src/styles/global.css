@@ -5,12 +5,16 @@
 
 @import "./typography.css";
 
+@import "./Button.css";
+
 .Main {
   min-height: 100%;
   isolation: isolate;
   background-image: var(--main-background-image);
   background-color: var(--main-background-color);
+  min-height: 100vh;
 }
+
 @media (forced-colors: active) {
   /* Deactivate custom backgrounds for high contrast users. */
   .Main {
@@ -24,10 +28,20 @@ body {
   font-family: var(--main-font-body);
   line-height: var(--main-line-height-md);
   color: var(--main-color);
-  font-weight: nomral;
+  font-weight: normal;
+  background: var(--main-color);
 }
 
 a {
+  color: var(--anchor-color);
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 0.05em;
+}
+
+a:focus,
+a:focus-visible,
+a:active,
+a:hover {
   color: var(--anchor-color);
 }
 

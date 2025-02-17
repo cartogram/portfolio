@@ -1,0 +1,153 @@
+---
+// Learn about using Astro layouts:
+// https://docs.astro.build/en/core-concepts/layouts/
+
+// Component Imports
+import Head from "../components/Head.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Wordmark from "../components/Wordmark.astro";
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+}
+
+const { title, description } = Astro.props;
+
+const professionalLinks: {
+  label: string;
+  href: string;
+}[] = [
+  {
+    label: "Say hello",
+    href: "mailto:mseccafien@gmail.com",
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/cartogram",
+  },
+  {
+    label: "View résumé",
+    href: "Matthew Seccafien-CV-2023.pdf",
+  },
+  {
+    label: "Instagram",
+    href: "https://instagram.com/cartogram",
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <Head title={title} description={description} />
+  </head>
+  <body>
+    <main class="Main">
+      <Wordmark />
+
+      <section class="Layout">
+        <header class="Header">
+          <Nav />
+        </header>
+        <div class="Masthead">
+          <p>
+            Berlin-based designer and developer,<br />
+            builder of user interfaces and systems.<br />
+          </p>
+          <ul class="List">
+            {
+              professionalLinks.map(({ label, href }) => (
+                <li class="List__Item">
+                  <a href={href}>{label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="Content">
+          <slot />
+        </div>
+        <footer class="Footer">
+          <Footer />
+        </footer>
+      </section>
+    </main>
+
+    <script>
+      addEventListener("load", () =>
+        document.documentElement.classList.add("loaded")
+      );
+    </script>
+  </body>
+</html>
+
+<style>
+  .Layout {
+    padding: 4rem;
+    width: 100%;
+    max-width: 1750px;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto 1fr auto;
+    grid-row-gap: 2rem;
+    z-index: var(--z-index-2);
+    position: relative;
+  }
+
+  .Header {
+    grid-area: 1 / 1 / 2 / 5;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  .Masthead {
+    grid-area: 2 / 1 / 3 / 5;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: max-content max-content;
+    grid-row-gap: 2rem;
+
+    > * {
+      grid-column: 1 / 5;
+    }
+
+    @media (width > 900px) {
+      grid-area: 2 / 1 / 3 / 3;
+
+      > * {
+        grid-column: 1 / 3;
+      }
+    }
+  }
+
+  .Footer {
+    grid-area: 5 / 1 / 6 / 5;
+
+    @media (width > 900px) {
+      grid-area: 5 / 1 / 6 / 3;
+    }
+  }
+
+  .Content {
+    grid-area: 4 / 1 / 5 / 5;
+    display: flex;
+    flex-direction: column;
+
+    @media (width > 900px) {
+      grid-area: 4 / 1 / 5 / 5;
+    }
+  }
+
+  .Navigation {
+    grid-area: 2 / 3 / 3 / 5;
+  }
+
+  .List {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+</style>

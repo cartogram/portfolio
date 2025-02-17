@@ -4,13 +4,22 @@
   --main-background-image: var(--background-image-noise);
   --main-background-color: light-dark(var(--color-white), var(--color-black));
 
-  --main-color: light-dark(var(--color-blue), var(--color-cyan));
+  --main-color: light-dark(var(--color-blue), var(--color-pink));
+  --main-color-light: light-dark(
+    var(--color-blue-light),
+    var(--color-pink-light)
+  );
   --main-font-body: var(--font-body);
   --main-line-height-md: var(--line-height-md);
 
   --dash-color: var(--main-color);
 
   --anchor-color: var(--main-color);
+  --anchor-color-active: var(--main-color-light);
+  --button-color: var(var(--anchor-color));
+
+  --wordmark-color: light-dark(var(--main-color), var(--color-pink-dark));
+  --wordmark-background-color: var(--main-background-color);
 }
 
 :root.theme-dark {
