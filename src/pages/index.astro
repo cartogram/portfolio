@@ -1,10 +1,105 @@
 ---
+import { getCollection } from "astro:content";
+
 import Layout from "../layouts/Layout.astro";
-import Dash from "../components/Dash.astro";
+
+const professionalLinks: {
+  label: string;
+  href: string;
+}[] = [
+  {
+    label: "Say hello",
+    href: "mailto:mseccafien@gmail.com",
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/cartogram",
+  },
+  {
+    label: "View résumé",
+    href: "/assets/Matthew Seccafien-CV-2023.pdf",
+  },
+  {
+    label: "Instagram",
+    href: "https://instagram.com/cartogram",
+  },
+];
+
+const projects = (await getCollection("work"))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 5);
+
+const currentProjects = projects.filter((project) =>
+  project.data.tags.includes("Current")
+);
+
+const pastProjects = projects.filter((project) =>
+  project.data.tags.includes("Past")
+);
 ---
 
-<Layout>
-  <div class="ContentLayout">
+<Layout title="Matt Seccafien">
+  <div slot="masthead">
+    <h2>
+      Berlin-based designer and developer,<br />
+      builder of user interfaces and systems.<br />
+    </h2>
+
+    <ul class="List">
+      {
+        professionalLinks.map(({ label, href }) => (
+          <li>
+            <a class="Anchor" href={href}>
+              <span class="Anchor__Target">{label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <ul class="List" slot="projects">
+    <li class="">
+      <h3>Current Projects</h3>
+      <ul class="Projects">
+        {
+          currentProjects.map((project) => (
+            <li>
+              <a
+                class="Anchor"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={project.data.url}
+              >
+                <span class="Anchor__Target">{project.data.title}</span>
+                <span class="Anchor__Text">{project.data.type}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </li>
+    <li class="">
+      <h3>Past Projects</h3>
+      <ul class="Projects">
+        {
+          pastProjects.map((project) => (
+            <li>
+              <a
+                class="Anchor"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={project.data.url}
+              >
+                <span class="Anchor__Target">{project.data.title}</span>
+                <span class="Anchor__Text">{project.data.type}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </li>
+  </ul>
+  <div class="ContentLayout" slot="content">
     <div class="ImageContainer">
       <img class="Image" src="/assets/me-1.jpg" alt="Me" />
       <img class="Image" src="/assets/me-3.jpg" alt="Me" />
@@ -26,23 +121,30 @@ import Dash from "../components/Dash.astro";
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.strava.com/athletes/59501199">running</a
-        > around Templehofer Feld in Berlin.
+        > around Templehofer Feld in Berlin, at the <a
+          href="https://letterboxd.com/cartogram/"
+          target="_blank"
+          rel="noopener noreferrer">kino</a
+        > or hanging out with my partner <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.fimcd.ca/">Fiona</a
+        > and our cat Otto (pictured).
       </p>
       <h3>Speaking</h3>
       <ul class="Speaking">
         <li class="List__Item">
           <span class="title">The Forest for the Abstract Syntax Trees</span><br
           />
-          <span class="details">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://gitnation.com/contents/the-forest-for-the-abstract-syntax-trees"
-              class="location">React Advanced London</a
-            >
-            <Dash />
-            <span class="date">2021</span>
-          </span>
+          <a
+            class="Anchor"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://gitnation.com/contents/the-forest-for-the-abstract-syntax-trees"
+          >
+            <span class="Anchor__Target">React Advanced London</span>
+            <span class="Anchor__Text">2021</span>
+          </a>
         </li>
       </ul>
     </div>
@@ -80,11 +182,6 @@ import Dash from "../components/Dash.astro";
       grid-column: 3 / 5;
       grid-row: 3 / 5;
       z-index: 0;
-    }
-
-    .details {
-      display: flex;
-      align-items: baseline;
     }
   </style>
 </Layout>

@@ -14,10 +14,12 @@ const isCurrentPage = (href: string) => {
   if (pathname.at(-1) !== "/") pathname += "/";
   return pathname === href || (href !== "/" && pathname.startsWith(href));
 };
+
+const { title } = Astro.props;
 ---
 
-<nav class="Nav">
-  <h1 class="Title"><a href="/">Matt Seccafien</a></h1>
+<nav class="Nav Wrap">
+  <h1 class="Title"><a href="/">{title}</a></h1>
   {
     [].length > 0 && (
       <ul class="Links">
@@ -38,10 +40,29 @@ const isCurrentPage = (href: string) => {
 
 <style>
   .Nav {
+    z-index: var(--z-index-3);
     display: grid;
-    grid-template-columns: subgrid;
-    grid-area: 1 / 1 / 1 / 5;
-    align-items: center;
+    align-items: baseline;
+    padding-bottom: 1rem;
+    position: relative;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  :global(.loaded) .Nav {
+    opacity: 1;
+  }
+
+  .Nav {
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+    transition-delay: 0.3s;
+    transition-property: opacity, transform;
+  }
+
+  :global(.loaded) .Nav {
+    opacity: 1;
   }
 
   .Title {
@@ -55,6 +76,5 @@ const isCurrentPage = (href: string) => {
   .ThemeToggle {
     grid-area: 1 / 4 / 4 / 5;
     justify-self: end;
-    align-self: center;
   }
 </style>

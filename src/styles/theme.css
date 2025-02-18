@@ -18,7 +18,7 @@
   --anchor-color-active: var(--main-color-light);
   --button-color: var(var(--anchor-color));
 
-  --wordmark-color: light-dark(var(--main-color), var(--color-pink-dark));
+  --wordmark-color: light-dark(var(--color-blue-light), var(--color-pink-dark));
   --wordmark-background-color: var(--main-background-color);
 }
 

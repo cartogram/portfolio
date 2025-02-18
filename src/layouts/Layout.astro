@@ -15,40 +15,6 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-
-const professionalLinks: {
-  label: string;
-  href: string;
-}[] = [
-  {
-    label: "Say hello",
-    href: "mailto:mseccafien@gmail.com",
-  },
-  {
-    label: "GitHub",
-    href: "https://github.com/cartogram",
-  },
-  {
-    label: "View résumé",
-    href: "Matthew Seccafien-CV-2023.pdf",
-  },
-  {
-    label: "Instagram",
-    href: "https://instagram.com/cartogram",
-  },
-];
-
-const projects = (await getCollection("work"))
-  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-  .slice(0, 4);
-
-console.log(await getCollection("work"));
-const currentProjects = projects.filter((project) =>
-  project.data.tags.includes("Current")
-);
-const pastProjects = projects.filter((project) =>
-  project.data.tags.includes("Past")
-);
 ---
 
 <html lang="en">
@@ -58,76 +24,17 @@ const pastProjects = projects.filter((project) =>
   <body>
     <main class="Main">
       <Wordmark />
+      <Nav title={title} />
 
-      <section class="Layout">
-        <header class="Header">
-          <Nav />
-        </header>
+      <section class="Layout Wrap">
         <div class="Masthead">
-          <h2>
-            Berlin-based designer and developer,<br />
-            builder of user interfaces and systems.<br />
-          </h2>
-
-          <ul class="List">
-            {
-              professionalLinks.map(({ label, href }) => (
-                <li class="List__Item">
-                  <a target="_blank" rel="noopener noreferrer" href={href}>
-                    {label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
+          <slot name="masthead" />
         </div>
         <div class="Projects">
-          <ul class="List">
-            <li class="">
-              <h3>Current Projects</h3>
-              <ul class="Projects">
-                {
-                  currentProjects.map((project) => (
-                    <li class="List__Item">
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={project.data.url}
-                      >
-                        {project.data.title}
-                      </a>
-                      <Dash />
-                      <span class="type">{project.data.type}</span>
-                    </li>
-                  ))
-                }
-              </ul>
-            </li>
-            <li class="">
-              <h3>Past Projects</h3>
-              <ul class="Projects">
-                {
-                  pastProjects.map((project) => (
-                    <li class="List__Item">
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={project.data.url}
-                      >
-                        {project.data.title}
-                      </a>
-                      <Dash />
-                      <span class="type">{project.data.type}</span>
-                    </li>
-                  ))
-                }
-              </ul>
-            </li>
-          </ul>
+          <slot name="projects" />
         </div>
-
         <div class="Content">
-          <slot />
+          <slot name="content" />
         </div>
         <footer class="Footer">
           <Footer />
@@ -145,18 +52,14 @@ const pastProjects = projects.filter((project) =>
 
 <style>
   .Layout {
-    padding: 1.5rem;
     width: 100%;
-    max-width: 1750px;
     min-height: 100vh;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: auto;
     grid-column-gap: 2rem;
     grid-row-gap: 3rem;
     grid-template-areas:
-      "header header header header"
       "masthead masthead masthead masthead"
       "projects projects projects projects"
       "content content content content"
@@ -165,28 +68,19 @@ const pastProjects = projects.filter((project) =>
     position: relative;
   }
 
-  @media (width > 550px) {
-    .Layout {
-      padding: 2.5rem;
-    }
-  }
-
   @media (width > 950px) {
     .Layout {
-      padding: 6rem 4rem;
       grid-template-areas:
-        "header header header header"
         "masthead masthead masthead ."
         ". . projects projects"
         "content content content content"
-        "footer footer footer .";
+        "footer footer . .";
     }
   }
 
   @media (width > 1100px) {
     .Layout {
       grid-template-areas:
-        "header header header header"
         "masthead masthead . ."
         ". . projects projects"
         "content content content content"
@@ -205,13 +99,6 @@ const pastProjects = projects.filter((project) =>
   :global(.loaded) .Layout {
     opacity: 1;
     transform: translateY(0);
-  }
-
-  .Header {
-    grid-area: header;
-    display: grid;
-    /* position: sticky;
-    top: 0; */
   }
 
   .Masthead {
@@ -236,16 +123,5 @@ const pastProjects = projects.filter((project) =>
     p {
       max-width: 40ch;
     }
-  }
-
-  .List {
-    display: grid;
-    grid-column-gap: 2rem;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .List__Item {
-    display: flex;
-    align-items: baseline;
   }
 </style>
