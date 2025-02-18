@@ -1,14 +1,17 @@
 ---
 const letters = ["C", "A", "R", "T", "O", "G", "R", "A", "M"];
-const trails = 6;
+const min = 3;
+const max = 15;
 ---
 
 <cartogram-wordmark class="Wordmark">
   {
     letters.map((l) => (
       <div class="Track">
-        {Array.from({ length: trails }).map((_, i) => (
-          <span style={`--index: ${trails - i}`} class="Letter">
+        {Array.from({
+          length: Math.floor(Math.random() * (max - min + 1)) + min,
+        }).map((_, i) => (
+          <span style={`--index: ${max - i}`} class="Letter">
             {l}
           </span>
         ))}
@@ -19,7 +22,7 @@ const trails = 6;
 
 <style>
   .Wordmark {
-    position: absolute;
+    position: fixed;
     z-index: var(--z-index-1);
     top: 0;
     right: 0;
@@ -27,9 +30,10 @@ const trails = 6;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     pointer-events: none;
-    overflow-x: hidden;
+    width: 100vw;
+    overflow: hidden;
   }
 
   .Track {
@@ -50,6 +54,7 @@ const trails = 6;
       -1px 1px 0 var(--wordmark-color),
       1px 1px 0 var(--wordmark-color);
     z-index: var(--index);
+    cursor: pointer;
   }
 
   .Letter:first-child {
@@ -58,7 +63,7 @@ const trails = 6;
 </style>
 
 <script>
-  import { animate, stagger, cubicBezier, hover } from "motion";
+  import { animate, stagger } from "motion";
 
   class CartogramWordmark extends HTMLElement {
     constructor() {
@@ -74,7 +79,7 @@ const trails = 6;
       tracks.forEach((track) => {
         const height = this.randomNumber(0, size.height, 0.5);
         const letters = track.querySelectorAll(".Letter");
-        const easing = cubicBezier(0.05, 0.83, 0.56, 1);
+        // const easing = cubicBezier(0.05, 0.83, 0.56, 1);
 
         letters.forEach((letter, index) => {
           animate(
@@ -87,9 +92,15 @@ const trails = 6;
               skewY: [-18, -18],
             },
             {
-              delay: stagger(0.1),
-              duration: 3,
-              ease: easing,
+              // delay: stagger(1),
+              // duration: 10,
+              // ease: easing,
+
+              type: "spring",
+              stiffness: 300,
+              damping: 40,
+              mass: 4,
+              delay: index * 0.02,
             }
           );
         });

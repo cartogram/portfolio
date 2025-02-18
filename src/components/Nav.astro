@@ -17,7 +17,7 @@ const isCurrentPage = (href: string) => {
 ---
 
 <nav class="Nav">
-  <h1><a href="/">Matt Seccafien</a></h1>
+  <h1 class="Title"><a href="/">Matt Seccafien</a></h1>
   {
     [].length > 0 && (
       <ul class="Links">
@@ -44,15 +44,13 @@ const isCurrentPage = (href: string) => {
     align-items: center;
   }
 
-  h1 {
+  .Title {
     grid-area: 1 / 1 / 4 / 3;
   }
 
-  /* .Links {
-    grid-area: 1 / 3 / 4 / 4;
-    display: flex;
-    gap: 2rem;
-  } */
+  .Title__Text {
+    background-color: var(--main-background-color);
+  }
 
   .ThemeToggle {
     grid-area: 1 / 4 / 4 / 5;

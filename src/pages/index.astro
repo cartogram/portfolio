@@ -1,48 +1,90 @@
 ---
-import { getCollection } from "astro:content";
-
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import Layout from "../layouts/Layout.astro";
-
-import Grid from "../components/Grid.astro";
-import Hero from "../components/Hero.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
-import Wordmark from "../components/Wordmark.astro";
-const projects = (await getCollection("work"))
-  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-  .slice(0, 4);
+import Dash from "../components/Dash.astro";
 ---
 
 <Layout>
-  <!-- <img
-          alt="Matthew Seccafien and his cat Otto."
-          width="480"
-          height="620"
-          src="/assets/me.jpg"
-        /> -->
+  <div class="ContentLayout">
+    <div class="ImageContainer">
+      <img class="Image" src="/assets/me-1.jpg" alt="Me" />
+      <img class="Image" src="/assets/me-3.jpg" alt="Me" />
+    </div>
+    <div class="ContentContainer">
+      <h3>About me</h3>
+      <p>
+        Over the last 20 years I've held a variety of roles, starting out in
+        traditional print, typography and information design, to site resiliency
+        engineering, to open-source React framework development, and I'm
+        currently interested in design system operations.
+      </p>
+      <p>
+        I value creativity and autonomy in both life and work, and thrive when I
+        am invested in the whole idea rather than any single facet.
+      </p>
+      <p>
+        When not at my computer I can be found <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.strava.com/athletes/59501199">running</a
+        > around Templehofer Feld in Berlin.
+      </p>
+      <h3>Speaking</h3>
+      <ul class="Speaking">
+        <li class="List__Item">
+          <span class="title">The Forest for the Abstract Syntax Trees</span><br
+          />
+          <span class="details">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://gitnation.com/contents/the-forest-for-the-abstract-syntax-trees"
+              class="location">React Advanced London</a
+            >
+            <Dash />
+            <span class="date">2021</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-  <!-- <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Selected Work</h3>
-          <p>
-            Take a look below at some of my featured work for clients from the
-            past few years.
-          </p>
-        </header> -->
+  <style>
+    .ContentLayout {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-column-gap: 2rem;
+    }
 
-  <!-- <div class="gallery">
-          <Grid variant="offset">
-            {
-              projects.map((project) => (
-                <li>{/* <PortfolioPreview project={project} /> */}</li>
-              ))
-            }
-          </Grid>
-        </div> -->
+    .ImageContainer {
+      padding-right: 4rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+    }
+
+    @media (width > 950px) {
+      .ContentLayout {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .Image {
+      position: relative;
+      grid-column: 1 / 4;
+      grid-row: 1 / 4;
+      z-index: 1;
+      box-shadow: 0 0rem 2rem rgba(0, 0, 0, 0.1);
+    }
+
+    .Image:nth-child(2) {
+      grid-column: 3 / 5;
+      grid-row: 3 / 5;
+      z-index: 0;
+    }
+
+    .details {
+      display: flex;
+      align-items: baseline;
+    }
+  </style>
 </Layout>
-
-<style>
-  .roles {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-</style>

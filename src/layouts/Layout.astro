@@ -1,13 +1,14 @@
 ---
 // Learn about using Astro layouts:
 // https://docs.astro.build/en/core-concepts/layouts/
+import { getCollection } from "astro:content";
 
 // Component Imports
 import Head from "../components/Head.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import Wordmark from "../components/Wordmark.astro";
-
+import Dash from "../components/Dash.astro";
 interface Props {
   title?: string | undefined;
   description?: string | undefined;
@@ -36,6 +37,18 @@ const professionalLinks: {
     href: "https://instagram.com/cartogram",
   },
 ];
+
+const projects = (await getCollection("work"))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 4);
+
+console.log(await getCollection("work"));
+const currentProjects = projects.filter((project) =>
+  project.data.tags.includes("Current")
+);
+const pastProjects = projects.filter((project) =>
+  project.data.tags.includes("Past")
+);
 ---
 
 <html lang="en">
@@ -51,20 +64,68 @@ const professionalLinks: {
           <Nav />
         </header>
         <div class="Masthead">
-          <p>
+          <h2>
             Berlin-based designer and developer,<br />
             builder of user interfaces and systems.<br />
-          </p>
+          </h2>
+
           <ul class="List">
             {
               professionalLinks.map(({ label, href }) => (
                 <li class="List__Item">
-                  <a href={href}>{label}</a>
+                  <a target="_blank" rel="noopener noreferrer" href={href}>
+                    {label}
+                  </a>
                 </li>
               ))
             }
           </ul>
         </div>
+        <div class="Projects">
+          <ul class="List">
+            <li class="">
+              <h3>Current Projects</h3>
+              <ul class="Projects">
+                {
+                  currentProjects.map((project) => (
+                    <li class="List__Item">
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={project.data.url}
+                      >
+                        {project.data.title}
+                      </a>
+                      <Dash />
+                      <span class="type">{project.data.type}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </li>
+            <li class="">
+              <h3>Past Projects</h3>
+              <ul class="Projects">
+                {
+                  pastProjects.map((project) => (
+                    <li class="List__Item">
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={project.data.url}
+                      >
+                        {project.data.title}
+                      </a>
+                      <Dash />
+                      <span class="type">{project.data.type}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </li>
+          </ul>
+        </div>
+
         <div class="Content">
           <slot />
         </div>
@@ -84,70 +145,107 @@ const professionalLinks: {
 
 <style>
   .Layout {
-    padding: 4rem;
+    padding: 1.5rem;
     width: 100%;
     max-width: 1750px;
     min-height: 100vh;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto 1fr auto;
-    grid-row-gap: 2rem;
+    grid-auto-rows: auto;
+    grid-column-gap: 2rem;
+    grid-row-gap: 3rem;
+    grid-template-areas:
+      "header header header header"
+      "masthead masthead masthead masthead"
+      "projects projects projects projects"
+      "content content content content"
+      "footer footer footer footer";
     z-index: var(--z-index-2);
     position: relative;
   }
 
+  @media (width > 550px) {
+    .Layout {
+      padding: 2.5rem;
+    }
+  }
+
+  @media (width > 950px) {
+    .Layout {
+      padding: 6rem 4rem;
+      grid-template-areas:
+        "header header header header"
+        "masthead masthead masthead ."
+        ". . projects projects"
+        "content content content content"
+        "footer footer footer .";
+    }
+  }
+
+  @media (width > 1100px) {
+    .Layout {
+      grid-template-areas:
+        "header header header header"
+        "masthead masthead . ."
+        ". . projects projects"
+        "content content content content"
+        "footer footer . .";
+    }
+  }
+
+  .Layout {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: 0.3s ease-in-out;
+    transition-delay: 0.3s;
+    transition-property: opacity, transform;
+  }
+
+  :global(.loaded) .Layout {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .Header {
-    grid-area: 1 / 1 / 2 / 5;
+    grid-area: header;
     display: grid;
-    grid-template-columns: subgrid;
+    /* position: sticky;
+    top: 0; */
   }
 
   .Masthead {
-    grid-area: 2 / 1 / 3 / 5;
-    display: grid;
-    grid-template-columns: subgrid;
-    grid-template-rows: max-content max-content;
-    grid-row-gap: 2rem;
-
-    > * {
-      grid-column: 1 / 5;
-    }
-
-    @media (width > 900px) {
-      grid-area: 2 / 1 / 3 / 3;
-
-      > * {
-        grid-column: 1 / 3;
-      }
-    }
+    grid-area: masthead;
   }
 
   .Footer {
-    grid-area: 5 / 1 / 6 / 5;
+    grid-area: footer;
+  }
 
-    @media (width > 900px) {
-      grid-area: 5 / 1 / 6 / 3;
-    }
+  .Projects {
+    grid-area: projects;
+  }
+
+  .Sub {
+    grid-area: sub;
   }
 
   .Content {
-    grid-area: 4 / 1 / 5 / 5;
-    display: flex;
-    flex-direction: column;
+    grid-area: content;
 
-    @media (width > 900px) {
-      grid-area: 4 / 1 / 5 / 5;
+    p {
+      max-width: 40ch;
     }
-  }
-
-  .Navigation {
-    grid-area: 2 / 3 / 3 / 5;
   }
 
   .List {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 2rem;
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .List__Item {
+    display: flex;
+    align-items: baseline;
   }
 </style>
