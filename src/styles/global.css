@@ -43,18 +43,13 @@ body {
   }
 }
 
-.Anchor__Target,
-a:not(.Anchor) {
+a {
   color: var(--anchor-color);
   text-decoration: underline;
   text-underline-offset: 6px;
   text-decoration-thickness: 1px;
   background-color: var(--main-background-color);
   padding: 0 1px;
-}
-
-.Anchor__Target {
-  position: relative;
 }
 
 /* a[href]:not(:where(
@@ -70,44 +65,12 @@ a:not(.Anchor) {
   padding-left: 0.25em;
 } */
 
-.Anchor {
-  color: var(--anchor-color);
-  display: flex;
-  align-items: center;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  background-color: transparent;
-  text-decoration: none;
-  position: relative;
-}
-
-.Anchor:focus-visible,
-.Anchor:focus,
-.Anchor:active,
-.Anchor:hover,
 a:focus,
 a:focus-visible,
 a:active,
 a:hover {
-  &,
-  > .Anchor__Target {
-    text-decoration-thickness: 2px;
-    text-underline-offset: 5px;
-  }
-}
-
-.Anchor__Text {
-  display: flex;
-  align-items: center;
-}
-
-.Anchor__Text::before {
-  content: "";
-  height: 1px;
-  background: var(--dash-color);
-  width: 2rem;
-  display: block;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
 }
 
 .Image {

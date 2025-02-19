@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 
 import Layout from "../layouts/Layout.astro";
+import Anchor from "../components/Anchor.astro";
 
 const professionalLinks: {
   label: string;
@@ -49,9 +50,7 @@ const pastProjects = projects.filter((project) =>
       {
         professionalLinks.map(({ label, href }) => (
           <li>
-            <a class="Anchor" href={href}>
-              <span class="Anchor__Target">{label}</span>
-            </a>
+            <Anchor href={href} primary={label} />
           </li>
         ))
       }
@@ -64,15 +63,11 @@ const pastProjects = projects.filter((project) =>
         {
           currentProjects.map((project) => (
             <li>
-              <a
-                class="Anchor"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={project.data.url}
-              >
-                <span class="Anchor__Target">{project.data.title}</span>
-                <span class="Anchor__Text">{project.data.type}</span>
-              </a>
+              <Anchor
+                href={project.data.url ?? "#"}
+                primary={project.data.title}
+                secondary={project.data.type}
+              />
             </li>
           ))
         }
@@ -84,15 +79,11 @@ const pastProjects = projects.filter((project) =>
         {
           pastProjects.map((project) => (
             <li>
-              <a
-                class="Anchor"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={project.data.url}
-              >
-                <span class="Anchor__Target">{project.data.title}</span>
-                <span class="Anchor__Text">{project.data.type}</span>
-              </a>
+              <Anchor
+                href={project.data.url ?? "#"}
+                primary={project.data.title}
+                secondary={project.data.type}
+              />
             </li>
           ))
         }
@@ -149,15 +140,12 @@ const pastProjects = projects.filter((project) =>
       <ul class="Speaking">
         <li class="List__Item">
           <span class="title">Forest for the Abstract Syntax Trees</span><br />
-          <a
-            class="Anchor"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Anchor
             href="https://gitnation.com/contents/the-forest-for-the-abstract-syntax-trees"
-          >
-            <span class="Anchor__Target">React Advanced London</span>
-            <span class="Anchor__Text">2021</span>
-          </a>
+            primary="React Advanced London"
+            secondary="2021"
+            external
+          />
         </li>
       </ul>
     </div>

@@ -21,11 +21,17 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
+
 const { Content } = await render(entry);
 ---
 
 <Layout title={entry.data.title} description={entry.data.description}>
+  <Fragment slot="masthead">
+    <h1>{entry.data.title}</h1>
+    <p>{entry.data.description}</p>
+  </Fragment>
   <div class="content" slot="content">
+    <pre>{JSON.stringify(entry.data, null, 2)}</pre>
     <Content />
   </div>
 </Layout>

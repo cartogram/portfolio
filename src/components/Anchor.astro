@@ -1,0 +1,70 @@
+---
+interface Props {
+  href: string;
+  primary?: string;
+  secondary?: string;
+  external?: boolean;
+}
+
+const { href, primary, secondary, external } = Astro.props;
+---
+
+<a
+  class="Anchor"
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+>
+  <span class="Anchor__Primary">{primary}</span>
+  {secondary && <span class="Anchor__Secondary">{secondary}</span>}
+</a>
+
+<style>
+  .Anchor__Primary {
+    color: var(--anchor-color);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+    background-color: var(--main-background-color);
+    padding: 0 1px;
+  }
+
+  .Anchor__Primary {
+    position: relative;
+  }
+
+  .Anchor {
+    color: var(--anchor-color);
+    display: flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: transparent;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .Anchor:focus-visible,
+  .Anchor:focus,
+  .Anchor:active,
+  .Anchor:hover {
+    > .Anchor__Primary {
+      text-decoration-thickness: 2px;
+      text-underline-offset: 5px;
+    }
+  }
+
+  .Anchor__Secondary {
+    display: flex;
+    align-items: center;
+  }
+
+  .Anchor__Secondary::before {
+    content: "";
+    height: 1px;
+    background: var(--dash-color);
+    width: 2rem;
+    display: block;
+  }
+</style>
