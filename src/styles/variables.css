@@ -19,7 +19,8 @@
   --font-size-sm: 0.8rem;
   --font-size-md: 1.35rem;
   --font-size-lg: 1.75rem;
-  --line-height-md: 1.5;
+  --font-weight-normal: 300;
+  --line-height-normal: 1.5;
 
   /* Transitions */
   --global-transition: 0.2s ease-in-out;

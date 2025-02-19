@@ -11,8 +11,9 @@
   background-image: var(--main-background-image);
   background-color: var(--main-background-color);
   min-height: 100vh;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  overflow-x: hidden;
 }
 
 @media (forced-colors: active) {
@@ -59,7 +60,7 @@ a:not(.Anchor) {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  background-color: none;
+  background-color: transparent;
   text-decoration: none;
   position: relative;
 }
@@ -109,6 +110,11 @@ a:hover {
 }
 
 @media (width > 550px) {
+  .Main {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
   .Wrap {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
@@ -116,6 +122,11 @@ a:hover {
 }
 
 @media (width > 950px) {
+  .Main {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
   .Wrap {
     padding-left: 4rem;
     padding-right: 4rem;
@@ -123,6 +134,11 @@ a:hover {
 }
 
 @media (width > 1300px) {
+  .Main {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
   .Wrap {
     padding-left: 6rem;
     padding-right: 6rem;
