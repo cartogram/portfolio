@@ -157,13 +157,15 @@ const pastProjects = projects.filter((project) =>
     }
 
     .ImageContainer {
-      padding-right: 4rem;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       grid-template-rows: repeat(4, 1fr);
     }
 
     @media (width > 950px) {
+      .ImageContainer {
+        padding-right: 4rem;
+      }
       .ContentLayout {
         grid-template-columns: 1fr 1fr;
       }
