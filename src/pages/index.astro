@@ -101,8 +101,22 @@ const pastProjects = projects.filter((project) =>
   </ul>
   <div class="ContentLayout" slot="content">
     <div class="ImageContainer">
-      <img class="Image" src="/assets/me-1.jpg" alt="Me" />
-      <img class="Image" src="/assets/me-3.jpg" alt="Me" />
+      <img
+        class="Image"
+        src="/assets/me-1.jpg"
+        alt="Matthew Seccafien and his black cat Otto standing in his Berlin apartment."
+      />
+      <img
+        class="Image"
+        src="/assets/me-3.jpg"
+        alt="Matthew Seccafien running in the Berlin Marathon 2023."
+      />
+      <figcaption>
+        <small
+          >Follow via <a href="https://instagram.com/cartogram">Instagram</a
+          ></small
+        >
+      </figcaption>
     </div>
     <div class="ContentContainer">
       <h3>About me</h3>
@@ -183,6 +197,12 @@ const pastProjects = projects.filter((project) =>
       grid-column: 3 / 5;
       grid-row: 3 / 5;
       z-index: 0;
+    }
+
+    figcaption {
+      grid-column: 1 / 5;
+      grid-row: 3 / 4;
+      align-self: flex-end;
     }
   </style>
 </Layout>
