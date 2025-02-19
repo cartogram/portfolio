@@ -53,6 +53,23 @@ a:not(.Anchor) {
   padding: 0 1px;
 }
 
+.Anchor__Target {
+  position: relative;
+}
+
+/* a[href]:not(:where(
+  [href^="#"],
+  [href^="javascript:" i],  
+  [href^="/"]:not([href^="//"]),
+  [href*="//stackoverflow.com"],
+  [href*="//meta.stackoverflow.com"],
+)) .Anchor__Target::after {
+  content: "↗";
+  font-size: 80%;
+  display: inline-block;
+  padding-left: 0.25em;
+} */
+
 .Anchor {
   color: var(--anchor-color);
   display: flex;

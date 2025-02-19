@@ -147,11 +147,12 @@ const max = 15;
         // });
 
         letters.forEach((letter, index) => {
+          const offset = size.width > 950 ? index * 10 : index * 5;
+          const y = height + offset;
           animate(
             letter,
             {
-              y: height + index * 10,
-
+              y,
               rotateZ: [35, 35],
               skewX: [-18, -18],
               skewY: [-18, -18],
