@@ -1,8 +1,10 @@
 ---
+import Dash from "./Dash.astro";
+
 interface Props {
   href: string;
   primary?: string;
-  secondary?: string;
+  secondary?: string | string[];
   external?: boolean;
 }
 
@@ -16,7 +18,20 @@ const { href, primary, secondary, external } = Astro.props;
   rel={external ? "noopener noreferrer" : undefined}
 >
   <span class="Anchor__Primary">{primary}</span>
-  {secondary && <span class="Anchor__Secondary">{secondary}</span>}
+  {
+    Array.isArray(secondary) ? (
+      <span class="Anchor__Secondary">
+        {secondary.map((item, index) => (
+          <>
+            {item}
+            {index < secondary.length - 1 && <Dash />}
+          </>
+        ))}
+      </span>
+    ) : secondary ? (
+      <span class="Anchor__Secondary">{secondary}</span>
+    ) : null
+  }
 </a>
 
 <style>

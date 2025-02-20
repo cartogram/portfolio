@@ -10,10 +10,18 @@ export const collections = {
 			description: z.string(),
 			publishDate: z.coerce.date(),
 			tags: z.array(z.string()),
-			img: z.string(),
+			img: z.string().optional(),
 			img_alt: z.string().optional(),
 			type: z.string(),
 			url: z.string().url().optional(),
+			roles: z.array(z.string()).optional(),
+			collaborators: z.array(z.object({
+				name: z.string(),
+				url: z.string().url().optional(),
+				role: z.array(z.string()).optional(),
+			})).optional(),
+
+			published: z.boolean().optional(),
 		}),
 	}),
 };

@@ -64,7 +64,11 @@ const pastProjects = projects.filter((project) =>
           currentProjects.map((project) => (
             <li>
               <Anchor
-                href={project.data.url ?? "#"}
+                href={
+                  project.data.published
+                    ? [project.collection, project.id].join("/")
+                    : (project.data.url ?? "#")
+                }
                 primary={project.data.title}
                 secondary={project.data.type}
               />
@@ -80,7 +84,11 @@ const pastProjects = projects.filter((project) =>
           pastProjects.map((project) => (
             <li>
               <Anchor
-                href={project.data.url ?? "#"}
+                href={
+                  project.data.published
+                    ? `work/${project.data.title}`
+                    : (project.data.url ?? "#")
+                }
                 primary={project.data.title}
                 secondary={project.data.type}
               />

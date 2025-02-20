@@ -57,5 +57,8 @@ p {
 ul {
   display: grid;
   list-style: none;
-  padding-bottom: 2rem;
+}
+
+ul h3 {
+  padding-bottom: 0.5rem;
 }
