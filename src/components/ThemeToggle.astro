@@ -3,9 +3,9 @@
 ---
 
 <theme-toggle>
-  <button class="Anchor Text--medium">
-    <span class="Anchor__Target"></span>
-    <span class="Anchor__Text sr-only">Theme</span>
+  <button class="Anchor">
+    <span class="Anchor__Primary">Theme</span>
+    <span class="Anchor__Secondary"></span>
   </button>
 </theme-toggle>
 
@@ -36,12 +36,12 @@
 </script>
 
 <style>
-  .Anchor__Target::after {
+  .Anchor__Secondary::after {
     font-weight: var(--font-weight-normal);
     content: "Dark";
   }
 
-  :global(.theme-dark) .Anchor__Target::after {
+  :global(.theme-dark) .Anchor__Secondary::after {
     content: "Light";
   }
 </style>
