@@ -25,6 +25,7 @@ h5 {
   line-height: var(--line-height-normal);
   font-weight: var(--font-weight-normal);
   padding-bottom: 1rem;
+  letter-spacing: 0.025em;
 }
 
 small {

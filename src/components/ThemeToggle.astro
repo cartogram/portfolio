@@ -1,11 +1,10 @@
 ---
-
+import Anchor from "./Anchor.astro";
 ---
 
 <theme-toggle>
-  <button class="Anchor">
-    <span class="Anchor__Primary">Theme</span>
-    <span class="Anchor__Secondary"></span>
+  <button>
+    <Anchor primary="Theme" secondary="" />
   </button>
 </theme-toggle>
 
@@ -36,12 +35,11 @@
 </script>
 
 <style>
-  .Anchor__Secondary::after {
-    font-weight: var(--font-weight-normal);
-    content: "Dark";
+  button {
+    --anchor-secondary-content: "Dark";
   }
 
-  :global(.theme-dark) .Anchor__Secondary::after {
-    content: "Light";
+  :global(.theme-dark) button {
+    --anchor-secondary-content: "Light";
   }
 </style>

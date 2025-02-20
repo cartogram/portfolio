@@ -2,7 +2,7 @@
 import Dash from "./Dash.astro";
 
 interface Props {
-  href: string;
+  href?: string;
   primary?: string;
   secondary?: string | string[];
   external?: boolean;
@@ -28,13 +28,13 @@ const { href, primary, secondary, external } = Astro.props;
           </>
         ))}
       </span>
-    ) : secondary ? (
+    ) : typeof secondary === "string" ? (
       <span class="Anchor__Secondary">{secondary}</span>
     ) : null
   }
 </a>
 
-<style is:global>
+<style>
   .Anchor__Primary {
     color: var(--anchor-color);
     text-decoration: underline;
@@ -83,5 +83,9 @@ const { href, primary, secondary, external } = Astro.props;
     width: 2rem;
     display: block;
     align-self: center;
+  }
+
+  .Anchor__Secondary::after {
+    content: var(--anchor-secondary-content, "");
   }
 </style>
