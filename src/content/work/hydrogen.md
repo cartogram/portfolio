@@ -1,6 +1,6 @@
 ---
 title: Hydrogen
-type: React Framework
+type: Framework
 published: true
 url: https://www.github.com/Shopify/hydrogen
 publishDate: 2024-10-01 00:00:00
