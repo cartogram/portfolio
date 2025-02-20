@@ -42,7 +42,7 @@ const pastProjects = projects.filter((project) =>
 <Layout title="Matt Seccafien">
   <div slot="masthead">
     <h2>
-      Berlin-based designer and developer,<br />
+      <s>Toronto</s> Berlin-based designer and developer,<br />
       builder of user interfaces and systems.<br />
     </h2>
 
@@ -86,7 +86,7 @@ const pastProjects = projects.filter((project) =>
               <Anchor
                 href={
                   project.data.published
-                    ? `work/${project.data.title}`
+                    ? [project.collection, project.id].join("/")
                     : (project.data.url ?? "#")
                 }
                 primary={project.data.title}

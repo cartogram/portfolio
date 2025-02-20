@@ -12,7 +12,7 @@ roles:
   - Developer
 collaborators:
   - name: Fiona McDougall
-    url: https://www.linkedin.com/in/fionamcdougall/
+    url: https://www.fimcd.ca/
     role:
       - Co-creator
       - Designer

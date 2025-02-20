@@ -114,11 +114,6 @@ a:hover {
 }
 
 @media (width > 1300px) {
-  .Main {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-
   .Wrap {
     padding-left: 6rem;
     padding-right: 6rem;
