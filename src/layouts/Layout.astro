@@ -30,9 +30,15 @@ const { title, description } = Astro.props;
         <div class="Masthead">
           <slot name="masthead" />
         </div>
+
+        <div class="Hero">
+          <slot name="hero" />
+        </div>
+
         <div class="Projects">
           <slot name="projects" />
         </div>
+
         <div class="Content">
           <slot name="content" />
         </div>
@@ -62,6 +68,7 @@ const { title, description } = Astro.props;
     grid-template-areas:
       "masthead masthead masthead masthead"
       "projects projects projects projects"
+      "hero hero hero hero"
       "content content content content"
       "footer footer footer footer";
     z-index: var(--z-index-2);
@@ -72,6 +79,7 @@ const { title, description } = Astro.props;
     .Layout {
       grid-template-areas:
         "masthead masthead masthead ."
+        "hero hero hero hero"
         ". . projects projects"
         "content content content content"
         "footer footer . .";
@@ -82,6 +90,7 @@ const { title, description } = Astro.props;
     .Layout {
       grid-template-areas:
         "masthead masthead . ."
+        "hero hero hero hero"
         ". . projects projects"
         "content content content content"
         "footer footer . .";
@@ -107,6 +116,10 @@ const { title, description } = Astro.props;
 
   .Footer {
     grid-area: footer;
+  }
+
+  .Hero {
+    grid-area: hero;
   }
 
   .Projects {
