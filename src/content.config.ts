@@ -25,7 +25,7 @@ export const collections = {
 				src: z.string(),
 				alt: z.string(),
 			})).optional(),
-
+			color: z.string().optional(),
 			published: z.boolean().optional(),
 		}),
 	}),

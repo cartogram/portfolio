@@ -1,26 +1,39 @@
 :root {
+  /* Backgrounds */
   --background-image-noise: url("/assets/noise.png");
-
   --main-background-image: var(--background-image-noise);
   --main-background-color: light-dark(var(--color-white), var(--color-black));
-
-  --main-color: light-dark(var(--color-blue), var(--color-pink));
-  --main-color-light: light-dark(
-    var(--color-blue-light),
-    var(--color-pink-light)
-  );
-  --main-font-body: var(--font-body);
-  --main-line-height-md: var(--line-height-md);
-
-  --dash-color: var(--main-color);
-
-  --anchor-color: var(--main-color);
-  --anchor-color-active: var(--main-color-light);
-  --anchor-color-underline: var(--main-color-light);
-  --button-color: var(var(--anchor-color));
-
-  --wordmark-color: light-dark(var(--color-blue-light), var(--color-pink-dark));
   --wordmark-background-color: var(--main-background-color);
+
+  /* Forgrounds */
+  --color-modifier: 0.18;
+  --main-color: light-dark(
+    var(--color),
+    color(
+      from var(--color) display-p3 calc(r + 0.5) calc(g + 0.5) calc(b + 0.5)
+    )
+  );
+  --main-color-light: light-dark(
+    color(
+      from var(--color) display-p3 calc(r + 0.5) calc(g + 0.5) calc(b + 0.5)
+    ),
+    color(
+      from var(--color) display-p3 calc(r + 0.1) calc(g + 0.1) calc(b + 0.1)
+    )
+  );
+  --main-color-dark: light-dark(
+    color(
+      from var(--color) display-p3 calc(r + var(--color-modifier) * 2.4)
+        calc(g + var(--color-modifier) * 2.4)
+        calc(b + var(--color-modifier) * 2.4)
+    ),
+    color(
+      from var(--color) display-p3 calc(r - var(--color-modifier))
+        calc(g - var(--color-modifier)) calc(b - var(--color-modifier))
+    )
+  );
+  --anchor-color-underline: var(--main-color-light);
+  --wordmark-color: var(--main-color-dark);
 }
 
 :root.theme-dark {

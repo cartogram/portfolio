@@ -12,5 +12,3 @@ roles:
   - Full-Time Position
   - Developer
 ---
-
-Hydrogen is a React framework for building headless Shopify stores. It's a modern way to build Shopify stores with React and Remix.

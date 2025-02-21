@@ -25,11 +25,11 @@
 
 body {
   -webkit-font-smoothing: antialiased;
-  font-family: var(--main-font-body);
-  line-height: var(--main-line-height-md);
-  color: var(--main-color);
+  font-family: var(--font-body);
+  line-height: var(--line-height-normal);
+  color: var(--color);
   font-weight: normal;
-  background: var(--main-color);
+  background: var(--color);
 }
 
 .List {
@@ -49,7 +49,7 @@ a {
   text-underline-offset: 6px;
   text-decoration-thickness: 1px;
   background-color: var(--main-background-color);
-  padding: 0 1px;
+  text-decoration-color: var(--anchor-color-underline);
 }
 
 a:focus,
@@ -58,6 +58,17 @@ a:active,
 a:hover {
   text-decoration-thickness: 2px;
   text-underline-offset: 5px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--main-color-light);
+  margin: 2rem 0;
+
+  p + & {
+    max-width: 65ch;
+    margin: 2rem 0 3rem;
+  }
 }
 
 .Image {

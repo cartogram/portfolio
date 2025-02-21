@@ -50,7 +50,6 @@ h3 {
   font-weight: 100;
 }
 
-.Text--medium,
 p {
   font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-md));
 }

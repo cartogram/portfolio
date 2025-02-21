@@ -6,9 +6,12 @@ interface Props {
   primary?: string;
   secondary?: string | string[];
   external?: boolean;
+  accesskey?: string;
+  isCurrent?: boolean;
 }
 
-const { href, primary, secondary, external } = Astro.props;
+const { href, primary, secondary, external, accesskey, isCurrent } =
+  Astro.props;
 ---
 
 <a
@@ -16,6 +19,8 @@ const { href, primary, secondary, external } = Astro.props;
   href={href}
   target={external ? "_blank" : undefined}
   rel={external ? "noopener noreferrer" : undefined}
+  accesskey={accesskey}
+  aria-current={isCurrent ? "page" : undefined}
 >
   <span class="Anchor__Primary">{primary}</span>
   {
@@ -35,27 +40,10 @@ const { href, primary, secondary, external } = Astro.props;
 </a>
 
 <style>
-  .Anchor__Primary {
-    color: var(--anchor-color);
-    text-decoration: underline;
-    text-underline-offset: 6px;
-    text-decoration-thickness: 1px;
-    background-color: var(--main-background-color);
-    padding: 0 1px;
-    text-decoration-color: var(--anchor-color-underline);
-  }
-
-  .Anchor__Primary {
-    position: relative;
-  }
-
   .Anchor {
-    color: var(--anchor-color);
+    color: currentColor;
     display: flex;
     align-items: center;
-    /* text-overflow: ellipsis; */
-    /* overflow: hidden; */
-    /* white-space: nowrap; */
     background-color: transparent;
     text-decoration: none;
     position: relative;
@@ -71,6 +59,18 @@ const { href, primary, secondary, external } = Astro.props;
     }
   }
 
+  .Anchor__Primary {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+    background-color: var(--main-background-color);
+    text-decoration-color: var(--anchor-color-underline);
+  }
+
+  .Anchor__Primary {
+    position: relative;
+  }
+
   .Anchor__Secondary {
     display: flex;
     align-items: center;
@@ -79,10 +79,11 @@ const { href, primary, secondary, external } = Astro.props;
   .Anchor__Secondary::before {
     content: "";
     height: 1px;
-    background: var(--dash-color);
+    background: currentColor;
     width: 2rem;
     display: block;
     align-self: center;
+    margin: 0 1px;
   }
 
   .Anchor__Secondary::after {
