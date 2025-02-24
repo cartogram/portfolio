@@ -1,14 +1,16 @@
 ---
 import Dash from "./Dash.astro";
+import Anchor from "./Anchor.astro";
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="Footer">
-  <a href="about"><small>Colophon</small></a>
+  <small><Anchor href="/colophon" secondary="Colophon" primary="Pages" /></small
+  >
   <Dash isFullWidth />
   <small>© {currentYear}</small>
-  <Dash />
-  <small>Cartogram Inc. </small>
+  &nbsp;
+  <small>Cartogram Inc.</small>
 </footer>
 
 <style>
@@ -17,6 +19,6 @@ const currentYear = new Date().getFullYear();
     display: flex;
     width: 100%;
     align-items: center;
-    gap: 1px;
+    gap: 3px;
   }
 </style>

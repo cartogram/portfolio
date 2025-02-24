@@ -1,30 +1,34 @@
 :root {
   --background-image-noise: url("/assets/noise.png");
-
   --main-background-image: var(--background-image-noise);
   --main-background-color: light-dark(var(--color-white), var(--color-black));
 
-  --main-color: light-dark(var(--color-blue), var(--color-pink));
-  --main-color-light: light-dark(
-    var(--color-blue-light),
-    var(--color-pink-light)
+  --main-color: light-dark(
+    var(--color),
+    color(
+      from var(--color) display-p3 calc(r + 0.7) calc(g + 0.7) calc(b + 0.7)
+    )
   );
-  --main-font-body: var(--font-body);
-  --main-line-height-md: var(--line-height-md);
+  --main-color-light: light-dark(
+    color(
+      from var(--color) display-p3 calc(r + 0.5) calc(g + 0.5) calc(b + 0.5)
+    ),
+    color(
+      from var(--color) display-p3 calc(r + 0.4) calc(g + 0.4) calc(b + 0.4)
+    )
+  );
 
-  --dash-color: var(--main-color);
-
-  --anchor-color: var(--main-color);
-  --anchor-color-active: var(--main-color-light);
   --anchor-color-underline: var(--main-color-light);
-  --button-color: var(var(--anchor-color));
 
-  --wordmark-color: light-dark(var(--color-blue-light), var(--color-pink-dark));
+  /* Wordmark */
+  --wordmark-opacity: 0.4;
+  --wordmark-color: var(--main-color-light);
   --wordmark-background-color: var(--main-background-color);
 }
 
 :root.theme-dark {
   --main-background-image: none;
+  --wordmark-opacity: 0.1;
 }
 
 html {

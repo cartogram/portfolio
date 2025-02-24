@@ -8,12 +8,14 @@ import { ClientRouter } from "astro:transitions";
 interface Props {
   title?: string | undefined;
   description?: string | undefined;
+  layout?: "home" | "single";
+  color?: string | undefined;
 }
 
-const { title, description } = Astro.props;
+const { title, description, layout = "home", color } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" style={color ? `--color: ${color}` : ""}>
   <head>
     <Head
       title={`Matt Seccafien ${title ? `• ${title}` : ""}`}
@@ -26,16 +28,39 @@ const { title, description } = Astro.props;
       <Wordmark />
       <Nav title="Matt Seccafien" />
 
-      <section class="Layout Wrap">
+      <section class={`Layout Wrap Layout--${layout}`}>
         <div class="Masthead">
           <slot name="masthead" />
         </div>
-        <div class="Projects">
-          <slot name="projects" />
-        </div>
+
+        {
+          layout === "home" && (
+            <div class="Projects">
+              <slot name="projects" />
+            </div>
+          )
+        }
+
+        {
+          layout === "single" && (
+            <div class="Hero">
+              <slot name="hero" />
+            </div>
+          )
+        }
+
         <div class="Content">
+          {
+            layout === "single" && (
+              <div class="Chapters">
+                <slot name="chapters" />
+              </div>
+            )
+          }
+
           <slot name="content" />
         </div>
+
         <footer class="Footer">
           <Footer />
         </footer>
@@ -58,7 +83,7 @@ const { title, description } = Astro.props;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: auto;
     grid-column-gap: 2rem;
-    grid-row-gap: 3rem;
+    grid-row-gap: 2rem;
     grid-template-areas:
       "masthead masthead masthead masthead"
       "projects projects projects projects"
@@ -68,21 +93,44 @@ const { title, description } = Astro.props;
     position: relative;
   }
 
-  @media (width > 950px) {
+  .Layout--single {
+    grid-template-areas:
+      "masthead masthead masthead masthead"
+      "hero hero hero hero"
+      "content content content content"
+      "footer footer footer footer";
+  }
+  @media (width > 1024px) {
     .Layout {
       grid-template-areas:
         "masthead masthead masthead ."
-        ". . projects projects"
+        "projects projects projects ."
+        "content content content content"
+        "footer footer . .";
+    }
+
+    .Layout--single {
+      grid-template-areas:
+        "masthead masthead . ."
+        "hero hero hero hero"
         "content content content content"
         "footer footer . .";
     }
   }
 
-  @media (width > 1100px) {
+  @media (width > 1500px) {
     .Layout {
       grid-template-areas:
         "masthead masthead . ."
         ". . projects projects"
+        "content content content content"
+        "footer footer . .";
+    }
+
+    .Layout--single {
+      grid-template-areas:
+        "masthead masthead . ."
+        "hero hero hero hero"
         "content content content content"
         "footer footer . .";
     }
@@ -109,19 +157,66 @@ const { title, description } = Astro.props;
     grid-area: footer;
   }
 
+  .Hero {
+    grid-area: hero;
+  }
+
   .Projects {
     grid-area: projects;
   }
 
-  .Sub {
-    grid-area: sub;
+  .Layout--single .Projects {
+    position: sticky;
+    top: 0;
+    align-self: start;
   }
 
   .Content {
     grid-area: content;
+    display: grid;
+    /* grid-template-areas: "chapters chapters chapters chapters"; */
 
     p {
-      max-width: 40ch;
+      max-width: 50ch;
+    }
+
+    > div {
+      grid-column: 1 / 5;
+      grid-row: 2 / 2;
+    }
+
+    .Chapters {
+      grid-column: 1 / 5;
+      grid-row: 1 / 2;
+      padding-top: 2rem;
+    }
+  }
+
+  .Layout--single .Content {
+    grid-template-columns: subgrid;
+  }
+
+  @media (width > 1024px) {
+    /* .Layout--single .Content {
+      grid-template-columns: subgrid;
+    } */
+
+    .Chapters {
+      position: sticky;
+      top: 0;
+      align-self: start;
+    }
+
+    .Content {
+      > div {
+        grid-column: 1 / 4;
+        grid-row: 1 / 2;
+      }
+
+      .Chapters {
+        grid-column: 4 / 5;
+        grid-row: 1 / 2;
+      }
     }
   }
 </style>

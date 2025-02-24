@@ -22,23 +22,46 @@ const {
 <script is:inline>
   const getThemePreference = () => {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
+      return {
+        theme: localStorage.getItem("theme"),
+        mode: localStorage.getItem("mode"),
+      };
     }
+
     return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
+      ? {
+          theme: "dark",
+          mode: "mode-default",
+        }
+      : {
+          theme: "light",
+          mode: "mode-default",
+        };
   };
 
   function setDarkMode(document) {
-    const isDark = getThemePreference() === "dark";
-    document.documentElement.classList[isDark ? "add" : "remove"]("theme-dark");
+    const { theme, mode } = getThemePreference();
+    document.documentElement.classList[theme === "dark" ? "add" : "remove"](
+      "theme-dark"
+    );
+    document.documentElement.classList[
+      mode === "contrast-high" ? "add" : "remove"
+    ]("contrast-high");
 
     if (typeof localStorage !== "undefined") {
       // Watch the document element and persist user preference when it changes.
       const observer = new MutationObserver(() => {
         const isDark =
           document.documentElement.classList.contains("theme-dark");
+        const isHighContrast =
+          document.documentElement.classList.contains("contrast-high");
+
         localStorage.setItem("theme", isDark ? "dark" : "light");
+
+        localStorage.setItem(
+          "mode",
+          isHighContrast ? "contrast-high" : "mode-default"
+        );
       });
       observer.observe(document.documentElement, {
         attributes: true,

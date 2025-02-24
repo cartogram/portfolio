@@ -1,47 +1,180 @@
 ---
+import Anchor from "./Anchor.astro";
 
+type Color = { label: string; value: string | null };
+
+const colors: Color[] = [
+  { label: "default", value: null },
+  { label: "cyan", value: "rgb(0, 255, 255)" },
+  { label: "yellow", value: "rgb(255, 255, 0)" },
+  { label: "magenta", value: "rgb(255, 0, 255)" },
+  { label: "black", value: "rgb(0, 0, 0)" },
+];
+
+const modes = [
+  { label: "default", value: "mode-high-default" },
+  { label: "High Contrast", value: "contrast-high" },
+];
 ---
 
 <theme-toggle>
-  <button class="Anchor Text--medium">
-    <span class="Anchor__Target"></span>
-    <span class="Anchor__Text sr-only">Theme</span>
-  </button>
+  <div class="ThemeToggle">
+    <button class="Theme">
+      <Anchor primary="Theme" secondary="" />
+    </button>
+    <!-- <button class="Color">
+      <Anchor primary="Color" secondary={colors.map((c) => c.label)} />
+    </button> -->
+
+    <button class="Contrast">
+      <Anchor primary="Contrast" secondary="" />
+    </button>
+  </div>
 </theme-toggle>
 
 <script>
+  type Color = { label: string; value: string };
+
   class ThemeToggle extends HTMLElement {
     constructor() {
       super();
 
-      const button = this.querySelector("button")!;
+      const themeButton = this.querySelector(".Theme");
+      const colorButton = this.querySelector(".Color");
+      const contrastButton = this.querySelector(".Contrast");
 
-      const setTheme = (dark: boolean) => {
-        document.documentElement.classList[dark ? "add" : "remove"](
-          "theme-dark"
-        );
-        button.setAttribute("aria-pressed", String(dark));
+      const setTheme = ({
+        dark,
+        color,
+        contrast,
+      }: {
+        dark: boolean;
+        color: string;
+        contrast: boolean;
+      }) => {
+        const doc = document.documentElement;
+        doc.classList[dark ? "add" : "remove"]("theme-dark");
+        doc.classList[contrast ? "add" : "remove"]("contrast-high");
+        doc.style.setProperty("--color", color);
+
+        if (themeButton) {
+          themeButton.setAttribute("aria-pressed", String(dark));
+        }
+        if (colorButton) {
+          colorButton.setAttribute("aria-pressed", String(color));
+        }
+        if (contrastButton) {
+          contrastButton.setAttribute("aria-pressed", String(contrast));
+        }
+
+        console.log("setting", dark, color, contrast);
       };
 
-      button.addEventListener("click", () => setTheme(!this.isDark()));
+      if (themeButton) {
+        themeButton.addEventListener("click", () =>
+          setTheme({
+            dark: !this.isDark(),
+            color: this.getColor(),
+            contrast: this.isHighContrast(),
+          })
+        );
+      }
 
-      setTheme(this.isDark());
+      if (colorButton) {
+        colorButton.addEventListener("click", () =>
+          setTheme({
+            dark: this.isDark(),
+            color: this.changeColor(),
+            contrast: this.isHighContrast(),
+          })
+        );
+      }
+
+      if (contrastButton) {
+        contrastButton.addEventListener("click", () =>
+          setTheme({
+            dark: this.isDark(),
+            color: this.getColor(),
+            contrast: !this.isHighContrast(),
+          })
+        );
+      }
+
+      setTheme({
+        dark: this.isDark(),
+        color: this.getColor(),
+        contrast: this.isHighContrast(),
+      });
     }
 
     isDark() {
       return document.documentElement.classList.contains("theme-dark");
+    }
+
+    getColor() {
+      return document.documentElement.style.getPropertyValue("--color");
+    }
+
+    isHighContrast() {
+      return document.documentElement.classList.contains("contrast-high");
+    }
+
+    changeColor() {
+      const colors = [
+        { label: "cyan", value: "rgb(0, 255, 255)" },
+        { label: "yellow", value: "rgb(255, 255, 0)" },
+        { label: "magenta", value: "rgb(255, 0, 255)" },
+        { label: "black", value: "rgb(0, 0, 0)" },
+      ];
+      const color = this.getColor();
+
+      const currentColorIndex = colors.findIndex((c) => c.value === color);
+      const nextColorIndex = (currentColorIndex + 1) % colors.length;
+
+      const nextColor = colors[nextColorIndex];
+
+      if (!nextColor) return color;
+
+      return nextColor.value;
     }
   }
   customElements.define("theme-toggle", ThemeToggle);
 </script>
 
 <style>
-  .Anchor__Target::after {
-    font-weight: var(--font-weight-normal);
-    content: "Dark";
+  .ThemeToggle {
+    display: flex;
+    width: 100%;
+    column-gap: 1rem;
+    flex-wrap: wrap;
+
+    justify-content: flex-end;
   }
 
-  :global(.theme-dark) .Anchor__Target::after {
-    content: "Light";
+  @media (width > 770px) {
+    .ThemeToggle {
+      justify-content: flex-start;
+    }
+  }
+
+  .Theme {
+    --anchor-secondary-content: "Light";
+  }
+
+  :global(.theme-dark) .Theme {
+    --anchor-secondary-content: "Dark";
+  }
+
+  .Contrast {
+    --anchor-secondary-content: "Auto";
+  }
+
+  :global(.contrast-high) .Contrast {
+    --anchor-secondary-content: "High";
+  }
+
+  :global(.contrast-high) {
+    --color: #000 !important;
+    --wordmark-opacity: 0.1;
   }
 </style>

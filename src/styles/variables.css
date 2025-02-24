@@ -1,20 +1,15 @@
 /* Global variables */
 :root {
   /* Colors */
-  --color-blue: rgb(19, 26, 100);
-  --color-blue-dark: rgb(23, 6, 46);
-  --color-blue-light: rgb(114, 161, 211);
-  --color-cyan: cyan;
-  --color-pink: rgb(255, 192, 192);
-  --color-pink-dark: rgb(53, 34, 38);
-  --color-pink-light: rgb(255, 228, 232);
+  --color: rgb(66, 6, 6);
   --color-white: white;
-  --color-black: rgb(17, 15, 15);
+  --color-black: rgb(15, 15, 20);
 
   /* Fonts */
   --font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --font-body: "Lausanne", var(--font-system);
+  --font-mono: menlo, monospace;
   --font-size-xs: 0.7rem;
   --font-size-sm: 0.8rem;
   --font-size-md: 1.35rem;
@@ -25,19 +20,11 @@
   /* Transitions */
   --global-transition: 0.2s ease-in-out;
 
-  /* Dimensions */
-  --dimension-1: 1rem;
-  --dimension-2: 2rem;
-
-  /* Breakpoints */
-  --breakpoint-mobile: 40em;
-  --breakpoint-tablet: 60em;
-  --breakpoint-desktop: 80em;
-
   /* Z-index */
   --z-index-1: 1;
   --z-index-2: 2;
   --z-index-3: 3;
+
   /* Radius */
   --radius-1: 0.2rem;
 }

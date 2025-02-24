@@ -13,6 +13,7 @@ body {
 
 .Text--large,
 p,
+ol,
 ul,
 h1,
 h2,
@@ -25,6 +26,7 @@ h5 {
   line-height: var(--line-height-normal);
   font-weight: var(--font-weight-normal);
   padding-bottom: 1rem;
+  letter-spacing: 0.025em;
 }
 
 small {
@@ -45,11 +47,10 @@ h3 {
   display: flex;
   align-items: center;
   gap: 0.15rem;
-  font-family: menlo;
+  font-family: var(--font-mono);
   font-weight: 100;
 }
 
-.Text--medium,
 p {
   font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-md));
 }
@@ -57,6 +58,10 @@ p {
 ul {
   display: grid;
   list-style: none;
+}
+
+ol {
+  padding-left: 2rem;
 }
 
 ul h3 {

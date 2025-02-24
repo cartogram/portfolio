@@ -36,14 +36,20 @@ const max = 15;
     pointer-events: none;
   }
 
+  :global(.theme-dark) .Wordmark {
+    mix-blend-mode: difference;
+  }
+
   .Wordmark {
     opacity: 0;
-    transition: 0.05s ease-in-out;
-    transition-property: opacity, transform;
+    transition: all 0.05s ease-in-out;
+    /* transition:
+      opacity 0.05s ease-in-out,
+      transform 0.05s ease-in-out; */
   }
 
   :global(.loaded) .Wordmark {
-    opacity: 1;
+    opacity: var(--wordmark-opacity);
     transform: translateY(0);
   }
 
@@ -75,7 +81,7 @@ const max = 15;
 </style>
 
 <script>
-  import { animate, stagger } from "motion";
+  import { animate } from "motion";
 
   class CartogramWordmark extends HTMLElement {
     constructor() {
@@ -91,60 +97,6 @@ const max = 15;
       tracks.forEach((track) => {
         const height = this.randomNumber(0, size.height, 0.5);
         const letters = track.querySelectorAll(".Letter");
-        // const easing = cubicBezier(0.05, 0.83, 0.56, 1);
-
-        // track.addEventListener("mouseenter", () => {
-        //   letters.forEach((letter, index) => {
-        //     animate(
-        //       letter,
-        //       {
-        //         y: [height + index * 10, height + index * 40],
-
-        //         rotateZ: [35, 35],
-        //         skewX: [-18, -18],
-        //         skewY: [-18, -18],
-        //       },
-        //       {
-        //         // delay: stagger(1),
-        //         // duration: 10,
-        //         // ease: easing,
-
-        //         type: "spring",
-        //         stiffness: 300,
-        //         damping: 40,
-        //         mass: 4,
-        //         delay: index * 0.02,
-        //       }
-        //     );
-        //   });
-        // });
-
-        // track.addEventListener("mouseleave", () => {
-        //   console.log("mouseleave");
-        //   letters.forEach((letter, index) => {
-        //     animate(
-        //       letter,
-        //       {
-        //         y: [height + index * 40, height + index * 10],
-
-        //         rotateZ: [35, 35],
-        //         skewX: [-18, -18],
-        //         skewY: [-18, -18],
-        //       },
-        //       {
-        //         // delay: stagger(1),
-        //         // duration: 10,
-        //         // ease: easing,
-
-        //         type: "spring",
-        //         stiffness: 300,
-        //         damping: 40,
-        //         mass: 4,
-        //         delay: index * 0.02,
-        //       }
-        //     );
-        //   });
-        // });
 
         letters.forEach((letter, index) => {
           const offset = size.width > 950 ? index * 10 : index * 5;

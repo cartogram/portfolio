@@ -1,5 +1,9 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+import me1 from "../images/me-1.jpg";
+import me3 from "../images/me-3.jpg";
 
 import Layout from "../layouts/Layout.astro";
 import Anchor from "../components/Anchor.astro";
@@ -18,7 +22,7 @@ const professionalLinks: {
   },
   {
     label: "View résumé",
-    href: "/assets/Matthew Seccafien-CV-2023.pdf",
+    href: "/assets/Matthew Seccafien-CV-2025.pdf",
   },
   {
     label: "LinkedIn",
@@ -100,14 +104,14 @@ const pastProjects = projects.filter((project) =>
   </ul>
   <div class="ContentLayout" slot="content">
     <div class="ImageContainer">
-      <img
+      <Image
         class="Image"
-        src="/assets/me-1.jpg"
+        src={me1}
         alt="Matthew Seccafien and his black cat Otto standing in his Berlin apartment."
       />
-      <img
+      <Image
         class="Image"
-        src="/assets/me-3.jpg"
+        src={me3}
         alt="Matthew Seccafien running in the Berlin Marathon 2023."
       />
       <figcaption>

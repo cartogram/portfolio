@@ -20,8 +20,14 @@ export const collections = {
 				url: z.string().url().optional(),
 				role: z.array(z.string()).optional(),
 			})).optional(),
-
+			media: z.array(z.object({
+				type: z.enum(['image', 'video']),
+				src: z.string(),
+				alt: z.string(),
+			})).optional(),
+			color: z.string().optional(),
 			published: z.boolean().optional(),
+			video: z.boolean().optional(),
 		}),
 	}),
 };
