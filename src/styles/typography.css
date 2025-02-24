@@ -64,8 +64,8 @@ ul {
   list-style: none;
 }
 
-ol {
-  padding-left: 2rem;
+ol li {
+  list-style: decimal;
 }
 
 ul h3 {

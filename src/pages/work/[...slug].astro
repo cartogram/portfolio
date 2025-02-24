@@ -210,6 +210,12 @@ const { Content, headings } = await render(entry);
       font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-md));
     }
 
+    .content :global(ol li) {
+      list-style: decimal;
+      margin-left: 2rem;
+      padding-left: 0.5rem;
+    }
+
     .Meta {
       position: relative;
       display: flex;
