@@ -16,11 +16,15 @@
 
 .Nav {
   opacity: 0;
-  transition: 0.3s ease-in-out;
-  transition-delay: 0.3s;
-  transition-property: opacity, transform;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .Nav {
+    transition: 0.3s ease-in-out;
+    transition-delay: 0.3s;
+    transition-property: opacity, transform;
+  }
+}
 .loaded .Nav {
   opacity: 1;
 }

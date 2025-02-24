@@ -127,11 +127,11 @@ hr {
 .footnotes.footnotes.footnotes p,
 .footnotes li,
 .footnotes li::marker {
-  font-size: var(--font-size-sm);
   font-family: var(--font-mono);
   font-weight: 100;
   max-width: 65ch;
   margin: 0;
+  line-height: 0.8;
 }
 
 /* Utilities */

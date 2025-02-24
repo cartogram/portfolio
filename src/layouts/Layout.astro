@@ -147,9 +147,14 @@ const { title, description, layout = "home", color } = Astro.props;
   .Layout {
     opacity: 0;
     transform: translateY(1rem);
-    transition: 0.3s ease-in-out;
-    transition-delay: 0.3s;
-    transition-property: opacity, transform;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .Layout {
+      transition: 0.3s ease-in-out;
+      transition-delay: 0.3s;
+      transition-property: opacity, transform;
+    }
   }
 
   :global(.loaded) .Layout {
@@ -182,7 +187,6 @@ const { title, description, layout = "home", color } = Astro.props;
   .Content {
     grid-area: content;
     display: grid;
-    /* grid-template-areas: "chapters chapters chapters chapters"; */
 
     p {
       max-width: 53ch;
@@ -209,10 +213,6 @@ const { title, description, layout = "home", color } = Astro.props;
   }
 
   @media (width > 1024px) {
-    /* .Layout--single .Content {
-      grid-template-columns: subgrid;
-    } */
-
     .Chapters {
       position: sticky;
       top: 0;

@@ -27,22 +27,7 @@ h5 {
   font-weight: var(--font-weight-normal);
   padding-bottom: 1rem;
   letter-spacing: 0.025em;
-}
-
-h2 {
-  max-width: 40ch;
-  font-size: clamp(var(--font-size-md), 5vw, var(--font-size-lg));
-}
-
-small {
-  font-size: var(--font-size-xs);
-  font-family: menlo;
-  line-height: 1;
-
-  > a {
-    line-height: 1;
-    display: inline;
-  }
+  max-width: 52ch;
 }
 
 h3 {
@@ -71,4 +56,19 @@ ol li {
 
 ul h3 {
   padding-bottom: 0.5rem;
+}
+
+small {
+  font-size: var(--font-size-xs);
+  font-family: menlo;
+  line-height: 1.2;
+
+  > a {
+    line-height: 1;
+    display: inline;
+  }
+}
+
+figcaption {
+  padding: 1rem 0;
 }

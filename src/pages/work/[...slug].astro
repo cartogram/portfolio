@@ -174,8 +174,8 @@ const next = work.find(
         <div class="Media">
           <h3>Media</h3>
           {entry.data.media.map((media) => (
-            <>
-              <figure class="Media__Item">
+            <figure>
+              <div class="Media__Item">
                 {media.type === "video" && (
                   <video
                     autoplay
@@ -188,11 +188,11 @@ const next = work.find(
                 {media.type === "image" && (
                   <img src={`/assets/${media.src}`} alt={media.alt} />
                 )}
-              </figure>
-              <p>
+              </div>
+              <figcaption>
                 <small>{media.alt}</small>
-              </p>
-            </>
+              </figcaption>
+            </figure>
           ))}
         </div>
       )
@@ -208,9 +208,22 @@ const next = work.find(
       margin: 0;
       padding: 4rem 0 1rem;
     }
+    .content :global(h2) {
+      font-size: clamp(var(--font-size-lg), 6.5vw, var(--font-size-md));
+    }
 
     .content :global(strong) {
       font-weight: var(--font-weight-normal);
+      position: relative;
+    }
+
+    .content :global(strong)::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: var(--anchor-color-underline);
+      z-index: -1;
+      opacity: 0.1;
     }
 
     .content :global(li) {
