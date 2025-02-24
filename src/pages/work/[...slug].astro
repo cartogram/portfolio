@@ -197,6 +197,20 @@ const { Content, headings } = await render(entry);
       padding: 4rem 0 1rem;
     }
 
+    .content :global(strong) {
+      font-weight: var(--font-weight-normal);
+      text-decoration: underline;
+    }
+
+    .content :global(li) {
+      list-style: disc;
+      margin-left: 1rem;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      max-width: 50ch;
+      font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-md));
+    }
+
     .Meta {
       position: relative;
       display: flex;

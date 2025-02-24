@@ -190,6 +190,10 @@ const { title, description, layout = "home", color } = Astro.props;
       grid-row: 1 / 2;
       padding-top: 2rem;
     }
+
+    .Chapters li {
+      font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-md));
+    }
   }
 
   .Layout--single .Content {
