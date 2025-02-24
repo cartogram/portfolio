@@ -20,6 +20,6 @@ color: rgb(83 94 8)
 video: true
 ---
 
-Based out of Kelowna, BC and spearheaded by my best pal, Tyler Smith, I put together a respectable little website to give basic restaurant information and renforce the vibe of the website. Customers can make reservations, signup for newsletter and get a sense of the food and wine on offer.
+Based out of Kelowna, BC and spearheaded by my best pal, Tyler Smith, Wildling is a wine bar, restaurant and all-around cool place. As a small favour, I put together a respectable little website to give basic information and re-enforce the vibe of the physical space. Customers can make reservations, signup for to the newsletter and get a sense of the food and wine on offer.
 
-In order to keep things as simple as possible, the site was built with an HTML-first mindset, using Astro and no dependencies or front-end frameworks.
+In order to keep things as simple as possible, the site was built with an HTML-first mindset, using Astro with no dependencies or front-end frameworks.

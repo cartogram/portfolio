@@ -31,6 +31,7 @@ h5 {
 
 h2 {
   max-width: 40ch;
+  font-size: clamp(var(--font-size-md), 5vw, var(--font-size-lg));
 }
 
 small {

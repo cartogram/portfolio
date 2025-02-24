@@ -4,18 +4,50 @@ import "../styles/global.css";
 interface Props {
   title?: string | undefined;
   description?: string | undefined;
+  ogImage?: string;
 }
 
+const url = "https://www.cartogram.ca";
+
 const {
-  title = "Matthew Seccafien: Personal Site",
-  description = "The personal site of Matthew Seccafien",
+  title = "Matt Seccafien aka Cartogram",
+  description = "Berlin-based designer and developer, builder of user interfaces and systems.",
+  ogImage = "og-image.jpg",
 } = Astro.props;
+
+const ogImageSrc = `${url}/${ogImage}`;
 ---
 
 <meta charset="UTF-8" />
 <meta name="description" property="og:description" content={description} />
 <meta name="viewport" content="width=device-width" />
 <meta name="generator" content={Astro.generator} />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<meta name="msapplication-TileColor" content="#ea4e61" />
+<meta name="theme-color" content="#ffffff" />
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content={url} />
+<meta property="og:type" content="website" />
+<meta property="og:image:url" content={ogImageSrc} />
+<meta property="og:image:secure_url" content={ogImageSrc} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:alt" content={title} />
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:domain" content="cartogram.ca" />
+<meta property="twitter:url" content={url} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageSrc} />
+<slot name="head" />
+
 <title>{title}</title>
 
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.ico" />
