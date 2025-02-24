@@ -29,7 +29,7 @@ const { Content, headings } = await render(entry);
 ---
 
 <Layout
-  title={entry.data.title}
+  title={`${entry.data.title} ~ ${entry.data.type}`}
   description={entry.data.description}
   layout="single"
   color={entry.data.color}
