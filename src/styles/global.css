@@ -34,6 +34,11 @@ body {
   background: var(--main-color);
 }
 
+::selection {
+  background: var(--main-color-light);
+  color: var(--main-background-color);
+}
+
 .List {
   display: grid;
   grid-column-gap: 2rem;

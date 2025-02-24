@@ -1,6 +1,6 @@
 ---
 title: Pawzzles
-type: Product
+type: Online Store
 published: true
 url: https://www.pawzzles.cat
 publishDate: 2022-01-01 00:00:00
