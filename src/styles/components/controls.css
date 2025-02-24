@@ -1,0 +1,13 @@
+.Controls {
+  display: flex;
+  column-gap: 1rem;
+  flex-wrap: wrap;
+  row-gap: 1px;
+  justify-content: flex-end;
+}
+
+@media (width > 770px) {
+  .Controls {
+    justify-content: flex-start;
+  }
+}

@@ -5,6 +5,9 @@
 
 @import "./typography.css";
 
+@import "./components/nav.css";
+@import "./components/controls.css";
+
 .Main {
   min-height: 100%;
   isolation: isolate;
@@ -143,4 +146,8 @@ hr {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }

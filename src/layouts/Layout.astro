@@ -1,9 +1,10 @@
 ---
 import Head from "../components/Head.astro";
-import Nav from "../components/Nav.astro";
+import Anchor from "../components/Anchor.astro";
 import Footer from "../components/Footer.astro";
 import Wordmark from "../components/Wordmark.astro";
 import { ClientRouter } from "astro:transitions";
+import ThemeToggle from "../components/ThemeToggle.astro";
 
 interface Props {
   title?: string | undefined;
@@ -26,7 +27,14 @@ const { title, description, layout = "home", color } = Astro.props;
   <body>
     <main class="Main">
       <Wordmark />
-      <Nav title="Matt Seccafien" />
+      <header class="Wrap Nav">
+        <h1 class="Nav__Title">
+          <Anchor href="/" primary="Matt Seccafien" />
+        </h1>
+        <nav class="Nav__Controls">
+          <ThemeToggle />
+        </nav>
+      </header>
 
       <section class={`Layout Wrap Layout--${layout}`}>
         <div class="Masthead">
@@ -222,5 +230,9 @@ const { title, description, layout = "home", color } = Astro.props;
         grid-row: 1 / 2;
       }
     }
+  }
+
+  .Wrap {
+    display: none;
   }
 </style>

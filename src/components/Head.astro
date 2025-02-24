@@ -77,22 +77,22 @@ const ogImageSrc = `${url}/${ogImage}`;
       "theme-dark"
     );
     document.documentElement.classList[
-      mode === "contrast-high" ? "add" : "remove"
-    ]("contrast-high");
+      mode === "color-mono" ? "add" : "remove"
+    ]("color-mono");
 
     if (typeof localStorage !== "undefined") {
       // Watch the document element and persist user preference when it changes.
       const observer = new MutationObserver(() => {
         const isDark =
           document.documentElement.classList.contains("theme-dark");
-        const isHighContrast =
-          document.documentElement.classList.contains("contrast-high");
+        const isColorMono =
+          document.documentElement.classList.contains("color-mono");
 
         localStorage.setItem("theme", isDark ? "dark" : "light");
 
         localStorage.setItem(
           "mode",
-          isHighContrast ? "contrast-high" : "mode-default"
+          isColorMono ? "color-mono" : "mode-default"
         );
       });
       observer.observe(document.documentElement, {

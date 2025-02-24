@@ -1,0 +1,47 @@
+.Nav {
+  z-index: var(--z-index-3);
+  display: grid;
+  align-items: baseline;
+  padding-bottom: 1rem;
+  position: relative;
+  top: 0;
+  transition: opacity 0.2s ease-in-out;
+  column-gap: 2rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.loaded .Nav {
+  opacity: 1;
+}
+
+.Nav {
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+  transition-delay: 0.3s;
+  transition-property: opacity, transform;
+}
+
+.loaded .Nav {
+  opacity: 1;
+}
+
+.Nav__Title {
+  grid-area: 1 / 1 / 1 / 4;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.Nav__Controls {
+  grid-area: 1 / 3 / 4 / 5;
+}
+
+@media (width > 1200px) {
+  .Nav__Title {
+    grid-area: 1 / 1 / 1 / 4;
+  }
+
+  .Nav__Controls {
+    grid-area: 1 / 4 / 4 / 5;
+  }
+}

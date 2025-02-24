@@ -5,6 +5,8 @@ import Layout from "../../layouts/Layout.astro";
 import Anchor from "../../components/Anchor.astro";
 import Dash from "../../components/Dash.astro";
 import { render } from "astro:content";
+import Controls from "../../components/Controls.astro";
+import Nav from "../../components/Nav.astro";
 
 interface Props {
   entry: CollectionEntry<"work">;
@@ -26,6 +28,11 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 
 const { Content, headings } = await render(entry);
+
+const work = await getCollection("work");
+const next = work.find(
+  (w) => w.data.type === entry.data.type && w.id !== entry.id
+);
 ---
 
 <Layout
@@ -35,16 +42,21 @@ const { Content, headings } = await render(entry);
   color={entry.data.color}
 >
   <Fragment slot="masthead">
-    <div class="flex">
-      <h1>
+    <header class="Nav">
+      <h1 class="Nav__Title">
         <Anchor
           href="/"
           primary={entry.data.title}
           secondary={entry.data.type}
         />
       </h1>
-      <Anchor accesskey="x" href="/" primary="Close" />
-    </div>
+      <nav class="Nav__Controls">
+        <div class="Controls justify-end">
+          <Anchor href="/" primary="Close" />
+        </div>
+      </nav>
+    </header>
+
     <h2>{entry.data.description}</h2>
 
     <aside class="Meta">
