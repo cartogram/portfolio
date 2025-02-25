@@ -14,8 +14,7 @@ collaborators:
   - name: Fiona McDougall
     url: https://www.fimcd.ca/
     role:
-      - Co-creator
-      - Designer
+      - Product Creator
 tags:
   - Current
 color: rgb(25 89 11)

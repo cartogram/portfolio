@@ -61,14 +61,17 @@ ul h3 {
 small {
   font-size: var(--font-size-xs);
   font-family: menlo;
-  line-height: 1.2;
 
   > a {
-    line-height: 1;
     display: inline;
   }
 }
 
 figcaption {
   padding: 1rem 0;
+
+  p {
+    font-size: var(--font-size-xs);
+    font-family: var(--font-mono);
+  }
 }

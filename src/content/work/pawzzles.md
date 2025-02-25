@@ -16,8 +16,7 @@ collaborators:
   - name: Fiona McDougall
     url: https://www.fimcd.ca/
     role:
-      - Co-creator
-      - Designer
+      - Product Creator
 media:
   - src: pawzzles-01.jpg
     alt: Matt and Fiona with their cat Minou, with Pawzzles stacked around them.
