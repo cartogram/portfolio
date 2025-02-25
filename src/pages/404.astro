@@ -1,8 +1,18 @@
 ---
-import Hero from "../components/Hero.astro";
+import Anchor from "../components/Anchor.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Not Found" description="404 Error — this page was not found">
-  <Hero title="Page Not Found" tagline="Not found" />
+  <div slot="masthead">
+    <h2>
+      The page you are looking for couldn't be found<br /> and maybe doesn't exist.
+    </h2>
+
+    <ul class="List">
+      <li>
+        <Anchor href="/" primary="Go back home" />
+      </li>
+    </ul>
+  </div>
 </Layout>

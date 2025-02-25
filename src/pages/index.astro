@@ -114,12 +114,12 @@ const pastProjects = projects.filter((project) =>
         src={me3}
         alt="Matthew Seccafien running in the Berlin Marathon 2023."
       />
-      <figcaption>
+      <p>
         <small
           >Follow via <a href="https://instagram.com/cartogram">Instagram</a
           ></small
         >
-      </figcaption>
+      </p>
     </div>
     <div class="ContentContainer">
       <h3>About me</h3>
@@ -199,10 +199,9 @@ const pastProjects = projects.filter((project) =>
       z-index: 0;
     }
 
-    figcaption {
+    .ImageContainer p {
       grid-column: 1 / 5;
-      grid-row: 3 / 4;
-      align-self: flex-end;
+      grid-row: 4 / 5;
     }
   </style>
 </Layout>
