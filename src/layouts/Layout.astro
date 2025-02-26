@@ -1,27 +1,24 @@
 ---
-import Head from "../components/Head.astro";
-import Anchor from "../components/Anchor.astro";
-import Footer from "../components/Footer.astro";
-import Wordmark from "../components/Wordmark.astro";
-import { ClientRouter } from "astro:transitions";
-import ThemeToggle from "../components/ThemeToggle.astro";
+import Head from '../components/Head.astro'
+import Anchor from '../components/Anchor.astro'
+import Footer from '../components/Footer.astro'
+import Wordmark from '../components/Wordmark.astro'
+import {ClientRouter} from 'astro:transitions'
+import ThemeToggle from '../components/ThemeToggle.astro'
 
 interface Props {
-  title?: string | undefined;
-  description?: string | undefined;
-  layout?: "home" | "single";
-  color?: string | undefined;
+  title?: string | undefined
+  description?: string | undefined
+  layout?: 'home' | 'single'
+  color?: string | undefined
 }
 
-const { title, description, layout = "home", color } = Astro.props;
+const {title, description, layout = 'home', color} = Astro.props
 ---
 
-<html lang="en" style={color ? `--color: ${color}` : ""}>
+<html lang="en" style={color ? `--color: ${color}` : ''}>
   <head>
-    <Head
-      title={`Matt Seccafien ${title ? `~ ${title}` : ""}`}
-      description={description}
-    />
+    <Head title={`Matt Seccafien ${title ? `~ ${title}` : ''}`} description={description} />
     <ClientRouter />
   </head>
   <body>
@@ -42,7 +39,7 @@ const { title, description, layout = "home", color } = Astro.props;
         </div>
 
         {
-          layout === "home" && (
+          layout === 'home' && (
             <div class="Projects">
               <slot name="projects" />
             </div>
@@ -50,7 +47,7 @@ const { title, description, layout = "home", color } = Astro.props;
         }
 
         {
-          layout === "single" && (
+          layout === 'single' && (
             <div class="Hero">
               <slot name="hero" />
             </div>
@@ -59,7 +56,7 @@ const { title, description, layout = "home", color } = Astro.props;
 
         <div class="Content">
           {
-            layout === "single" && (
+            layout === 'single' && (
               <div class="Chapters">
                 <slot name="chapters" />
               </div>
@@ -76,9 +73,9 @@ const { title, description, layout = "home", color } = Astro.props;
     </main>
 
     <script>
-      document.addEventListener("astro:page-load", () => {
-        document.documentElement.classList.add("loaded");
-      });
+      document.addEventListener('astro:page-load', () => {
+        document.documentElement.classList.add('loaded')
+      })
     </script>
   </body>
 </html>
@@ -93,54 +90,54 @@ const { title, description, layout = "home", color } = Astro.props;
     grid-column-gap: 2rem;
     grid-row-gap: 2rem;
     grid-template-areas:
-      "masthead masthead masthead masthead"
-      "projects projects projects projects"
-      "content content content content"
-      "footer footer footer footer";
+      'masthead masthead masthead masthead'
+      'projects projects projects projects'
+      'content content content content'
+      'footer footer footer footer';
     z-index: var(--z-index-2);
     position: relative;
   }
 
   .Layout--single {
     grid-template-areas:
-      "masthead masthead masthead masthead"
-      "hero hero hero hero"
-      "content content content content"
-      "footer footer footer footer";
+      'masthead masthead masthead masthead'
+      'hero hero hero hero'
+      'content content content content'
+      'footer footer footer footer';
   }
   @media (width > 1024px) {
     .Layout {
       grid-template-areas:
-        "masthead masthead masthead ."
-        "projects projects projects ."
-        "content content content content"
-        "footer footer . .";
+        'masthead masthead masthead .'
+        'projects projects projects .'
+        'content content content content'
+        'footer footer . .';
     }
 
     .Layout--single {
       grid-template-areas:
-        "masthead masthead . ."
-        "hero hero hero hero"
-        "content content content content"
-        "footer footer . .";
+        'masthead masthead . .'
+        'hero hero hero hero'
+        'content content content content'
+        'footer footer . .';
     }
   }
 
   @media (width > 1500px) {
     .Layout {
       grid-template-areas:
-        "masthead masthead . ."
-        ". . projects projects"
-        "content content content content"
-        "footer footer . .";
+        'masthead masthead . .'
+        '. . projects projects'
+        'content content content content'
+        'footer footer . .';
     }
 
     .Layout--single {
       grid-template-areas:
-        "masthead masthead . ."
-        "hero hero hero hero"
-        "content content content content"
-        "footer footer . .";
+        'masthead masthead . .'
+        'hero hero hero hero'
+        'content content content content'
+        'footer footer . .';
     }
   }
 

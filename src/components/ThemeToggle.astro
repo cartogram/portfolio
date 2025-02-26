@@ -1,5 +1,5 @@
 ---
-import Anchor from "./Anchor.astro";
+import Anchor from './Anchor.astro'
 ---
 
 <theme-toggle>
@@ -16,74 +16,74 @@ import Anchor from "./Anchor.astro";
 <script>
   class ThemeToggle extends HTMLElement {
     constructor() {
-      super();
+      super()
 
-      const themeButton = this.querySelector(".Theme");
-      const colorButton = this.querySelector(".Color");
+      const themeButton = this.querySelector('.Theme')
+      const colorButton = this.querySelector('.Color')
 
-      const setTheme = ({ dark, color }: { dark: boolean; color: boolean }) => {
-        const doc = document.documentElement;
-        doc.classList[dark ? "add" : "remove"]("theme-dark");
-        doc.classList[color ? "add" : "remove"]("color-mono");
+      const setTheme = ({dark, color}: {dark: boolean; color: boolean}) => {
+        const doc = document.documentElement
+        doc.classList[dark ? 'add' : 'remove']('theme-dark')
+        doc.classList[color ? 'add' : 'remove']('color-mono')
 
         if (themeButton) {
-          themeButton.setAttribute("aria-pressed", String(dark));
+          themeButton.setAttribute('aria-pressed', String(dark))
         }
         if (colorButton) {
-          colorButton.setAttribute("aria-pressed", String(color));
+          colorButton.setAttribute('aria-pressed', String(color))
         }
-      };
+      }
 
       if (themeButton) {
-        themeButton.addEventListener("click", () =>
+        themeButton.addEventListener('click', () =>
           setTheme({
             dark: !this.isDark(),
             color: this.isColorMono(),
-          })
-        );
+          }),
+        )
       }
 
       if (colorButton) {
-        colorButton.addEventListener("click", () =>
+        colorButton.addEventListener('click', () =>
           setTheme({
             dark: this.isDark(),
             color: !this.isColorMono(),
-          })
-        );
+          }),
+        )
       }
 
       setTheme({
         dark: this.isDark(),
         color: this.isColorMono(),
-      });
+      })
     }
 
     isDark() {
-      return document.documentElement.classList.contains("theme-dark");
+      return document.documentElement.classList.contains('theme-dark')
     }
 
     isColorMono() {
-      return document.documentElement.classList.contains("color-mono");
+      return document.documentElement.classList.contains('color-mono')
     }
   }
-  customElements.define("theme-toggle", ThemeToggle);
+  customElements.define('theme-toggle', ThemeToggle)
 </script>
 
 <style>
   .Theme {
-    --anchor-secondary-content: "Light";
+    --anchor-secondary-content: 'Light';
   }
 
   :global(.theme-dark) .Theme {
-    --anchor-secondary-content: "Dark";
+    --anchor-secondary-content: 'Dark';
   }
 
   .Color {
-    --anchor-secondary-content: "Auto";
+    --anchor-secondary-content: 'Auto';
   }
 
   :global(.color-mono) .Color {
-    --anchor-secondary-content: "Mono";
+    --anchor-secondary-content: 'Mono';
   }
 
   :global(.color-mono) {

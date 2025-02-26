@@ -1,21 +1,12 @@
 :root {
-  --background-image-noise: url("/assets/noise.png");
+  --background-image-noise: url('/assets/noise.png');
   --main-background-image: var(--background-image-noise);
   --main-background-color: light-dark(var(--color-white), var(--color-black));
 
-  --main-color: light-dark(
-    var(--color),
-    color(
-      from var(--color) display-p3 calc(r + 0.7) calc(g + 0.7) calc(b + 0.7)
-    )
-  );
+  --main-color: light-dark(var(--color), color(from var(--color) display-p3 calc(r + 0.7) calc(g + 0.7) calc(b + 0.7)));
   --main-color-light: light-dark(
-    color(
-      from var(--color) display-p3 calc(r + 0.5) calc(g + 0.5) calc(b + 0.5)
-    ),
-    color(
-      from var(--color) display-p3 calc(r + 0.4) calc(g + 0.4) calc(b + 0.4)
-    )
+    color(from var(--color) display-p3 calc(r + 0.5) calc(g + 0.5) calc(b + 0.5)),
+    color(from var(--color) display-p3 calc(r + 0.4) calc(g + 0.4) calc(b + 0.4))
   );
 
   --anchor-color-underline: var(--main-color-light);

@@ -1,12 +1,11 @@
 ---
-import Dash from "./Dash.astro";
-import Anchor from "./Anchor.astro";
-const currentYear = new Date().getFullYear();
+import Dash from './Dash.astro'
+import Anchor from './Anchor.astro'
+const currentYear = new Date().getFullYear()
 ---
 
 <footer class="Footer">
-  <small><Anchor href="/colophon" secondary="Colophon" primary="Pages" /></small
-  >
+  <small><Anchor href="/colophon" secondary="Colophon" primary="Pages" /></small>
   <Dash isFullWidth />
   <small>© {currentYear}</small>
   &nbsp;

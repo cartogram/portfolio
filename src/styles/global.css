@@ -1,12 +1,12 @@
-@import "./reset.css";
+@import './reset.css';
 
-@import "./variables.css";
-@import "./theme.css";
+@import './variables.css';
+@import './theme.css';
 
-@import "./typography.css";
+@import './typography.css';
 
-@import "./components/nav.css";
-@import "./components/controls.css";
+@import './components/nav.css';
+@import './components/controls.css';
 
 .Main {
   min-height: 100%;

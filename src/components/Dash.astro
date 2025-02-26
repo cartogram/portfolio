@@ -1,8 +1,8 @@
 ---
-const { isFullWidth } = Astro.props;
+const {isFullWidth} = Astro.props
 ---
 
-<div class:list={["Dash", { isFullWidth }]}><slot /></div>
+<div class:list={['Dash', {isFullWidth}]}><slot /></div>
 
 <style>
   .Dash {
@@ -20,7 +20,7 @@ const { isFullWidth } = Astro.props;
   }
 
   .Dash::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 50%;
     right: 0;

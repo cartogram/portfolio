@@ -1,27 +1,26 @@
 ---
-import Dash from "./Dash.astro";
+import Dash from './Dash.astro'
 
 interface Props {
-  href?: string;
-  primary?: string;
-  secondary?: string | string[];
-  external?: boolean;
-  accesskey?: string;
-  isCurrent?: boolean;
-  wrap?: boolean;
+  href?: string
+  primary?: string
+  secondary?: string | string[]
+  external?: boolean
+  accesskey?: string
+  isCurrent?: boolean
+  wrap?: boolean
 }
 
-const { href, primary, secondary, external, accesskey, isCurrent, wrap } =
-  Astro.props;
+const {href, primary, secondary, external, accesskey, isCurrent, wrap} = Astro.props
 ---
 
 <a
-  class={`Anchor ${wrap ? "Anchor--wrap" : ""}`}
+  class={`Anchor ${wrap ? 'Anchor--wrap' : ''}`}
   href={href}
-  target={external ? "_blank" : undefined}
-  rel={external ? "noopener noreferrer" : undefined}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
   accesskey={accesskey}
-  aria-current={isCurrent ? "page" : undefined}
+  aria-current={isCurrent ? 'page' : undefined}
 >
   <span class="Anchor__Primary">{primary}</span>
   {
@@ -34,7 +33,7 @@ const { href, primary, secondary, external, accesskey, isCurrent, wrap } =
           </>
         ))}
       </span>
-    ) : typeof secondary === "string" ? (
+    ) : typeof secondary === 'string' ? (
       <span class="Anchor__Secondary">{secondary}</span>
     ) : null
   }
@@ -83,7 +82,7 @@ const { href, primary, secondary, external, accesskey, isCurrent, wrap } =
   }
 
   .Anchor__Primary::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     background-color: var(--anchor-color-underline);
@@ -107,7 +106,7 @@ const { href, primary, secondary, external, accesskey, isCurrent, wrap } =
   }
 
   .Anchor__Secondary::before {
-    content: "";
+    content: '';
     height: 1px;
     background: currentColor;
     width: 1rem;
@@ -119,7 +118,7 @@ const { href, primary, secondary, external, accesskey, isCurrent, wrap } =
   }
 
   .Anchor__Secondary::after {
-    content: var(--anchor-secondary-content, "");
+    content: var(--anchor-secondary-content, '');
   }
 
   @media (prefers-reduced-motion: no-preference) {

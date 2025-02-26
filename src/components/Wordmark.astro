@@ -1,7 +1,7 @@
 ---
-const letters = ["C", "A", "R", "T", "O", "G", "R", "A", "M"];
-const min = 3;
-const max = 15;
+const letters = ['C', 'A', 'R', 'T', 'O', 'G', 'R', 'A', 'M']
+const min = 3
+const max = 15
 ---
 
 <cartogram-wordmark class="Wordmark" aria-hidden="true">
@@ -81,26 +81,26 @@ const max = 15;
 </style>
 
 <script>
-  import { animate } from "motion";
+  import {animate} from 'motion'
 
   class CartogramWordmark extends HTMLElement {
     constructor() {
-      super();
+      super()
 
       const size = {
         width: window.innerWidth,
         height: window.innerHeight,
-      };
+      }
 
-      const tracks = this.querySelectorAll(".Track");
+      const tracks = this.querySelectorAll('.Track')
 
       tracks.forEach((track) => {
-        const height = this.randomNumber(0, size.height, 0.5);
-        const letters = track.querySelectorAll(".Letter");
+        const height = this.randomNumber(0, size.height, 0.5)
+        const letters = track.querySelectorAll('.Letter')
 
         letters.forEach((letter, index) => {
-          const offset = size.width > 950 ? index * 10 : index * 5;
-          const y = height + offset;
+          const offset = size.width > 950 ? index * 10 : index * 5
+          const y = height + offset
           animate(
             letter,
             {
@@ -110,23 +110,23 @@ const max = 15;
               skewY: [-18, -18],
             },
             {
-              type: "spring",
+              type: 'spring',
               stiffness: 300,
               damping: 40,
               mass: 4,
               delay: index * 0.02,
-            }
-          );
-        });
-      });
+            },
+          )
+        })
+      })
     }
     randomNumber(min: number, max: number, correction = 0) {
-      return Math.floor((Math.random() - correction) * (max - min + 1)) + min;
+      return Math.floor((Math.random() - correction) * (max - min + 1)) + min
     }
 
     isDark() {
-      return document.documentElement.classList.contains("theme-dark");
+      return document.documentElement.classList.contains('theme-dark')
     }
   }
-  customElements.define("cartogram-wordmark", CartogramWordmark);
+  customElements.define('cartogram-wordmark', CartogramWordmark)
 </script>

@@ -1,36 +1,34 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import {type CollectionEntry, getCollection} from 'astro:content'
 
-import Layout from "../../layouts/Layout.astro";
-import Anchor from "../../components/Anchor.astro";
-import Dash from "../../components/Dash.astro";
-import { render } from "astro:content";
+import Layout from '../../layouts/Layout.astro'
+import Anchor from '../../components/Anchor.astro'
+import Dash from '../../components/Dash.astro'
+import {render} from 'astro:content'
 
 interface Props {
-  entry: CollectionEntry<"work">;
+  entry: CollectionEntry<'work'>
 }
 
 type Heading = {
-  slug: string;
-  text: string;
-};
-
-export async function getStaticPaths() {
-  const work = await getCollection("work");
-  return work.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+  slug: string
+  text: string
 }
 
-const { entry } = Astro.props;
+export async function getStaticPaths() {
+  const work = await getCollection('work')
+  return work.map((entry) => ({
+    params: {slug: entry.id},
+    props: {entry},
+  }))
+}
 
-const { Content, headings } = await render(entry);
+const {entry} = Astro.props
 
-const work = await getCollection("work");
-const next = work.find(
-  (w) => w.data.type === entry.data.type && w.id !== entry.id
-);
+const {Content, headings} = await render(entry)
+
+const work = await getCollection('work')
+const next = work.find((w) => w.data.type === entry.data.type && w.id !== entry.id)
 ---
 
 <Layout
@@ -42,11 +40,7 @@ const next = work.find(
   <Fragment slot="masthead">
     <header class="Nav">
       <h1 class="Nav__Title">
-        <Anchor
-          href="/"
-          primary={entry.data.title}
-          secondary={entry.data.type}
-        />
+        <Anchor href="/" primary={entry.data.title} secondary={entry.data.type} />
       </h1>
       <nav class="Nav__Controls">
         <div class="Controls justify-end">
@@ -60,9 +54,9 @@ const next = work.find(
     <aside class="Meta">
       <small
         >{
-          entry.data.publishDate.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
+          entry.data.publishDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
           })
         }</small
       >
@@ -97,10 +91,7 @@ const next = work.find(
         entry.data.url && (
           <li>
             <h3>View</h3>
-            <Anchor
-              href={entry.data.url}
-              primary={entry.data.url.replace("https://www.", "").split("/")[0]}
-            />
+            <Anchor href={entry.data.url} primary={entry.data.url.replace('https://www.', '').split('/')[0]} />
           </li>
         )
       }
@@ -115,7 +106,7 @@ const next = work.find(
                 <li>
                   <Anchor
                     wrap
-                    href={collaborator.url ?? ""}
+                    href={collaborator.url ?? ''}
                     primary={collaborator.name}
                     secondary={collaborator.role}
                   />
@@ -134,14 +125,10 @@ const next = work.find(
         <h3>Chapters</h3>
         <ul>
           {(entry.rendered?.metadata?.headings as Heading[])
-            .filter((heading) => heading.slug !== "footnote-label")
+            .filter((heading) => heading.slug !== 'footnote-label')
             .map((heading, index) => (
               <li>
-                <Anchor
-                  href={`#${heading.slug}`}
-                  primary={String(index + 1)}
-                  secondary={heading.text}
-                />
+                <Anchor href={`#${heading.slug}`} primary={String(index + 1)} secondary={heading.text} />
               </li>
             ))}
         </ul>
@@ -153,13 +140,7 @@ const next = work.find(
     entry.data.video && (
       <Fragment slot="hero">
         <div class="Video">
-          <video
-            autoplay
-            loop
-            muted
-            playsinline
-            src={`/assets/${entry.id}.mp4`}
-          />
+          <video autoplay loop muted playsinline src={`/assets/${entry.id}.mp4`} />
         </div>
       </Fragment>
     )
@@ -174,18 +155,8 @@ const next = work.find(
           {entry.data.media.map((media) => (
             <figure>
               <div class="Media__Item">
-                {media.type === "video" && (
-                  <video
-                    autoplay
-                    loop
-                    muted
-                    playsinline
-                    src={`/assets/${media.src}`}
-                  />
-                )}
-                {media.type === "image" && (
-                  <img src={`/assets/${media.src}`} alt={media.alt} />
-                )}
+                {media.type === 'video' && <video autoplay loop muted playsinline src={`/assets/${media.src}`} />}
+                {media.type === 'image' && <img src={`/assets/${media.src}`} alt={media.alt} />}
               </div>
               <figcaption>
                 <p>{media.alt}</p>
@@ -217,7 +188,7 @@ const next = work.find(
     }
 
     .content :global(strong)::before {
-      content: "";
+      content: '';
       position: absolute;
       inset: 0;
       background-color: var(--anchor-color-underline);
