@@ -30,6 +30,10 @@ h5 {
   max-width: 52ch;
 }
 
+h2 {
+  line-height: var(--line-height-tight);
+}
+
 h3 {
   padding-top: 1rem;
   font-size: var(--font-size-sm);
