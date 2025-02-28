@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Anchor from '../components/Anchor.astro'
+---
+
+<Layout title="Colophon" description="Colophon">
+  <Fragment slot="masthead">
+    <header class="Nav">
+      <h1 class="Nav__Title">
+        <Anchor href="/" primary="Toronto" />
+      </h1>
+      <nav class="Nav__Controls">
+        <div class="Controls justify-end">
+          <Anchor href="/" primary="Close" />
+        </div>
+      </nav>
+    </header>
+
+    <h2>A short list of things I like in Toronto, Ontario from living there for nearly 15 years.</h2>
+    <h3>Beer</h3>
+    <ul class="">
+      <li>
+        <ul>
+          <li>
+            <Anchor external href="https://bellwoodsbrewery.com/" primary="Bellwoods Brewery" />
+            <h2>Strong IPAs for park hangs.</h2>
+          </li>
+          <li>
+            <Anchor external href="https://leftfieldbrewery.ca/" primary="Left Field Brewery" />
+            <h2>Unpretentious, well-run brewery.</h2>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Shops</h3>
+    <ul class="">
+      <li>
+        <ul>
+          <li>
+            <Anchor external href="https://www.bikesonwheels.com/" primary="Bikes on Wheels" />
+            <h2>Bikes and bike rides, run by a great couple.</h2>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </Fragment>
+</Layout>

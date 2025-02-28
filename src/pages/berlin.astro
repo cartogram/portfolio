@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Anchor from '../components/Anchor.astro'
+---
+
+<Layout title="Colophon" description="Colophon">
+  <Fragment slot="masthead">
+    <header class="Nav">
+      <h1 class="Nav__Title">
+        <Anchor href="/" primary="Berlin" />
+      </h1>
+      <nav class="Nav__Controls">
+        <div class="Controls justify-end">
+          <Anchor href="/" primary="Close" />
+        </div>
+      </nav>
+    </header>
+    <h3>Bars</h3>
+    <ul class="">
+      <li>
+        <ul>
+          <li>
+            <Anchor external href="https://froschkoenig-berlin.de/" primary="Frosch Koenig" />
+            <h2>A friendly local kneipe that plays silent films on Wednesdays evenings.</h2>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </Fragment>
+</Layout>
