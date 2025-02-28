@@ -12,19 +12,24 @@ type Props = {
 }
 
 const assetsDir = '/assets'
-const {title, data} = Astro.props
+const {data} = Astro.props
 ---
 
 <cartogram-media>
-  <div class="Media Unwrap">
+  <div class="Media">
     <section class="img-group-container" style={`height: ${data.length * 100}vh`}>
       <div class="sticker">
         <ul class="img-group">
           {
             data.map((media) => (
-              <li class="img-container">
+              <li class:list={['img-container', {withCaption: media.caption}]}>
                 {media.type === 'image' && <img src={`${assetsDir}/${media.src}`} alt={media.alt} />}
                 {media.type === 'video' && <video autoplay loop muted playsinline src={`${assetsDir}/${media.src}`} />}
+                {media.caption && (
+                  <p class="caption">
+                    <small>{media.caption}</small>
+                  </p>
+                )}
               </li>
             ))
           }
@@ -80,6 +85,7 @@ const {title, data} = Astro.props
     margin-top: 2rem;
     margin-bottom: 2rem;
     position: relative;
+    z-index: 1;
   }
 
   .Media::after {
@@ -120,11 +126,24 @@ const {title, data} = Astro.props
   }
 
   .img-container img {
-    border-radius: 1rem;
+    border-radius: var(--radius-2);
     max-height: 100%;
     object-fit: contain;
-    box-shadow: 0 0rem 2rem rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-1);
     background-color: var(--main-color-light);
-    border: 1px solid;
+    max-width: 95%;
+  }
+
+  .img-container.withCaption img {
+    max-height: 90%;
+  }
+
+  .caption {
+    min-width: 20ch;
+    max-width: 36ch;
+    line-height: 1;
+    padding: 2rem;
+    padding-bottom: 0;
+    /* align-self: flex-end; */
   }
 </style>

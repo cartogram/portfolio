@@ -7,6 +7,7 @@
 
 @import './components/nav.css';
 @import './components/controls.css';
+@import './components/footer.css';
 
 .Main {
   min-height: 100%;
@@ -16,6 +17,8 @@
   min-height: 100vh;
   padding-top: 1.5rem;
   padding-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (forced-colors: active) {
@@ -79,7 +82,7 @@ hr {
 }
 
 .Image {
-  border-radius: 1rem;
+  border-radius: var(--radius-2);
   width: 100%;
   height: auto;
   max-width: 500px;

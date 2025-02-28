@@ -4,20 +4,18 @@ import Anchor from './Anchor.astro'
 const currentYear = new Date().getFullYear()
 ---
 
-<footer class="Footer">
-  <small><Anchor href="/colophon" secondary="Colophon" primary="Pages" /></small>
-  <Dash isFullWidth />
-  <small>© {currentYear}</small>
-  &nbsp;
-  <small>Cartogram Inc.</small>
-</footer>
+<footer class="Footer Wrap">
+  <div class="Footer__content">
+    <small>Pages</small>
+    <Dash />
+    <nav>
+      <small><Anchor href="/colophon" primary="Colophon" /></small>
+      <small><Anchor href="/berlin" primary="Berlin" /></small>
+      <small><Anchor href="/toronto" primary="Toronto" /></small>
+    </nav>
+    <Dash isFullWidth />
+    <small>1987-{currentYear} &copy; Cartogram</small>
+  </div>
 
-<style>
-  .Footer {
-    position: relative;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    gap: 3px;
-  }
-</style>
+  <style></style>
+</footer>

@@ -18,6 +18,20 @@ collaborators:
 tags:
   - Current
 color: rgb(25 89 11)
+media:
+  - src: fondfolio-04.png
+    alt: Full product image of the pawzzle.
+    type: image
+  - src: fondfolio-02.jpg
+    alt: Postcards to promote the product.
+    type: image
+  - src: fondfolio-03.jpg
+    alt: Close up of the fondfolio logo and toy.
+    type: image
+  - src: fondfolio-01.jpg
+    alt: Matt and Fiona with their cat Minou, with fondfolio stacked around them.
+    type: image
+
 video: true
 ---
 

@@ -18,9 +18,19 @@ collaborators:
     role:
       - Product Creator
 media:
+  - src: pawzzles-04.jpg
+    alt: Full product image of the pawzzle.
+    type: image
+  - src: pawzzles-02.jpg
+    alt: Postcards to promote the product.
+    caption: I created a set of hand-drawn cat illustraions and Fiona digitally retraced and colorized them.
+    type: image
+  - src: pawzzles-03.jpg
+    alt: Close up of the pawzzles logo and toy.
+    type: image
   - src: pawzzles-01.jpg
     alt: Matt and Fiona with their cat Minou, with Pawzzles stacked around them.
-    caption: Our first apartment in Berlin, where Fiona started working on Pawzzles with our dear cat, Minou.
+    caption: Our first apartment in Berlin, where Fiona started working on Pawzzles with our dearly-departed cat Minou.
     type: image
 
 collection: work

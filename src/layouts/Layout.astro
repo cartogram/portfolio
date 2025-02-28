@@ -65,18 +65,16 @@ const {title, description, layout = 'home', color} = Astro.props
 
           <slot name="content" />
         </div>
-
-        {
-          layout === 'single' && (
-            <div class="Media">
-              <slot name="media" />
-            </div>
-          )
-        }
-        <footer class="Footer">
-          <Footer />
-        </footer>
       </section>
+
+      {
+        layout === 'single' && (
+          <div class="Media">
+            <slot name="media" />
+          </div>
+        )
+      }
+      <Footer />
     </main>
 
     <script>
@@ -90,7 +88,7 @@ const {title, description, layout = 'home', color} = Astro.props
 <style>
   .Layout {
     width: 100%;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: auto;
@@ -99,37 +97,33 @@ const {title, description, layout = 'home', color} = Astro.props
     grid-template-areas:
       'masthead masthead masthead masthead'
       'projects projects projects projects'
-      'content content content content'
-      'footer footer footer footer';
+      'content content content content';
 
     z-index: var(--z-index-2);
     position: relative;
+    padding-bottom: 2rem;
+    flex-grow: 1;
   }
 
   .Layout--single {
     grid-template-areas:
       'masthead masthead masthead masthead'
       'hero hero hero hero'
-      'content content content content'
-      'media media media media'
-      'footer footer footer footer';
+      'content content content content';
   }
   @media (width > 1024px) {
     .Layout {
       grid-template-areas:
         'masthead masthead masthead .'
         'projects projects projects .'
-        'content content content content'
-        'footer footer . .';
+        'content content content content';
     }
 
     .Layout--single {
       grid-template-areas:
         'masthead masthead . .'
         'hero hero hero hero'
-        'content content content content'
-        'media media media media'
-        'footer footer . .';
+        'content content content content';
     }
   }
 
@@ -138,17 +132,14 @@ const {title, description, layout = 'home', color} = Astro.props
       grid-template-areas:
         'masthead masthead . .'
         '. . projects projects'
-        'content content content content'
-        'footer footer . .';
+        'content content content content';
     }
 
     .Layout--single {
       grid-template-areas:
         'masthead masthead . .'
         'hero hero hero hero'
-        'content content content content'
-        'media media media media'
-        'footer footer . .';
+        'content content content content';
     }
   }
 
@@ -172,10 +163,6 @@ const {title, description, layout = 'home', color} = Astro.props
 
   .Masthead {
     grid-area: masthead;
-  }
-
-  .Footer {
-    grid-area: footer;
   }
 
   .Hero {

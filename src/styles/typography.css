@@ -32,6 +32,7 @@ h5 {
 
 h2 {
   line-height: var(--line-height-tight);
+  max-width: 35ch;
 }
 
 h3 {

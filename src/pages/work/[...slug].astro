@@ -104,12 +104,7 @@ const next = work.find((w) => w.data.type === entry.data.type && w.id !== entry.
             <ul>
               {entry.data.collaborators?.map((collaborator) => (
                 <li>
-                  <Anchor
-                    wrap
-                    href={collaborator.url ?? ''}
-                    primary={collaborator.name}
-                    secondary={collaborator.role}
-                  />
+                  <Anchor wrap href={collaborator.url} primary={collaborator.name} secondary={collaborator.role} />
                 </li>
               ))}
             </ul>
@@ -169,7 +164,6 @@ const next = work.find((w) => w.data.type === entry.data.type && w.id !== entry.
     }
     .content :global(h2) {
       font-size: clamp(var(--font-size-lg), 6.5vw, var(--font-size-md));
-      max-width: 40ch;
     }
 
     .content :global(strong) {
@@ -223,10 +217,10 @@ const next = work.find((w) => w.data.type === entry.data.type && w.id !== entry.
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 1rem;
-      border: 1px solid;
+      border-radius: var(--radius-2);
+      /* border: 2px solid; */
       overflow: hidden;
-      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-1);
       background-color: var(--main-background-color);
     }
 
@@ -253,7 +247,7 @@ const next = work.find((w) => w.data.type === entry.data.type && w.id !== entry.
       height: 100%;
       border-radius: 1rem;
       border: 1px solid;
-      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-1);
     }
 
     .Media__Item video {

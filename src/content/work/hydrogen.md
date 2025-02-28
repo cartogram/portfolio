@@ -13,6 +13,18 @@ tags:
 roles:
   - Full-Time Position
   - Developer
+collaborators:
+  - name: Josh larson
+    url: https://www.jplhomer.org/
+  - name: Fran Dios
+    url: https://www.linkedin.com/in/frandios
+  - name: Brett Little
+    url: https://www.linkedin.com/in/bretlittle/
+  - name: Daniel Rios Pavia
+    url: https://www.linkedin.com/in/ieldanr/
+  - name: Juan P. Prieto
+    url: https://www.calltheguys.co/
+
 color: rgb(27 104 0);
 video: true
 ---
