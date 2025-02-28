@@ -16,16 +16,6 @@ collaborators:
     url: https://www.thetyleradamsmith.com/
     role:
       - Owner
-media:
-  - src: cartogram-work-wildling-01.png
-    alt: Matt and Fiona with their cat Minou, with Pawzzles stacked around them.
-    caption: Our first apartment in Berlin, where Fiona started working on Pawzzles with our dear cat, Minou.
-    type: image
-  - src: cartogram-work-wildling-02.png
-    alt: Matt and Fiona with their cat Minou, with Pawzzles stacked around them.
-    caption: Our first apartment in Berlin, where Fiona started working on Pawzzles with our dear cat, Minou.
-    type: image
-
 color: rgb(83 94 8)
 video: true
 ---
