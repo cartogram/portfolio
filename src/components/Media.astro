@@ -1,0 +1,130 @@
+---
+type Media = {
+  type: 'image' | 'video'
+  src: string
+  alt: string
+  caption?: string
+}
+
+type Props = {
+  title: string
+  data: Media[]
+}
+
+const assetsDir = '/assets'
+const {title, data} = Astro.props
+---
+
+<cartogram-media>
+  <div class="Media Unwrap">
+    <section class="img-group-container" style={`height: ${data.length * 100}vh`}>
+      <div class="sticker">
+        <ul class="img-group">
+          {
+            data.map((media) => (
+              <li class="img-container">
+                {media.type === 'image' && <img src={`${assetsDir}/${media.src}`} alt={media.alt} />}
+                {media.type === 'video' && <video autoplay loop muted playsinline src={`${assetsDir}/${media.src}`} />}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </div>
+</cartogram-media>
+
+<script>
+  import {animate, scroll} from 'motion'
+
+  class CartogramMedia extends HTMLElement {
+    private elements: {
+      items: NodeListOf<HTMLElement>
+      groups: NodeListOf<HTMLElement>
+      container: Element
+    }
+
+    constructor() {
+      super()
+
+      const container = this.querySelector('.img-group-container')
+
+      if (!container) {
+        throw new Error('Container not found')
+      }
+
+      this.elements = {
+        items: this.querySelectorAll('.img-container'),
+        groups: this.querySelectorAll('.img-group'),
+        container,
+      }
+
+      this.init()
+    }
+
+    init() {
+      scroll(
+        animate(this.elements.groups, {
+          transform: ['none', `translateX(-${this.elements.items.length - 1}00vw)`],
+        }),
+        {target: this.elements.container},
+      )
+    }
+  }
+
+  customElements.define('cartogram-media', CartogramMedia)
+</script>
+
+<style>
+  .Media {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .Media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--main-background-color);
+    z-index: -1;
+    opacity: 0.25;
+    border-top: 1px solid var(--main-color-light);
+    border-bottom: 1px solid var(--main-color-light);
+  }
+
+  .img-group-container {
+    position: relative;
+  }
+
+  .sticker {
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .img-group {
+    display: flex;
+  }
+
+  .img-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .img-container img {
+    border-radius: 1rem;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 0rem 2rem rgba(0, 0, 0, 0.1);
+    background-color: var(--main-color-light);
+    border: 1px solid;
+  }
+</style>

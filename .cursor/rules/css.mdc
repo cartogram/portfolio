@@ -1,0 +1,39 @@
+---
+description: ECSS (Enduring CSS) methodology
+globs: **/*.css
+alwaysApply: false
+---
+I follow the ECSS (Enduring CSS) methodology to ensure modular, maintainable, and scalable CSS. Here are the key principles and more information can be found https://ecss.info/en/.
+
+1. Component Structure & Naming
+	•	Each file defines a single component, and all selectors must start with the filename.
+	•	Modifiers and utility classes must use explicit prefixes (e.g., as-, is-, on-, to-, __).
+	•	Nesting is restricted to two levels, and all nested selectors must start with &.
+	•	Tag selectors are encouraged within components but not as part of class names.
+
+2. Spacing & Layout
+	•	Padding is applied to containers and interactive elements, not text elements.
+	•	Horizontal margins should not be applied to text elements (except for inline icons/tags).
+	•	Layout rhythm is applied in one direction (top) using *+* or gap in flex/grid.
+	•	Fixed dimensions are discouraged—use max-width, min-width, and fluid units.
+
+3. Specificity & Selectors
+	•	Attribute selectors ([data-state="active"]) are preferred over IDs.
+	•	Overqualified selectors (e.g., article.card) are discouraged.
+	•	Components should not affect elements outside their scope (e.g., no margin on .card).
+	•	Specificity should be kept as low as possible (:where() over :is()).
+
+4. Reusability & Design Tokens
+	•	Design tokens (var(--small-spacing)) should replace raw numerical values.
+	•	Magic numbers must be avoided or commented when necessary.
+	•	Default browser behavior should not be overridden unless justified.
+
+5. Global Rules & Code Organization
+	•	Fundamental design layers (typography, rhythm) should be globally defined.
+	•	Rules should be DRY—avoid repeating more than 3 properties across multiple selectors.
+	•	One entity per file, with a soft limit of ~100 lines.
+
+6. Browser Behavior & Accessibility
+	•	overflow: hidden is discouraged—use auto to avoid unintentionally hiding content.
+	•	Avoid problematic units (e.g., 100vh in favor of 100dvh).
+	•	CSS should embrace the browser’s default behavior instead of forcing layouts.

@@ -20,6 +20,7 @@ collaborators:
 media:
   - src: pawzzles-01.jpg
     alt: Matt and Fiona with their cat Minou, with Pawzzles stacked around them.
+    caption: Our first apartment in Berlin, where Fiona started working on Pawzzles with our dear cat, Minou.
     type: image
 
 collection: work

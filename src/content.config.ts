@@ -30,6 +30,7 @@ export const collections = {
             type: z.enum(['image', 'video']),
             src: z.string(),
             alt: z.string(),
+            caption: z.string().optional(),
           }),
         )
         .optional(),

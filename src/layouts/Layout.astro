@@ -66,6 +66,13 @@ const {title, description, layout = 'home', color} = Astro.props
           <slot name="content" />
         </div>
 
+        {
+          layout === 'single' && (
+            <div class="Media">
+              <slot name="media" />
+            </div>
+          )
+        }
         <footer class="Footer">
           <Footer />
         </footer>
@@ -94,6 +101,7 @@ const {title, description, layout = 'home', color} = Astro.props
       'projects projects projects projects'
       'content content content content'
       'footer footer footer footer';
+
     z-index: var(--z-index-2);
     position: relative;
   }
@@ -103,6 +111,7 @@ const {title, description, layout = 'home', color} = Astro.props
       'masthead masthead masthead masthead'
       'hero hero hero hero'
       'content content content content'
+      'media media media media'
       'footer footer footer footer';
   }
   @media (width > 1024px) {
@@ -119,6 +128,7 @@ const {title, description, layout = 'home', color} = Astro.props
         'masthead masthead . .'
         'hero hero hero hero'
         'content content content content'
+        'media media media media'
         'footer footer . .';
     }
   }
@@ -137,6 +147,7 @@ const {title, description, layout = 'home', color} = Astro.props
         'masthead masthead . .'
         'hero hero hero hero'
         'content content content content'
+        'media media media media'
         'footer footer . .';
     }
   }
@@ -173,6 +184,10 @@ const {title, description, layout = 'home', color} = Astro.props
 
   .Projects {
     grid-area: projects;
+  }
+
+  .Media {
+    grid-area: media;
   }
 
   .Layout--single .Projects {
