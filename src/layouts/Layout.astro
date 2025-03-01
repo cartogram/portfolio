@@ -9,7 +9,7 @@ import ThemeToggle from '../components/ThemeToggle.astro'
 interface Props {
   title?: string | undefined
   description?: string | undefined
-  layout?: 'home' | 'single'
+  layout?: 'home' | 'single' | 'page'
   color?: string | undefined
 }
 
@@ -111,6 +111,15 @@ const {title, description, layout = 'home', color} = Astro.props
       'hero hero hero hero'
       'content content content content';
   }
+
+  .Layout--page {
+    grid-auto-rows: auto 1fr;
+
+    grid-template-areas:
+      'masthead masthead masthead masthead'
+      'content content content content';
+  }
+
   @media (width > 1024px) {
     .Layout {
       grid-template-areas:
@@ -123,6 +132,12 @@ const {title, description, layout = 'home', color} = Astro.props
       grid-template-areas:
         'masthead masthead . .'
         'hero hero hero hero'
+        'content content content content';
+    }
+
+    .Layout--page {
+      grid-template-areas:
+        'masthead masthead . .'
         'content content content content';
     }
   }
@@ -139,6 +154,12 @@ const {title, description, layout = 'home', color} = Astro.props
       grid-template-areas:
         'masthead masthead . .'
         'hero hero hero hero'
+        'content content content content';
+    }
+
+    .Layout--page {
+      grid-template-areas:
+        'masthead masthead . .'
         'content content content content';
     }
   }
@@ -199,7 +220,6 @@ const {title, description, layout = 'home', color} = Astro.props
     .Chapters {
       grid-column: 1 / 5;
       grid-row: 1 / 2;
-      padding-top: 2rem;
     }
 
     .Chapters li {
@@ -207,6 +227,7 @@ const {title, description, layout = 'home', color} = Astro.props
     }
   }
 
+  .Layout--page .Content,
   .Layout--single .Content {
     grid-template-columns: subgrid;
   }

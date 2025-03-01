@@ -30,9 +30,15 @@ h5 {
   max-width: 52ch;
 }
 
+.Text--large,
 h2 {
   line-height: var(--line-height-tight);
-  max-width: 35ch;
+  max-width: 42ch;
+
+  &:not(:first-of-type) {
+    margin: 0;
+    padding: 4rem 0 1rem;
+  }
 }
 
 h3 {
@@ -55,8 +61,13 @@ ul {
   list-style: none;
 }
 
+ol {
+  padding-left: 1.5rem;
+}
+
 ol li {
   list-style: decimal;
+  margin-left: 1.5rem;
 }
 
 ul h3 {
@@ -78,5 +89,45 @@ figcaption {
   p {
     font-size: var(--font-size-xs);
     font-family: var(--font-mono);
+  }
+}
+
+strong {
+  font-weight: var(--font-weight-normal);
+  position: relative;
+}
+
+strong::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--anchor-color-underline);
+  z-index: -1;
+  opacity: 0.1;
+}
+
+/* .Markdown {
+  padding-top: 2rem;
+} */
+
+.Markdown h2 {
+  font-size: clamp(var(--font-size-lg), 6.5vw, var(--font-size-md));
+}
+
+.Markdown ul li {
+  padding-bottom: 1rem;
+  max-width: 50ch;
+  font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-md));
+  text-indent: -1.6rem;
+
+  &::before {
+    content: '';
+    display: inline-flex;
+    width: 1.5rem;
+    margin-right: 0.1rem;
+    height: 1px;
+    background-color: var(--anchor-color-underline);
+    top: -0.5rem;
+    position: relative;
   }
 }

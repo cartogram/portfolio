@@ -3,26 +3,23 @@ import Layout from '../layouts/Layout.astro'
 import Anchor from '../components/Anchor.astro'
 ---
 
-<Layout title="Colophon" description="Colophon">
+<Layout title="Colophon" description="Colophon" layout="page">
   <Fragment slot="masthead">
     <header class="Nav">
-      <h1 class="Nav__Title">
-        <Anchor href="/" primary="Colophon" />
-      </h1>
+      <h1 class="Nav__Title">Colophon</h1>
       <nav class="Nav__Controls">
         <div class="Controls justify-end">
           <Anchor href="/" primary="Close" />
         </div>
       </nav>
     </header>
-    <ul class="List">
-      <li>
-        <ul>
-          <li><Anchor href="https://weltkern.com/typefaces/lausanne" primary="Set in" secondary="Lausanne" /></li>
-          <li><Anchor href="https://github.com/cartogram/portfolio" primary="Source in" secondary="TypeScript" /></li>
-          <li><Anchor href="/berlin" primary="Made in" secondary="Berlin" /></li>
-        </ul>
-      </li>
-    </ul>
   </Fragment>
+
+  <div slot="content">
+    <ul>
+      <li><Anchor href="https://weltkern.com/typefaces/lausanne" primary="Set in" secondary="Lausanne" /></li>
+      <li><Anchor href="https://github.com/cartogram/portfolio" primary="Source in" secondary="TypeScript" /></li>
+      <li><Anchor href="/berlin" primary="Made in" secondary="Berlin" /></li>
+    </ul>
+  </div>
 </Layout>

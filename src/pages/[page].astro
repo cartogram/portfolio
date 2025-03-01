@@ -1,0 +1,44 @@
+---
+import {type CollectionEntry, getCollection, getEntry} from 'astro:content'
+
+import Layout from '../layouts/Layout.astro'
+import Anchor from '../components/Anchor.astro'
+import {render} from 'astro:content'
+
+interface Props {
+  page: CollectionEntry<'pages'>
+}
+
+export function getStaticPaths() {
+  return [{params: {page: 'berlin'}}, {params: {page: 'colophon'}}, {params: {page: 'toronto'}}]
+}
+
+const {page} = Astro.params
+
+const entry = await getEntry('pages', page)
+
+if (!entry) {
+  throw new Error('Could not find Berlin page')
+}
+
+const {Content, headings, remarkPluginFrontmatter} = await render(entry)
+---
+
+<Layout title={`${entry.data.title}`} description={entry.data.description} layout="page">
+  <Fragment slot="masthead">
+    <header class="Nav">
+      <h1 class="Nav__Title">
+        {entry.data.description}
+      </h1>
+      <nav class="Nav__Controls">
+        <div class="Controls justify-end">
+          <Anchor href="/" primary="Close" />
+        </div>
+      </nav>
+    </header>
+  </Fragment>
+
+  <div class="Markdown content" slot="content">
+    <Content />
+  </div>
+</Layout>
