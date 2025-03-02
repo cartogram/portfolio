@@ -7,20 +7,25 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
+    "lint:css": "stylelint \"**/*.{css,scss,sass}\""
   },
   "dependencies": {
-    "@astrojs/react": "^4.2.0",
     "@efficientcss/stylelint-config-ecss": "^1.0.0-beta-14",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "astro": "^5.2.5",
     "motion": "^12.4.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "stylelint": "^16.15.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-astro": "^0.31.4",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
     "prettier": "3.5.2",
     "prettier-plugin-astro": "0.14.1"
   }

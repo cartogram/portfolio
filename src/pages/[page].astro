@@ -1,5 +1,5 @@
 ---
-import {type CollectionEntry, getCollection, getEntry} from 'astro:content'
+import {type CollectionEntry, getEntry} from 'astro:content'
 
 import Layout from '../layouts/Layout.astro'
 import Anchor from '../components/Anchor.astro'
@@ -21,7 +21,7 @@ if (!entry) {
   throw new Error('Could not find Berlin page')
 }
 
-const {Content, headings, remarkPluginFrontmatter} = await render(entry)
+const {Content} = await render(entry)
 ---
 
 <Layout title={`${entry.data.title}`} description={entry.data.description} layout="page">
