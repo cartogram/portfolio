@@ -6,16 +6,26 @@ const currentYear = new Date().getFullYear()
 
 <footer class="Footer Wrap">
   <div class="Meta">
-    <small>Pages</small>
-    <Dash />
+    <small class="hide-on-mobile">Pages</small>
+    <span class="hide-on-mobile"><Dash /></span>
     <nav>
       <small><Anchor href="/colophon" primary="Colophon" /></small>
       <small><Anchor href="/berlin" primary="Berlin" /></small>
       <small><Anchor href="/toronto" primary="Toronto" /></small>
     </nav>
     <Dash isFullWidth />
-    <small>1987-{currentYear} &copy; Cartogram</small>
+    <small><span class="hide-on-mobile">1987-</span>{currentYear} &copy; Cartogram</small>
   </div>
 
-  <style></style>
+  <style>
+    .hide-on-mobile {
+      display: none;
+    }
+
+    @media (width > 500px) {
+      .hide-on-mobile {
+        display: inline-block;
+      }
+    }
+  </style>
 </footer>
