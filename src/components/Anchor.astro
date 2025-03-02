@@ -6,12 +6,11 @@ interface Props {
   primary?: string
   secondary?: string | string[]
   external?: boolean
-  accesskey?: string
   isCurrent?: boolean
   wrap?: boolean
 }
 
-const {href, primary, secondary, external, accesskey, isCurrent, wrap} = Astro.props
+const {href, primary, secondary, external, isCurrent, wrap} = Astro.props
 ---
 
 <a
@@ -19,7 +18,6 @@ const {href, primary, secondary, external, accesskey, isCurrent, wrap} = Astro.p
   href={href}
   target={external ? '_blank' : undefined}
   rel={external ? 'noopener noreferrer' : undefined}
-  accesskey={accesskey}
   aria-current={isCurrent ? 'page' : undefined}
 >
   <span class="Anchor__Primary">{primary}</span>

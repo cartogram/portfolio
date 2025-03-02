@@ -5,12 +5,13 @@ module.exports = {
     browser: true,
     es2022: true,
   },
+  globals: {
+    NodeListOf: true,
+  },
+
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
     'plugin:astro/recommended',
     'plugin:jsx-a11y/recommended',
   ],
@@ -22,7 +23,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['@typescript-eslint', 'react', 'jsx-a11y'],
+  plugins: ['@typescript-eslint', 'jsx-a11y'],
   settings: {
     react: {
       version: 'detect',
