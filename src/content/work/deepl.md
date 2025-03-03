@@ -25,13 +25,9 @@ color: rgb(14 38 95)
 
 ## Introduction
 
-When people talk about design systems, they often center the conversation around components where two most common analogies are Lego bricks and atoms: small pieces that fuse together like bricks into structures, atoms into molecules, components into larger components, and eventually entire applications.
+When people talk about design systems, the focus often gravitates toward components, with common metaphors likening them to Lego bricks or atoms—discrete building blocks that combine to form structures, atoms into molecules, and components into complex components and ultimately, entire applications. While components are foundational, they do not, in themselves, define a design system or make it successful. Many component libraries exist and are already well-documented, widely adopted, built to a high standard and are easy to use. The more complex and impactful challenges for an in-house design system is what connects these components into a cohesive product—the processes, tools, and, most critically, the people and relationships that sustain the system. By understanding these connections, teams can uncover design inconsistencies, enhance usability, and will lead to a more widely adopted successful design system.
 
-Components alone don’t define a design system—relationships do. Understanding these relationships helps teams identify design inconsistencies, improve usability, and scale systems effectively.
-
-However, I think of this part of design systems as a somewhat solved problem—there are libraries that exist for this, and they are well-documented and widely used and built with high quality. The more interesting challenges lie between the bricks and atoms, in the mortar and chemistry that binds everything together, the processes, tools and community that keep the design system alive and growing.
-
-At this layer we can also be resourceful in our approach to force multiply our work with automation and guardrails. At DeepL this is important because we are a small team with a wide surface area of influence, and it is impossible for us to be everywhere at once.
+This is how we work at DeepL. At this layer we can also be resourceful in our approach to force multiply our work with automation and guardrails. At DeepL this is important because we are a small team with a wide surface area of influence, and it is impossible for us to be everywhere at once.
 
 Along the way, we encountered a number of novel challenges and I'm proud of how far we've come from in this journey.
 
