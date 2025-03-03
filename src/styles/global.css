@@ -8,9 +8,10 @@
 @import './components/nav.css';
 @import './components/controls.css';
 @import './components/footer.css';
+@import './components/dash.css';
+@import './components/anchor.css';
 
 .Main {
-  min-height: 100%;
   isolation: isolate;
   background-image: var(--main-background-image);
   background-color: var(--main-background-color);

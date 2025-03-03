@@ -1,0 +1,24 @@
+.Dash {
+  position: relative;
+  display: inline-block;
+  text-indent: -9999px;
+  min-width: 1em;
+  max-width: 5em;
+  min-height: 1rem;
+}
+
+.isFullWidth {
+  max-width: 100%;
+  flex: 1;
+}
+
+.Dash::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+}
