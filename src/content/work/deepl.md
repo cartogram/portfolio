@@ -38,10 +38,10 @@ I cut my teeth at DeepL by shipping high-visibility features in the translator, 
 To address this, I expanded the Design System beyond a set of poorly maintained React components and focused on foundational tools, processes, and workflows that enhance the UI developer and designer experience at DeepL. Key initiatives included:
 
 - **Custom linting plugins** for TypeScript and CSS to standardize and enforce design token usage, ensuring color consistency across products and preventing the use of unsupported colors.
-- **Multi-directional layout support**, introducing logical CSS for Right-To-Left support and a centrally managed, accessible icon library for designers (via Figma) and developers (via NPM).
-- **Scalable UI consistency strategy**, including support for dark themes, centralized token definitions, and a structured naming syntax.
-- **Independent design repository**, distributing versioned design system packages (@deepl/theme, @deepl/icons) across codebases.
-- **Prototyping workflows**, allowing rapid testing of ideas in an isolated DeepL-like environment to improve validation speed.
+- **Multi-directional layout support** introducing logical CSS for Right-To-Left support and a centrally managed, accessible icon library for designers (via Figma) and developers (via NPM).
+- **Scalable UI consistency strategy** including support for dark themes, centralized token definitions, and a structured naming syntax.
+- **Independent design repository** distributing versioned design system packages (@deepl/theme, @deepl/icons) across codebases.
+- **Prototyping workflows** allowing rapid testing of ideas in an isolated DeepL-like environment to improve validation speed.
 
 These initiatives are transforming the design system into a reliable, platform-agnostic, and scalable solution supporting more teams and platforms at DeepL.
 
