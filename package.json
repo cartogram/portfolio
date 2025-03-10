@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@efficientcss/stylelint-config-ecss": "^1.0.0-beta-14",
+    "@sentry/astro": "^9.5.0",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vercel/analytics": "^1.5.0",
