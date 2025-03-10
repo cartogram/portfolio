@@ -22,7 +22,7 @@ h4,
 h5 {
   padding: 0;
   margin: 0;
-  font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-lg));
+  font-size: clamp(var(--font-size-sm), 4.8vw, var(--font-size-lg));
   line-height: var(--line-height-normal);
   font-weight: var(--font-weight-normal);
   padding-bottom: 1rem;
@@ -36,7 +36,8 @@ h2 {
   max-width: 42ch;
 
   &:not(:first-of-type) {
-    margin: 0;
+    margin-top: 0;
+    margin-bottom: 0;
     padding: 4rem 0 1rem;
   }
 }
@@ -53,7 +54,7 @@ h3 {
 }
 
 p {
-  font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-md));
+  font-size: clamp(var(--font-size-sm), 4.8vw, var(--font-size-md));
 }
 
 ul {
@@ -78,7 +79,7 @@ small {
   font-size: var(--font-size-xs);
   font-family: menlo;
 
-  > a {
+  & > a {
     display: inline;
   }
 }
@@ -86,7 +87,7 @@ small {
 figcaption {
   padding: 1rem 0;
 
-  p {
+  & p {
     font-size: var(--font-size-xs);
     font-family: var(--font-mono);
   }
@@ -106,18 +107,15 @@ strong::before {
   opacity: 0.1;
 }
 
-/* .Markdown {
-  padding-top: 2rem;
-} */
-
 .Markdown h2 {
   font-size: clamp(var(--font-size-lg), 6.5vw, var(--font-size-md));
 }
 
+/* stylelint-disable-next-line ecss/selector-unnecessary */
 .Markdown ul li {
   padding-bottom: 1rem;
   max-width: 50ch;
-  font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-md));
+  font-size: clamp(var(--font-size-sm), 4.8vw, var(--font-size-md));
   text-indent: -1.6rem;
 
   &::before {
