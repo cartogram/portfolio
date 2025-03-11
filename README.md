@@ -1,14 +1,6 @@
-# Cartogram
+<h4><a href="https://cartogram.ca">Matt Seccafien</a></h4>
 
-## 🧞 Commands
+<h3>Berlin-based designer and developer,<br />
+builder of user interfaces and systems.</h3>
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+<samp>[say hello!](mailto:mseccafien@gmail.com) – [view résumé](https://www.cartogram.ca/assets/Matthew%20Seccafien-CV-2025.pdf) – [instagram](https://www.instagram.com/cartogram/)</samp>
