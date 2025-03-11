@@ -51,7 +51,7 @@ const {Content, headings} = await render(entry)
     <aside class="Meta">
       <small
         >{
-          entry.data.publishDate.toLocaleDateString('en-US', {
+          entry.data?.publishDate?.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'short',
           })
