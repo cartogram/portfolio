@@ -32,7 +32,7 @@ const professionalLinks: {
 
 const projects = (await getCollection('work'))
   .filter((project) => project.data.published)
-  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .sort((a, b) => b.data.publishDate!.valueOf() - a.data.publishDate!.valueOf())
   .slice(0, 5)
 
 const currentProjects = projects.filter((project) => project.data.tags.includes('Current'))
@@ -102,9 +102,9 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
     <div class="ContentContainer">
       <h3>About me</h3>
       <p>
-        Over the last 20 years I've held a variety of roles, starting out in traditional print, typography and
-        information design, to site resiliency engineering, to open-source React framework development, and I'm
-        currently interested in design system operations.
+        In the 20 years since studying in my homeland of Canada, I've held a variety of professional roles, starting out
+        in traditional print, typography and information design, to site resiliency engineering, to open-source React
+        framework development, and I'm currently interested in design system operations.
       </p>
       <p>
         I value creativity and autonomy in both life and work, and thrive when I am invested in the whole idea rather
