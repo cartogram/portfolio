@@ -1,6 +1,6 @@
 ---
 title: Toronto
-description: A short list of things for Toronto.
+description: Born, raised, studied and lived in-and-around this lovely Canadian city for many years. Here are some things I like and suggest you try.
 ---
 
 ### Beer

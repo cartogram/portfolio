@@ -1,6 +1,6 @@
 ---
 title: Berlin
-description: A short list of things for Berlin.
+description: Relocated to this crazy place in 2020 and still live here today. Here are some things to try, or give me a shout and we can do so together :)
 ---
 
 ### Outside

@@ -28,7 +28,7 @@ const {Content} = await render(entry)
   <Fragment slot="masthead">
     <header class="Nav">
       <h1 class="Nav__Title">
-        {entry.data.description}
+        {entry.data.title}
       </h1>
       <nav class="Nav__Controls">
         <div class="Controls justify-end">
@@ -36,6 +36,8 @@ const {Content} = await render(entry)
         </div>
       </nav>
     </header>
+
+    <h2>{entry.data.description}</h2>
   </Fragment>
 
   <div class="Markdown content" slot="content">
