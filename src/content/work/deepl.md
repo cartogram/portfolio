@@ -14,10 +14,6 @@ collaborators:
     url: https://mischa.dev
     role:
       - Developer
-  - name: Dominik Markušić Gross
-    url: https://www.linkedin.com/in/dominik-markusic-gross/
-    role:
-      - Designer
 tags:
   - Current
 color: rgb(14 38 95)
