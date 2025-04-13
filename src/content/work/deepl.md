@@ -27,7 +27,7 @@ While components are foundational, they do not, in themselves, define a Design S
 
 To accomplish this we are resourceful in our approach with respect to automation and our goal of covering the largest area of influence with the fewest people. It is impossible for us to be everywhere at once, but we do our best to impose soft guardrails that steer our colleagues in the right design direction without intervening until necessary. This is not easy and along the way we encounter a number of novel challenges requiring creative solutions, but I'm proud of how far we've come from in this journey and excited about where we will go.
 
-## Driving the growth of the Design System
+## Driving growth
 
 I cut my teeth at DeepL by shipping high-visibility features in the translator, such as excel support in document translation, and the multi-level advanced preferences toolbar that auto-adapts based on screen width. While I am proud of these achievements, and it provided me with a lot of exposure to DeepL's codebase, my primary mission at DeepL has been to transform the existing design system—previously underutilized, inconsistent and full of bottlenecks—into a highly effective system with widespread adoption across the company.
 
@@ -41,7 +41,7 @@ To address this, I expanded the Design System beyond a set of React components a
 
 These initiatives are transforming the Design System into a reliable, platform-agnostic, and scalable solution supporting more teams and platforms at DeepL.
 
-## Deprecating components and improving long-term maintainability
+## Long-term Maintainability
 
 The DeepL codebase and Design System accumulated deprecated components, aka dead code, and hundreds of ESLint violations, creating technical debt and a great deal of developer friction. I implemented scripts to audit the codebase for deprecated components, developed command-line tools to identify and remove unused or outdated components, and clean-up the repository, systematically removing unnecessary dependencies to improve CI speed and user performance. This also included:
 
@@ -51,7 +51,7 @@ The DeepL codebase and Design System accumulated deprecated components, aka dead
 
 This initiative resulted not only in a leaner codebase, but it empowered teams to maintain higher standards and resulted in a healthier engineering culture at DeepL.
 
-## Spearheading community as a tool to raise the bar for quality
+## Spearheading community
 
 The absence of a unified UI approach with no central forum for discussing best practices, accessibility or direction, led to inconsistencies across DeepL products.
 
