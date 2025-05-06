@@ -7,6 +7,8 @@ import me3 from '../images/me-3.jpg'
 
 import Layout from '../layouts/Layout.astro'
 import Anchor from '../components/Anchor.astro'
+import Run from '../components/Runs.astro'
+import Speaking from '../components/Speaking.astro'
 
 const professionalLinks: {
   label: string
@@ -95,9 +97,10 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
     <div class="ImageContainer">
       <Image class="Image" src={me1} alt="Matthew Seccafien and his black cat Otto standing in his Berlin apartment." />
       <Image class="Image" src={me3} alt="Matthew Seccafien running in the Berlin Marathon 2023." />
-      <p>
-        <small>Follow via <a href="https://instagram.com/cartogram">Instagram</a></small>
-      </p>
+      <div>
+        <small>Follow via <a href="https://instagram.com/cartogram">Instagram</a></small><br />
+        <Run />
+      </div>
     </div>
     <div class="ContentContainer">
       <h3>About me</h3>
@@ -111,7 +114,6 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
         I value creativity and autonomy in both life and work, and thrive when I am invested in the whole idea rather
         than any single facet.
       </p>
-      <!-- // a proud Canadian now livining in berlin. -->
       <p>
         When not at my computer I can be found <a
           target="_blank"
@@ -125,19 +127,10 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
           >Fiona</a
         > and our cat Otto (pictured).
       </p>
-      <h3>Speaking</h3>
-      <ul class="Speaking">
-        <li class="List__Item">
-          <span class="title">Forest for the Abstract Syntax Trees</span><br />
-          <Anchor
-            href="https://gitnation.com/contents/the-forest-for-the-abstract-syntax-trees"
-            primary="React Advanced London"
-            secondary="2021"
-            external
-          />
-        </li>
-      </ul>
+
+      <Speaking />
     </div>
+    <div class="ContentContainer"></div>
   </div>
 
   <style>
@@ -168,7 +161,6 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
       grid-row: 1 / 4;
       z-index: 1;
       box-shadow: var(--shadow-1);
-      /* border: 2px solid; */
     }
 
     .Image:nth-child(2) {
@@ -177,7 +169,7 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
       z-index: 0;
     }
 
-    .ImageContainer p {
+    .ImageContainer div {
       grid-column: 1 / 5;
       grid-row: 4 / 5;
     }
