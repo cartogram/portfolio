@@ -13,7 +13,6 @@ const runTotals = data.ytd_run_totals
 ---
 
 <small>
-  {runTotals ? (runTotals.distance / 1000).toFixed(2) : ''}km YTD <a href="https://www.strava.com/athletes/59501199">
-    Strava
-  </a>
+  {runTotals ? `${(runTotals.distance / 1000).toFixed(2)}km YTD via ` : 'Follow via '}
+  <a href="https://www.strava.com/athletes/59501199">Strava</a>
 </small>
