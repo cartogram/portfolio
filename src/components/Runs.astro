@@ -1,5 +1,5 @@
 ---
-const STRAVA_ACCESS_TOKEN = import.meta.env.STRAVA_ACCESS_TOKEN
+const STRAVA_ACCESS_TOKEN = '' // import.meta.env.STRAVA_ACCESS_TOKEN
 const STRAVA_URL = 'https://www.strava.com/api/v3/athletes/'
 const STRAVA_ATHLETE_ID = import.meta.env.STRAVA_ATHLETE_ID
 
@@ -8,7 +8,15 @@ const response = await fetch([STRAVA_URL, STRAVA_ATHLETE_ID, 'stats'].join('/'),
     Authorization: `Bearer ${STRAVA_ACCESS_TOKEN}`,
   },
 })
+
+console.log(response)
+
+if (response.status !== 200) {
+  console.log(`Failed to fetch Strava data (${response.status} ${response.statusText})`)
+}
+
 const data = await response.json()
+
 const runTotals = data.ytd_run_totals
 ---
 
