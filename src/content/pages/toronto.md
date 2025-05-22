@@ -22,7 +22,7 @@ description: Born, raised, studied and lived in-and-around this lovely Canadian 
 
 ### Museums
 
-- **[Museum of Contemporary Art (MOCA)](https://moca.ca/)** A small, well-curated modern art museum just off the **West End Railpath**.
+- **[Museum of Contemporary Art (MOCA)](https://moca.ca/)** A small, well-curated modern art museum just off the West End Railpath.
 
 ### Outside
 

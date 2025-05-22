@@ -36,7 +36,7 @@ description: Relocated to this crazy place in 2020 and still live here today. He
 ### Shops
 
 - **[Dresscode](https://www.dresscodeberlin.com/)** Second-hand clothes.
-- **[Zabriskie](https://zabriskie.de/)** Books on nature & culture.
+- **[Zabriskie](https://zabriskie.de/)** Books on nature and culture.
 
 ### Resources
 
