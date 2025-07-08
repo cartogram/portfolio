@@ -3,9 +3,15 @@ import Anchor from './Anchor.astro'
 ---
 
 <h3>Speaking</h3>
-<ul class="Speaking">
-  <li class="List__Item">
-    <span class="title">Forest for the Abstract Syntax Trees</span><br />
+
+<ul class="List--small">
+  <li>
+    <span class="title">UI in a bi-directional Web</span><br />
+    <Anchor href="https://reactsummit.us" primary="React Summit US" secondary="2025" external />
+  </li>
+
+  <li class="past">
+    <span>Forest for the Abstract Syntax Trees</span><br />
     <Anchor
       href="https://gitnation.com/contents/the-forest-for-the-abstract-syntax-trees"
       primary="React Advanced London"
@@ -14,3 +20,10 @@ import Anchor from './Anchor.astro'
     />
   </li>
 </ul>
+
+<style>
+  .List--small {
+    gap: 1.5rem;
+    font-size: var(--font-size-md);
+  }
+</style>
