@@ -67,7 +67,9 @@ const {title, description, layout = 'home', color} = Astro.props
             )
           }
 
-          <slot name="content" />
+          <div class="ContentBody">
+            <slot name="content" />
+          </div>
         </div>
       </section>
 
@@ -84,6 +86,12 @@ const {title, description, layout = 'home', color} = Astro.props
     <script>
       document.addEventListener('astro:page-load', () => {
         document.documentElement.classList.add('loaded')
+
+        // ClientRouter swaps the DOM without restarting autoplaying videos,
+        // so kick playback off again after each client-side navigation.
+        document.querySelectorAll<HTMLVideoElement>('video[autoplay]').forEach((video) => {
+          video.play().catch(() => {})
+        })
       })
     </script>
   </body>
@@ -216,43 +224,44 @@ const {title, description, layout = 'home', color} = Astro.props
       max-width: 53ch;
     }
 
-    > div {
-      grid-column: 1 / 5;
-      grid-row: 2 / 2;
-    }
-
-    .Chapters {
-      grid-column: 1 / 5;
-      grid-row: 1 / 2;
-    }
-
     .Chapters li {
       font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-md));
     }
   }
 
+  /* single + page share the case-study column grid */
   .Layout--page .Content,
   .Layout--single .Content {
     grid-template-columns: subgrid;
   }
 
+  .Layout--page .ContentBody {
+    grid-column: 1 / 5;
+  }
+
+  /* single stacks the chapters rail above the body on narrow screens */
+  .Layout--single .Chapters {
+    grid-column: 1 / 5;
+    grid-row: 1;
+  }
+
+  .Layout--single .ContentBody {
+    grid-column: 1 / 5;
+    grid-row: 2;
+  }
+
   @media (width > 1024px) {
-    .Chapters {
+    .Layout--single .Chapters {
+      grid-column: 4 / 5;
+      grid-row: 1;
       position: sticky;
       top: 0;
       align-self: start;
     }
 
-    .Content {
-      > div {
-        grid-column: 1 / 4;
-        grid-row: 1 / 2;
-      }
-
-      .Chapters {
-        grid-column: 4 / 5;
-        grid-row: 1 / 2;
-      }
+    .Layout--single .ContentBody {
+      grid-column: 1 / 4;
+      grid-row: 1;
     }
   }
 
