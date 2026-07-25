@@ -84,6 +84,12 @@ const {title, description, layout = 'home', color} = Astro.props
     <script>
       document.addEventListener('astro:page-load', () => {
         document.documentElement.classList.add('loaded')
+
+        // ClientRouter swaps the DOM without restarting autoplaying videos,
+        // so kick playback off again after each client-side navigation.
+        document.querySelectorAll<HTMLVideoElement>('video[autoplay]').forEach((video) => {
+          video.play().catch(() => {})
+        })
       })
     </script>
   </body>
