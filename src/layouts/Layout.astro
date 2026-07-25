@@ -67,7 +67,9 @@ const {title, description, layout = 'home', color} = Astro.props
             )
           }
 
-          <slot name="content" />
+          <div class="ContentBody">
+            <slot name="content" />
+          </div>
         </div>
       </section>
 
@@ -227,45 +229,39 @@ const {title, description, layout = 'home', color} = Astro.props
     }
   }
 
+  /* single + page share the case-study column grid */
   .Layout--page .Content,
   .Layout--single .Content {
     grid-template-columns: subgrid;
   }
 
-  /*
-   * Slotted content carries the child page's scope hash, not Layout's, so it
-   * can't be targeted by a scoped `> div` selector. Reach it with :global()
-   * and gate to single/page so the home layout's grid is left untouched.
-   */
-  .Layout--single .Content > :global(*),
-  .Layout--page .Content > :global(*) {
+  .Layout--page .ContentBody {
     grid-column: 1 / 5;
   }
 
-  .Layout--single .Content > :global(*) {
-    grid-row: 2 / 3;
+  /* single stacks the chapters rail above the body on narrow screens */
+  .Layout--single .Chapters {
+    grid-column: 1 / 5;
+    grid-row: 1;
   }
 
-  .Layout--single .Content > .Chapters {
+  .Layout--single .ContentBody {
     grid-column: 1 / 5;
-    grid-row: 1 / 2;
+    grid-row: 2;
   }
 
   @media (width > 1024px) {
-    .Chapters {
+    .Layout--single .Chapters {
+      grid-column: 4 / 5;
+      grid-row: 1;
       position: sticky;
       top: 0;
       align-self: start;
     }
 
-    .Layout--single .Content > :global(*) {
+    .Layout--single .ContentBody {
       grid-column: 1 / 4;
-      grid-row: 1 / 2;
-    }
-
-    .Layout--single .Content > .Chapters {
-      grid-column: 4 / 5;
-      grid-row: 1 / 2;
+      grid-row: 1;
     }
   }
 
