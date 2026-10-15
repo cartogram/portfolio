@@ -7,7 +7,6 @@ import me3 from '../images/me-3.jpg'
 
 import Layout from '../layouts/Layout.astro'
 import Anchor from '../components/Anchor.astro'
-import Run from '../components/Runs.astro'
 import Speaking from '../components/Speaking.astro'
 
 const professionalLinks: {
@@ -98,8 +97,11 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
       <Image class="Image" src={me1} alt="Matthew Seccafien and his black cat Otto standing in his Berlin apartment." />
       <Image class="Image" src={me3} alt="Matthew Seccafien running in the Berlin Marathon 2023." />
       <div>
-        <small>Follow via <a href="https://instagram.com/cartogram">Instagram</a></small><br />
-        <Run />
+        <small
+          >Follow my inactivity on <a href="https://instagram.com/cartogram">Instagram</a>,<br /><a
+            href="https://www.strava.com/athletes/59501199">Strava</a
+          > or <a href="https://letterboxd.com/cartogram/">Letterboxd</a>.</small
+        >
       </div>
     </div>
     <div class="ContentContainer">
@@ -170,7 +172,7 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
     }
 
     .ImageContainer div {
-      grid-column: 1 / 5;
+      grid-column: 1 / 3;
       grid-row: 4 / 5;
     }
   </style>
