@@ -87,9 +87,14 @@ const {title, description, layout = 'home', color} = Astro.props
       document.addEventListener('astro:page-load', () => {
         document.documentElement.classList.add('loaded')
 
-        // ClientRouter swaps the DOM without restarting autoplaying videos,
-        // so kick playback off again after each client-side navigation.
+        // ClientRouter parses the next page with DOMParser, so videos first try to
+        // resolve their src against an inert about:blank document and Chromium
+        // rejects the load ("URL safety check"). play() can't recover from that
+        // error state; load() re-runs source selection against the real URL.
         document.querySelectorAll<HTMLVideoElement>('video[autoplay]').forEach((video) => {
+          if (video.error || video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
+            video.load()
+          }
           video.play().catch(() => {})
         })
       })
