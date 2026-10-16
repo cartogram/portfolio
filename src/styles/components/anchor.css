@@ -63,6 +63,12 @@
   align-items: baseline;
 }
 
+/* Keep multi-word labels like "Design System" on one line. */
+.Anchor__Primary,
+.Anchor__Secondary {
+  white-space: nowrap;
+}
+
 .Anchor__Secondary::before {
   content: '';
   height: 1px;

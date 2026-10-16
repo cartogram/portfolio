@@ -16,7 +16,7 @@
   background-image: var(--main-background-image);
   background-color: var(--main-background-color);
   min-height: 100vh;
-  padding-top: 1.5rem;
+  padding-top: 0.5rem;
   padding-bottom: 2.5rem;
   display: flex;
   flex-direction: column;
@@ -96,7 +96,6 @@ hr {
 
 @media (width > 550px) {
   .Main {
-    padding-top: 2.5rem;
     padding-bottom: 2.5rem;
   }
 
@@ -113,7 +112,7 @@ hr {
 
 @media (width > 950px) {
   .Main {
-    padding-top: 4rem;
+    padding-top: 1.5rem;
     padding-bottom: 4rem;
   }
 

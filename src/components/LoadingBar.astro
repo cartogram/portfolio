@@ -1,0 +1,97 @@
+---
+// Striped bar flush along the top of the viewport while the page loads; slides
+// up once loaded, and pushes the page down by its height while shown. The
+// stripes are visx's diagonal PatternLines tile, used as a mask so they pick up
+// the page's main colour.
+---
+
+<div class="LoadingBar" aria-hidden="true" transition:persist="loading-bar"></div>
+
+<style>
+  :global(:root) {
+    --loading-bar-height: 20px;
+    /* Slides up over 300ms; drops back in faster at the start of a navigation. */
+    --loading-bar-easing: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --loading-bar-easing-in: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .LoadingBar {
+    --tile: 8px;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    height: var(--loading-bar-height);
+    background-color: var(--main-background-color);
+    pointer-events: none;
+    translate: 0 0;
+  }
+
+  .LoadingBar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--main-color);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0 8l8-8M-2 2l4-4M6 10l4-4' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
+    mask-size: var(--tile) var(--tile);
+  }
+
+  /* Hidden once loaded, and shown again while a client-side navigation runs. */
+  :global(.loaded) .LoadingBar {
+    translate: 0 -100%;
+  }
+
+  :global(.loaded.is-navigating) .LoadingBar {
+    translate: 0 0;
+  }
+
+  /* With reduced motion there's no bar, no push and no hold (see Layout.astro). */
+  @media (prefers-reduced-motion: reduce) {
+    .LoadingBar {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* The page sits below the bar while it's shown and rises with it. */
+    :global(.Main) {
+      margin-top: var(--loading-bar-height);
+    }
+
+    :global(.loaded .Main) {
+      margin-top: 0;
+    }
+
+    :global(.loaded.is-navigating .Main) {
+      margin-top: var(--loading-bar-height);
+    }
+
+    .LoadingBar {
+      transition: translate var(--loading-bar-easing);
+    }
+
+    :global(.Main) {
+      transition: margin-top var(--loading-bar-easing);
+    }
+
+    :global(.loaded.is-navigating) .LoadingBar {
+      transition: translate var(--loading-bar-easing-in);
+    }
+
+    :global(.loaded.is-navigating .Main) {
+      transition: margin-top var(--loading-bar-easing-in);
+    }
+
+    .LoadingBar::before {
+      animation: LoadingBar-march 1s linear infinite;
+    }
+  }
+
+  @keyframes LoadingBar-march {
+    to {
+      mask-position: var(--tile) 0;
+    }
+  }
+</style>

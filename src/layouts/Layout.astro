@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro'
 import Wordmark from '../components/Wordmark.astro'
 import {ClientRouter} from 'astro:transitions'
 import ThemeToggle from '../components/ThemeToggle.astro'
+import LoadingBar from '../components/LoadingBar.astro'
 
 interface Props {
   title?: string | undefined
@@ -26,6 +27,7 @@ const {title, description, layout = 'home', color} = Astro.props
     <SpeedInsights />
   </head>
   <body>
+    <LoadingBar />
     <main class="Main">
       <Wordmark />
       <header class="Wrap Nav" transition:name="nav">
@@ -84,15 +86,31 @@ const {title, description, layout = 'home', color} = Astro.props
     </main>
 
     <script>
-      // ClientRouter replaces <html>'s classes on every navigation, dropping
-      // .loaded and replaying the nav's first-load fade. Flag the incoming page
-      // so the name and controls stay put; the content still fades in.
-      document.addEventListener('astro:before-swap', (event) => {
-        event.newDocument.documentElement.classList.add('nav-loaded')
+      // Keep the loading bar up for at least this long, even when the page is ready
+      // sooner. With reduced motion the bar is hidden, so don't hold the page at all.
+      const MIN_LOAD_MS = 400
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
+      const minLoad = () => (reducedMotion.matches ? 0 : MIN_LOAD_MS)
+      const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+      let firstLoad = true
+
+      // Bring the loading bar back down while the next page is fetched, and hold
+      // the old page until both it has loaded and the minimum time has passed.
+      document.addEventListener('astro:before-preparation', (event) => {
+        document.documentElement.classList.add('is-navigating')
+        const loader = event.loader
+        event.loader = () => Promise.all([loader(), wait(minLoad())]).then(() => {})
       })
 
-      document.addEventListener('astro:page-load', () => {
+      document.addEventListener('astro:page-load', async () => {
+        // Client-side navigations already waited in the loader above; on the first
+        // load, count from when the browser started loading the page.
+        if (firstLoad) {
+          firstLoad = false
+          await wait(minLoad() - performance.now())
+        }
         document.documentElement.classList.add('loaded')
+        document.documentElement.classList.remove('is-navigating')
 
         // ClientRouter parses the next page with DOMParser, so videos first try to
         // resolve their src against an inert about:blank document and Chromium
@@ -188,22 +206,20 @@ const {title, description, layout = 'home', color} = Astro.props
     }
   }
 
+  /* Content fades in quickly as the loading bar lifts the page; the movement
+     itself comes from the loading bar pushing .Main down. */
   .Layout {
     opacity: 0;
-    transform: translateY(1rem);
   }
 
   @media (prefers-reduced-motion: no-preference) {
     .Layout {
-      transition: 0.3s ease-in-out;
-      transition-delay: 0.3s;
-      transition-property: opacity, transform;
+      transition: opacity 200ms ease-out;
     }
   }
 
   :global(.loaded) .Layout {
     opacity: 1;
-    transform: translateY(0);
   }
 
   .Masthead {
