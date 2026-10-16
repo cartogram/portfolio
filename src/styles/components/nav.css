@@ -32,6 +32,12 @@
   opacity: 1;
 }
 
+/* Already shown before a client-side navigation: skip the first-load fade. */
+.nav-loaded .Nav {
+  opacity: 1;
+  transition: none;
+}
+
 .Nav__Title {
   grid-area: 1 / 1 / 1 / 4;
   text-overflow: ellipsis;
