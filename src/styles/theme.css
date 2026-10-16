@@ -10,6 +10,8 @@
   );
 
   --anchor-color-underline: var(--main-color-light);
+  /* Solid equivalent of the 10% underline tint shown behind hovered links. */
+  --main-color-faint: color-mix(in display-p3, var(--main-color-light) 10%, var(--main-background-color));
 
   /* Wordmark */
   --wordmark-opacity: 0.4;

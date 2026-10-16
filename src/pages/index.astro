@@ -39,6 +39,10 @@ const projects = (await getCollection('work'))
 const currentProjects = projects.filter((project) => project.data.tags.includes('Current'))
 
 const pastProjects = projects.filter((project) => project.data.tags.includes('Past'))
+
+// Outlined layers stacked behind the hover preview, echoing the wordmark letters.
+// Each hover shows a random number of them between these bounds.
+const previewLayers = {min: 2, max: 4}
 ---
 
 <Layout title="Cartogram">
@@ -93,8 +97,20 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
         </ul>
       </li>
     </ul>
-    <div class="ProjectPreview" aria-hidden="true">
-      <video muted loop playsinline preload="none"></video>
+    <div
+      class="ProjectPreview"
+      aria-hidden="true"
+      data-min-layers={previewLayers.min}
+      style={`--layers: ${previewLayers.max}`}
+    >
+      {
+        Array.from({length: previewLayers.max}, (_, i) => (
+          <div class="ProjectPreview__Layer" style={`--layer: ${previewLayers.max - i}`} />
+        ))
+      }
+      <div class="ProjectPreview__Layer ProjectPreview__Layer--front" style="--layer: 0">
+        <video muted loop playsinline preload="none"></video>
+      </div>
     </div>
   </Fragment>
   <div class="ContentLayout" slot="content">
@@ -146,30 +162,51 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
       top: 0;
       left: 0;
       z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Layers fade out back-to-front and in front-to-back, like the wordmark stagger. */
+    .ProjectPreview__Layer {
+      --delay: calc((var(--layers) - var(--layer)) * 30ms);
+
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 22rem;
       aspect-ratio: 16 / 10;
-      overflow: hidden;
+      border: 1px solid var(--wordmark-color);
       border-radius: var(--radius-2);
-      box-shadow: var(--shadow-1);
-      background-color: var(--main-color-light);
-      pointer-events: none;
+      background-color: var(--wordmark-background-color);
       opacity: 0;
       visibility: hidden;
       transition:
-        opacity 100ms linear,
-        visibility 0s linear 100ms;
+        opacity 100ms linear var(--delay),
+        visibility 0s linear calc(var(--delay) + 100ms);
     }
 
-    .ProjectPreview--visible {
+    .ProjectPreview--visible .ProjectPreview__Layer {
       opacity: 1;
       visibility: visible;
-      transition: opacity 100ms linear;
+      transition: opacity 100ms linear calc(var(--layer) * 30ms);
+    }
+
+    .ProjectPreview__Layer--front {
+      overflow: hidden;
+      border-color: var(--main-color-faint);
+      background-color: var(--main-color-faint);
+      box-shadow: var(--shadow-1);
     }
 
     .ProjectPreview video {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ProjectPreview__Layer:not(.ProjectPreview__Layer--front) {
+        display: none;
+      }
     }
 
     .ContentLayout {
@@ -216,8 +253,9 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
 
 <script>
   // Video preview that trails the cursor over projects with a case-study video,
-  // modelled on GreenSock's "show cursor image on hover" pen. Videos are only
-  // fetched on first hover.
+  // modelled on GreenSock's "show cursor image on hover" pen. Outlined layers
+  // stack behind it like the wordmark letters, each trailing a little further
+  // behind the cursor. Videos are only fetched on first hover.
   function initProjectPreview() {
     const preview = document.querySelector<HTMLElement>('.ProjectPreview')
     const video = preview?.querySelector('video')
@@ -229,50 +267,74 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
     document.body.append(preview)
 
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
-    // Time constant for the easing; ~0.1s settles in roughly the pen's 0.4s.
-    const smoothing = 0.1
-    // Gap between the cursor and the preview's left edge, and from the viewport edges.
-    const offset = 32
-    const current = {x: 0, y: 0}
+    // Front-most layer first.
+    const layers = [...preview.querySelectorAll<HTMLElement>('.ProjectPreview__Layer')].reverse().map((el, index) => ({
+      el,
+      // Time constant for the easing; the front settles in roughly the pen's 0.4s
+      // and each layer behind lags a little more.
+      smoothing: 0.1 + index * 0.04,
+      // Resting step between layers, like the wordmark's stacked letters.
+      offset: {x: index * 4, y: index * 4},
+      x: 0,
+      y: 0,
+    }))
+    const front = layers[0].el
+    // Distance between the cursor and the preview, and between the preview and the viewport edges.
+    const gap = 96
+    const margin = 32
     const target = {x: 0, y: 0}
+    let spread = false
+    // Outlined layers shown behind the front one; re-rolled each time the preview appears.
+    const minLayers = Number(preview.dataset.minLayers)
+    let count = layers.length - 1
     let frame = 0
     let lastTime = 0
 
     // Sit to the right of the cursor, vertically centred on it. Flip to the left
-    // when there isn't room, and keep it inside the viewport vertically.
+    // when there isn't room, and keep the whole stack inside the viewport.
     const aim = (event: PointerEvent) => {
-      const width = preview.offsetWidth
-      const height = preview.offsetHeight
-      const right = event.clientX + offset
-      target.x = right + width + offset > window.innerWidth ? event.clientX - offset - width : right
-      target.y = Math.min(Math.max(event.clientY - height / 2, offset), window.innerHeight - height - offset)
+      const width = front.offsetWidth
+      const height = front.offsetHeight
+      const stack = layers[count].offset
+      const right = event.clientX + gap
+      target.x = right + width + stack.x + margin > window.innerWidth ? event.clientX - gap - width - stack.x : right
+      target.y = Math.min(Math.max(event.clientY - height / 2, margin), window.innerHeight - height - stack.y - margin)
     }
 
     const render = () => {
-      preview.style.translate = `${current.x}px ${current.y}px`
+      layers.forEach((layer) => {
+        layer.el.style.translate = `${layer.x}px ${layer.y}px`
+      })
     }
 
     const tick = (time: number) => {
       const dt = lastTime ? (time - lastTime) / 1000 : 0
       lastTime = time
-      const t = reducedMotion ? 1 : 1 - Math.exp(-dt / smoothing)
-      current.x += (target.x - current.x) * t
-      current.y += (target.y - current.y) * t
+      let moving = false
+
+      layers.forEach((layer) => {
+        const t = reducedMotion ? 1 : 1 - Math.exp(-dt / layer.smoothing)
+        const x = target.x + (spread ? layer.offset.x : 0)
+        const y = target.y + (spread ? layer.offset.y : 0)
+        layer.x += (x - layer.x) * t
+        layer.y += (y - layer.y) * t
+        if (Math.abs(x - layer.x) > 0.1 || Math.abs(y - layer.y) > 0.1) moving = true
+      })
       render()
 
-      if (Math.abs(target.x - current.x) > 0.1 || Math.abs(target.y - current.y) > 0.1) {
+      frame = moving ? requestAnimationFrame(tick) : 0
+    }
+
+    const animate = () => {
+      if (!frame) {
+        lastTime = 0
         frame = requestAnimationFrame(tick)
-      } else {
-        frame = 0
       }
     }
 
     const follow = (event: PointerEvent) => {
       aim(event)
-      if (!frame) {
-        lastTime = 0
-        frame = requestAnimationFrame(tick)
-      }
+      animate()
     }
 
     document.querySelectorAll<HTMLElement>('[data-preview]').forEach((item) => {
@@ -281,19 +343,31 @@ const pastProjects = projects.filter((project) => project.data.tags.includes('Pa
         if (video.getAttribute('src') !== src) video.src = src
         video.play().catch(() => {})
 
-        // Snap to the cursor when appearing rather than easing in from the last spot.
+        // Appear collapsed at the cursor, then let the layers fan out behind.
         if (!preview.classList.contains('ProjectPreview--visible')) {
+          count = minLayers + Math.floor(Math.random() * (layers.length - minLayers))
+          layers.forEach((layer, index) => {
+            layer.el.hidden = index > count
+          })
+          // Keeps the CSS exit stagger running back-to-front from the last visible layer.
+          preview.style.setProperty('--layers', String(count))
           aim(event)
-          current.x = target.x
-          current.y = target.y
+          layers.forEach((layer) => {
+            layer.x = target.x
+            layer.y = target.y
+          })
           render()
         }
+        spread = true
         preview.classList.add('ProjectPreview--visible')
+        animate()
       })
       item.addEventListener('pointermove', follow)
       item.addEventListener('pointerleave', () => {
+        spread = false
         preview.classList.remove('ProjectPreview--visible')
         video.pause()
+        animate()
       })
     })
   }
