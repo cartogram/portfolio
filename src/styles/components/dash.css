@@ -20,5 +20,5 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background: currentColor;
+  background: var(--anchor-color-underline);
 }

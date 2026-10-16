@@ -66,7 +66,7 @@
 .Anchor__Secondary::before {
   content: '';
   height: 1px;
-  background: currentColor;
+  background: var(--anchor-color-underline);
   width: 1rem;
   display: block;
   margin: 0 1px;
