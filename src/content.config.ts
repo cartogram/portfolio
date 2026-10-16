@@ -1,5 +1,6 @@
 import {glob} from 'astro/loaders'
-import {defineCollection, z} from 'astro:content'
+import {defineCollection} from 'astro:content'
+import {z} from 'astro/zod'
 
 export const collections = {
   work: defineCollection({
@@ -13,13 +14,13 @@ export const collections = {
       img: z.string().optional(),
       img_alt: z.string().optional(),
       type: z.string(),
-      url: z.string().url().optional(),
+      url: z.url().optional(),
       roles: z.array(z.string()).optional(),
       collaborators: z
         .array(
           z.object({
             name: z.string(),
-            url: z.string().url().optional(),
+            url: z.url().optional(),
             role: z.array(z.string()).optional(),
           }),
         )

@@ -1,6 +1,7 @@
 /** @type {import('stylelint').Config} */
 export default {
   extends: ['@efficientcss/stylelint-config-ecss'],
+  ignoreFiles: ['dist/**', '.astro/**', 'node_modules/**'],
   rules: {
     'ecss/padding-constraints': null,
     'ecss/selector-filename': [
