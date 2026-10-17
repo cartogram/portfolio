@@ -80,40 +80,44 @@ const ogImageSrc = `${url}/${ogImage}`
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'static' : 'motion'
   }
 
-  function setDarkMode(document) {
+  // Apply the stored (or OS default) preferences as classes on a document's <html>.
+  function applyPreferences(doc) {
     const {theme, mode} = getThemePreference()
-    document.documentElement.classList[theme === 'dark' ? 'add' : 'remove']('theme-dark')
-    document.documentElement.classList[mode === 'color-mono' ? 'add' : 'remove']('color-mono')
-    document.documentElement.classList[getMotionPreference() === 'static' ? 'add' : 'remove']('motion-static')
-
-    if (typeof localStorage !== 'undefined') {
-      // Watch the document element and persist user preference when it changes.
-      const observer = new MutationObserver(() => {
-        const isDark = document.documentElement.classList.contains('theme-dark')
-        const isColorMono = document.documentElement.classList.contains('color-mono')
-
-        localStorage.setItem('theme', isDark ? 'dark' : 'light')
-
-        localStorage.setItem('mode', isColorMono ? 'color-mono' : 'mode-default')
-
-        const isStatic = document.documentElement.classList.contains('motion-static')
-        // Only store a choice that differs from the OS, so the default keeps following it.
-        if (isStatic === window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          localStorage.removeItem('motion')
-        } else {
-          localStorage.setItem('motion', isStatic ? 'static' : 'motion')
-        }
-      })
-      observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['class'],
-      })
-    }
+    doc.documentElement.classList[theme === 'dark' ? 'add' : 'remove']('theme-dark')
+    doc.documentElement.classList[mode === 'color-mono' ? 'add' : 'remove']('color-mono')
+    doc.documentElement.classList[getMotionPreference() === 'static' ? 'add' : 'remove']('motion-static')
   }
 
-  setDarkMode(document)
+  applyPreferences(document)
 
-  document.addEventListener('astro:after-swap', (event) => {
-    setDarkMode(event.target)
+  // ClientRouter copies the incoming page's <html> classes over the live ones, so
+  // set the preferences on the new document first. Otherwise they briefly vanish
+  // mid-swap and the observer below saves the defaults over the user's choice.
+  document.addEventListener('astro:before-swap', (event) => {
+    applyPreferences(event.newDocument)
   })
+
+  if (typeof localStorage !== 'undefined') {
+    // Watch the document element and persist user preference when it changes.
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains('theme-dark')
+      const isColorMono = document.documentElement.classList.contains('color-mono')
+
+      localStorage.setItem('theme', isDark ? 'dark' : 'light')
+
+      localStorage.setItem('mode', isColorMono ? 'color-mono' : 'mode-default')
+
+      const isStatic = document.documentElement.classList.contains('motion-static')
+      // Only store a choice that differs from the OS, so the default keeps following it.
+      if (isStatic === window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        localStorage.removeItem('motion')
+      } else {
+        localStorage.setItem('motion', isStatic ? 'static' : 'motion')
+      }
+    })
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    })
+  }
 </script>
