@@ -1,5 +1,6 @@
 ---
-import Anchor from './Anchor.astro'---
+import Anchor from './Anchor.astro'
+---
 
 <h3>Speaking</h3>
 
@@ -10,15 +11,16 @@ import Anchor from './Anchor.astro'---
       primary="My UI is not your UI"
       secondary="Slides"
       external
+      wrap
     />
-    <Anchor href="https://reactadvanced.com" primary="React Advanced London" secondary="2026" external />
-    <Anchor href="https://weyweyweb.com" primary="Wey Wey Web" secondary="2026" external />
+    <Anchor href="https://reactadvanced.com" primary="React Advanced London" secondary="2026" external wrap />
+    <Anchor href="https://weyweyweb.com" primary="Wey Wey Web" secondary="2026" external wrap />
   </li>
 
   <li>
     <span class="title">UI in a bi-directional Web</span>
     <br />
-    <Anchor href="https://reactsummit.us" primary="React Summit US" secondary="2025" external />
+    <Anchor href="https://reactsummit.us" primary="React Summit US" secondary="2025" external wrap />
   </li>
 
   <li class="past">
@@ -29,6 +31,7 @@ import Anchor from './Anchor.astro'---
       primary="React Advanced London"
       secondary="2021"
       external
+      wrap
     />
   </li>
 </ul>
@@ -37,4 +40,5 @@ import Anchor from './Anchor.astro'---
   .List--small {
     gap: 1.5rem;
     font-size: var(--font-size-md);
-  }</style>
+  }
+</style>
