@@ -25,3 +25,6 @@ pnpm-debug.log*
 .idea/
 
 *.mov
+
+# Claude Code local config and worktrees
+.claude/
