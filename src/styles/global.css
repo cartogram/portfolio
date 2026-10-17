@@ -25,7 +25,7 @@
 @media (forced-colors: active) {
   .Main {
     background: none;
-    background-blend-mode: none;
+    background-blend-mode: normal;
   }
 }
 
@@ -143,6 +143,8 @@ hr {
   margin: 6rem 0 2rem;
 }
 
+/* Repeated class is deliberate: it out-ranks the content column's paragraph styles. */
+/* stylelint-disable-next-line selector-max-specificity */
 .footnotes.footnotes.footnotes p,
 .footnotes li,
 .footnotes li::marker {
@@ -199,7 +201,9 @@ hr {
 }
 
 /* The Static toggle mirrors prefers-reduced-motion for anyone who wants it on
-   this site only. */
+   this site only. !important is deliberate: it has to beat every component's
+   own transitions and animations. */
+/* stylelint-disable declaration-no-important */
 .motion-static *,
 .motion-static *::before,
 .motion-static *::after {
@@ -213,3 +217,4 @@ hr {
 .motion-static::view-transition-new(*) {
   animation: none !important;
 }
+/* stylelint-enable declaration-no-important */
