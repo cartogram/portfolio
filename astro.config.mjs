@@ -5,5 +5,6 @@ import sentry from '@sentry/astro'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [sentry()],
+  // Don't send the Sentry build plugin's own usage telemetry.
+  integrations: [sentry({telemetry: false})],
 })

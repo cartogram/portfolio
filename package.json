@@ -13,7 +13,7 @@
     "lint:css": "stylelint \"**/*.{css,scss,sass}\""
   },
   "dependencies": {
-    "@sentry/astro": "^10.76.2",
+    "@sentry/astro": "11.4.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "astro": "^7.4.0",
