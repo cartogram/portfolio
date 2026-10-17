@@ -113,7 +113,7 @@ const previewLayers = {min: 2, max: 4}
       <Image class="Image" src={me3} alt="Matthew Seccafien running in the Berlin Marathon 2023." />
       <div>
         <small>
-          Follow my inactivity on <a href="https://instagram.com/cartogram">Instagram</a>,<br />
+          Follow my inactivity on <a href="https://instagram.com/cartogram">Instagram</a>,{' '}
           <a href="https://www.strava.com/athletes/59501199">Strava</a> or{' '}
           <a href="https://letterboxd.com/cartogram/">Letterboxd</a>.
         </small>
@@ -247,6 +247,11 @@ const previewLayers = {min: 2, max: 4}
     .ImageContainer div {
       grid-column: 1 / 3;
       grid-row: 4 / 5;
+    }
+
+    .ImageContainer small {
+      display: block;
+      text-wrap: balance;
     }
   </style>
 </Layout>
