@@ -20,19 +20,17 @@ const {data} = Astro.props
     <section class="img-group-container" style={`height: ${data.length * 100}vh`}>
       <div class="sticker">
         <ul class="img-group">
-          {
-            data.map((media) => (
-              <li class:list={['img-container', {withCaption: media.caption}]}>
-                {media.type === 'image' && <img src={`${assetsDir}/${media.src}`} alt={media.alt} />}
-                {media.type === 'video' && <video autoplay loop muted playsinline src={`${assetsDir}/${media.src}`} />}
-                {media.caption && (
-                  <p class="caption">
-                    <small>{media.caption}</small>
-                  </p>
-                )}
-              </li>
-            ))
-          }
+          {data.map((media) => (
+            <li class:list={['img-container', {withCaption: media.caption}]}>
+              {media.type === 'image' && <img src={`${assetsDir}/${media.src}`} alt={media.alt} />}
+              {media.type === 'video' && <video autoplay loop muted playsinline src={`${assetsDir}/${media.src}`} />}
+              {media.caption && (
+                <p class="caption">
+                  <small>{media.caption}</small>
+                </p>
+              )}
+            </li>
+          ))}
         </ul>
       </div>
     </section>

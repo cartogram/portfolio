@@ -21,18 +21,16 @@ const {href, primary, secondary, external, isCurrent, wrap} = Astro.props
   aria-current={isCurrent ? 'page' : undefined}
 >
   <span class="Anchor__Primary">{primary}</span>
-  {
-    Array.isArray(secondary) ? (
-      <span class="Anchor__Secondary">
-        {secondary.map((item, index) => (
-          <>
-            {item}
-            {index < secondary.length - 1 && <Dash />}
-          </>
-        ))}
-      </span>
-    ) : typeof secondary === 'string' ? (
-      <span class="Anchor__Secondary">{secondary}</span>
-    ) : null
-  }
+  {Array.isArray(secondary) ? (
+    <span class="Anchor__Secondary">
+      {secondary.map((item, index) => (
+        <>
+          {item}
+          {index < secondary.length - 1 && <Dash />}
+        </>
+      ))}
+    </span>
+  ) : typeof secondary === 'string' ? (
+    <span class="Anchor__Secondary">{secondary}</span>
+  ) : null}
 </a>

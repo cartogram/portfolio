@@ -27,9 +27,7 @@ const {Content} = await render(entry)
 <Layout title={`${entry.data.title}`} description={entry.data.description} layout="page">
   <Fragment slot="masthead">
     <header class="Nav">
-      <h1 class="Nav__Title">
-        {entry.data.title}
-      </h1>
+      <h1 class="Nav__Title">{entry.data.title}</h1>
       <nav class="Nav__Controls">
         <div class="Controls justify-end">
           <Anchor href="/" primary="Close" />

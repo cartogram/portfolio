@@ -44,30 +44,24 @@ const {title, description, layout = 'home', color} = Astro.props
           <slot name="masthead" />
         </div>
 
-        {
-          layout === 'home' && (
-            <div class="Projects">
-              <slot name="projects" />
-            </div>
-          )
-        }
+        {layout === 'home' && (
+          <div class="Projects">
+            <slot name="projects" />
+          </div>
+        )}
 
-        {
-          layout === 'single' && (
-            <div class="Hero">
-              <slot name="hero" />
-            </div>
-          )
-        }
+        {layout === 'single' && (
+          <div class="Hero">
+            <slot name="hero" />
+          </div>
+        )}
 
         <div class="Content">
-          {
-            layout === 'single' && (
-              <div class="Chapters">
-                <slot name="chapters" />
-              </div>
-            )
-          }
+          {layout === 'single' && (
+            <div class="Chapters">
+              <slot name="chapters" />
+            </div>
+          )}
 
           <div class="ContentBody">
             <slot name="content" />
@@ -75,13 +69,11 @@ const {title, description, layout = 'home', color} = Astro.props
         </div>
       </section>
 
-      {
-        layout === 'single' && (
-          <div class="Media">
-            <slot name="media" />
-          </div>
-        )
-      }
+      {layout === 'single' && (
+        <div class="Media">
+          <slot name="media" />
+        </div>
+      )}
       <Footer />
     </main>
 

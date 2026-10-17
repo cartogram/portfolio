@@ -49,106 +49,90 @@ const {Content, headings} = await render(entry)
     <h2>{entry.data.description}</h2>
 
     <aside class="Meta">
-      <small
-        >{
-          entry.data?.publishDate?.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-          })
-        }</small
-      >
+      <small>
+        {entry.data?.publishDate?.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+        })}
+      </small>
 
       <Dash />
-      {
-        entry.data.tags.map((tag, index) => (
-          <>
-            {index > 0 && <Dash />}
-            <small>{tag}</small>
-          </>
-        ))
-      }
+      {entry.data.tags.map((tag, index) => (
+        <>
+          {index > 0 && <Dash />}
+          <small>{tag}</small>
+        </>
+      ))}
       <Dash isFullWidth />
     </aside>
 
     <ul class="flex">
-      {
-        entry.data.roles && (
-          <li>
-            <h3>Roles</h3>
-            {entry.data.roles?.map((role, index) => (
-              <>
-                {index > 0 && <Dash />}
-                {role}
-              </>
-            ))}
-          </li>
-        )
-      }
-      {
-        entry.data.url && (
-          <li>
-            <h3>View</h3>
-            <Anchor href={entry.data.url} primary={entry.data.url.replace('https://www.', '').split('/')[0]} />
-          </li>
-        )
-      }
+      {entry.data.roles && (
+        <li>
+          <h3>Roles</h3>
+          {entry.data.roles?.map((role, index) => (
+            <>
+              {index > 0 && <Dash />}
+              {role}
+            </>
+          ))}
+        </li>
+      )}
+      {entry.data.url && (
+        <li>
+          <h3>View</h3>
+          <Anchor href={entry.data.url} primary={entry.data.url.replace('https://www.', '').split('/')[0]} />
+        </li>
+      )}
     </ul>
     <ul>
-      {
-        entry.data.collaborators && (
-          <li>
-            <h3>Collaborators</h3>
-            <ul>
-              {entry.data.collaborators?.map((collaborator) => (
-                <li>
-                  <Anchor wrap href={collaborator.url} primary={collaborator.name} secondary={collaborator.role} />
-                </li>
-              ))}
-            </ul>
-          </li>
-        )
-      }
+      {entry.data.collaborators && (
+        <li>
+          <h3>Collaborators</h3>
+          <ul>
+            {entry.data.collaborators?.map((collaborator) => (
+              <li>
+                <Anchor wrap href={collaborator.url} primary={collaborator.name} secondary={collaborator.role} />
+              </li>
+            ))}
+          </ul>
+        </li>
+      )}
     </ul>
   </Fragment>
 
-  {
-    headings.length > 0 && (
-      <Fragment slot="chapters">
-        <h3>Chapters</h3>
-        <ul>
-          {(entry.rendered?.metadata?.headings as Heading[])
-            .filter((heading) => heading.slug !== 'footnote-label')
-            .map((heading, index) => (
-              <li>
-                <Anchor href={`#${heading.slug}`} primary={String(index + 1)} secondary={heading.text} />
-              </li>
-            ))}
-        </ul>
-      </Fragment>
-    )
-  }
+  {headings.length > 0 && (
+    <Fragment slot="chapters">
+      <h3>Chapters</h3>
+      <ul>
+        {(entry.rendered?.metadata?.headings as Heading[])
+          .filter((heading) => heading.slug !== 'footnote-label')
+          .map((heading, index) => (
+            <li>
+              <Anchor href={`#${heading.slug}`} primary={String(index + 1)} secondary={heading.text} />
+            </li>
+          ))}
+      </ul>
+    </Fragment>
+  )}
 
-  {
-    entry.data.video && (
-      <Fragment slot="hero">
-        <div class="Video">
-          <video autoplay loop muted playsinline src={`/assets/${entry.id}.mp4`} />
-        </div>
-      </Fragment>
-    )
-  }
+  {entry.data.video && (
+    <Fragment slot="hero">
+      <div class="Video">
+        <video autoplay loop muted playsinline src={`/assets/${entry.id}.mp4`} />
+      </div>
+    </Fragment>
+  )}
 
   <div class="Markdown content" slot="content">
     <Content />
   </div>
 
-  {
-    entry.data.media && (
-      <Fragment slot="media">
-        <Media title="Media" data={entry.data.media} />
-      </Fragment>
-    )
-  }
+  {entry.data.media && (
+    <Fragment slot="media">
+      <Media title="Media" data={entry.data.media} />
+    </Fragment>
+  )}
 
   <style>
     .flex {

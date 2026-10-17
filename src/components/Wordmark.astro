@@ -5,19 +5,17 @@ const max = 15
 ---
 
 <cartogram-wordmark class="Wordmark" aria-hidden="true">
-  {
-    letters.map((l) => (
-      <div class="Track">
-        {Array.from({
-          length: Math.floor(Math.random() * (max - min + 1)) + min,
-        }).map((_, i) => (
-          <span style={`--index: ${max - i}`} class="Letter">
-            {l}
-          </span>
-        ))}
-      </div>
-    ))
-  }
+  {letters.map((l) => (
+    <div class="Track">
+      {Array.from({
+        length: Math.floor(Math.random() * (max - min + 1)) + min,
+      }).map((_, i) => (
+        <span style={`--index: ${max - i}`} class="Letter">
+          {l}
+        </span>
+      ))}
+    </div>
+  ))}
 </cartogram-wordmark>
 
 <style>

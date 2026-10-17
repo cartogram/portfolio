@@ -48,18 +48,18 @@ const previewLayers = {min: 2, max: 4}
 <Layout title="Cartogram">
   <div slot="masthead">
     <h2>
-      Berlin-based designer and developer,<br />
-      builder of user interfaces and systems.<br />
+      Berlin-based designer and developer,
+      <br />
+      builder of user interfaces and systems.
+      <br />
     </h2>
 
     <ul class="List">
-      {
-        professionalLinks.map(({label, href}) => (
-          <li>
-            <Anchor href={href} primary={label} />
-          </li>
-        ))
-      }
+      {professionalLinks.map(({label, href}) => (
+        <li>
+          <Anchor href={href} primary={label} />
+        </li>
+      ))}
     </ul>
   </div>
   <Fragment slot="projects">
@@ -67,33 +67,29 @@ const previewLayers = {min: 2, max: 4}
       <li class="">
         <h3>Current</h3>
         <ul class="Projects">
-          {
-            currentProjects.map((project) => (
-              <li data-preview={project.data.video ? `/assets/${project.id}.mp4` : undefined}>
-                <Anchor
-                  href={project.data.published ? [project.collection, project.id].join('/') : (project.data.url ?? '#')}
-                  primary={project.data.title}
-                  secondary={project.data.type}
-                />
-              </li>
-            ))
-          }
+          {currentProjects.map((project) => (
+            <li data-preview={project.data.video ? `/assets/${project.id}.mp4` : undefined}>
+              <Anchor
+                href={project.data.published ? [project.collection, project.id].join('/') : (project.data.url ?? '#')}
+                primary={project.data.title}
+                secondary={project.data.type}
+              />
+            </li>
+          ))}
         </ul>
       </li>
       <li class="">
         <h3>Past</h3>
         <ul class="Projects">
-          {
-            pastProjects.map((project) => (
-              <li data-preview={project.data.video ? `/assets/${project.id}.mp4` : undefined}>
-                <Anchor
-                  href={project.data.published ? [project.collection, project.id].join('/') : (project.data.url ?? '#')}
-                  primary={project.data.title}
-                  secondary={project.data.type}
-                />
-              </li>
-            ))
-          }
+          {pastProjects.map((project) => (
+            <li data-preview={project.data.video ? `/assets/${project.id}.mp4` : undefined}>
+              <Anchor
+                href={project.data.published ? [project.collection, project.id].join('/') : (project.data.url ?? '#')}
+                primary={project.data.title}
+                secondary={project.data.type}
+              />
+            </li>
+          ))}
         </ul>
       </li>
     </ul>
@@ -103,11 +99,9 @@ const previewLayers = {min: 2, max: 4}
       data-min-layers={previewLayers.min}
       style={`--layers: ${previewLayers.max}`}
     >
-      {
-        Array.from({length: previewLayers.max}, (_, i) => (
-          <div class="ProjectPreview__Layer" style={`--layer: ${previewLayers.max - i}`} />
-        ))
-      }
+      {Array.from({length: previewLayers.max}, (_, i) => (
+        <div class="ProjectPreview__Layer" style={`--layer: ${previewLayers.max - i}`} />
+      ))}
       <div class="ProjectPreview__Layer ProjectPreview__Layer--front" style="--layer: 0">
         <video muted loop playsinline preload="none"></video>
       </div>
@@ -118,11 +112,11 @@ const previewLayers = {min: 2, max: 4}
       <Image class="Image" src={me1} alt="Matthew Seccafien and his black cat Otto standing in his Berlin apartment." />
       <Image class="Image" src={me3} alt="Matthew Seccafien running in the Berlin Marathon 2023." />
       <div>
-        <small
-          >Follow my inactivity on <a href="https://instagram.com/cartogram">Instagram</a>,<br /><a
-            href="https://www.strava.com/athletes/59501199">Strava</a
-          > or <a href="https://letterboxd.com/cartogram/">Letterboxd</a>.</small
-        >
+        <small>
+          Follow my inactivity on <a href="https://instagram.com/cartogram">Instagram</a>,<br />
+          <a href="https://www.strava.com/athletes/59501199">Strava</a> or{' '}
+          <a href="https://letterboxd.com/cartogram/">Letterboxd</a>.
+        </small>
       </div>
     </div>
     <div class="ContentContainer">
@@ -138,17 +132,19 @@ const previewLayers = {min: 2, max: 4}
         than any single facet.
       </p>
       <p>
-        When not at my computer I can be found <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.strava.com/athletes/59501199">running</a
-        > around Tempelhofer Feld in <a href="/berlin">Berlin</a>, at the <a
-          href="https://letterboxd.com/cartogram/"
-          target="_blank"
-          rel="noopener noreferrer">kino</a
-        > or hanging out with my partner <a target="_blank" rel="noopener noreferrer" href="https://www.fimcd.ca/"
-          >Fiona</a
-        > and our cat Otto (pictured).
+        When not at my computer I can be found{' '}
+        <a target="_blank" rel="noopener noreferrer" href="https://www.strava.com/athletes/59501199">
+          running
+        </a>{' '}
+        around Tempelhofer Feld in <a href="/berlin">Berlin</a>, at the{' '}
+        <a href="https://letterboxd.com/cartogram/" target="_blank" rel="noopener noreferrer">
+          kino
+        </a>{' '}
+        or hanging out with my partner{' '}
+        <a target="_blank" rel="noopener noreferrer" href="https://www.fimcd.ca/">
+          Fiona
+        </a>{' '}
+        and our cat Otto (pictured).
       </p>
 
       <Speaking />
