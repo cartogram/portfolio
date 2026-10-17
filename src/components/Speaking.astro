@@ -1,21 +1,18 @@
 ---
-import Anchor from './Anchor.astro'
----
+import Anchor from './Anchor.astro'---
 
 <h3>Speaking</h3>
 
 <ul class="List--small">
   <li>
-    <span class="title">My UI is not your UI</span>
-    <br />
-    <Anchor href="https://reactadvanced.com" primary="React Advanced London" secondary="2026" external />
-    <Anchor href="https://weyweyweb.com" primary="Wey Wey Web" secondary="2026" external />
     <Anchor
       href="https://your-ui-is-not-my-ui.cartogram.ca/"
-      primary="Companion site"
-      secondary="your-ui-is-not-my-ui.cartogram.ca"
+      primary="My UI is not your UI"
+      secondary="Slides"
       external
     />
+    <Anchor href="https://reactadvanced.com" primary="React Advanced London" secondary="2026" external />
+    <Anchor href="https://weyweyweb.com" primary="Wey Wey Web" secondary="2026" external />
   </li>
 
   <li>
@@ -40,5 +37,4 @@ import Anchor from './Anchor.astro'
   .List--small {
     gap: 1.5rem;
     font-size: var(--font-size-md);
-  }
-</style>
+  }</style>
