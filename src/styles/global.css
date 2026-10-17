@@ -197,3 +197,19 @@ hr {
   height: 100%;
   object-fit: cover;
 }
+
+/* The Static toggle mirrors prefers-reduced-motion for anyone who wants it on
+   this site only. */
+.motion-static *,
+.motion-static *::before,
+.motion-static *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+.motion-static::view-transition-group(*),
+.motion-static::view-transition-old(*),
+.motion-static::view-transition-new(*) {
+  animation: none !important;
+}

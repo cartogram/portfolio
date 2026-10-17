@@ -72,10 +72,19 @@ const ogImageSrc = `${url}/${ogImage}`
         }
   }
 
+  const getMotionPreference = () => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('motion')) {
+      return localStorage.getItem('motion')
+    }
+
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'static' : 'motion'
+  }
+
   function setDarkMode(document) {
     const {theme, mode} = getThemePreference()
     document.documentElement.classList[theme === 'dark' ? 'add' : 'remove']('theme-dark')
     document.documentElement.classList[mode === 'color-mono' ? 'add' : 'remove']('color-mono')
+    document.documentElement.classList[getMotionPreference() === 'static' ? 'add' : 'remove']('motion-static')
 
     if (typeof localStorage !== 'undefined') {
       // Watch the document element and persist user preference when it changes.
@@ -86,6 +95,14 @@ const ogImageSrc = `${url}/${ogImage}`
         localStorage.setItem('theme', isDark ? 'dark' : 'light')
 
         localStorage.setItem('mode', isColorMono ? 'color-mono' : 'mode-default')
+
+        const isStatic = document.documentElement.classList.contains('motion-static')
+        // Only store a choice that differs from the OS, so the default keeps following it.
+        if (isStatic === window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          localStorage.removeItem('motion')
+        } else {
+          localStorage.setItem('motion', isStatic ? 'static' : 'motion')
+        }
       })
       observer.observe(document.documentElement, {
         attributes: true,

@@ -209,6 +209,10 @@ const previewLayers = {min: 2, max: 4}
       }
     }
 
+    :global(.motion-static) .ProjectPreview__Layer:not(.ProjectPreview__Layer--front) {
+      display: none;
+    }
+
     .ContentLayout {
       display: grid;
       grid-template-columns: 1fr;
@@ -266,7 +270,8 @@ const previewLayers = {min: 2, max: 4}
     // it rather than the viewport.
     document.body.append(preview)
 
-    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
+    // Read on each frame so the Static toggle takes effect without a reload.
+    const reducedMotion = () => document.documentElement.classList.contains('motion-static')
     // Front-most layer first.
     const layers = [...preview.querySelectorAll<HTMLElement>('.ProjectPreview__Layer')].reverse().map((el, index) => ({
       el,
@@ -313,7 +318,7 @@ const previewLayers = {min: 2, max: 4}
       let moving = false
 
       layers.forEach((layer) => {
-        const t = reducedMotion ? 1 : 1 - Math.exp(-dt / layer.smoothing)
+        const t = reducedMotion() ? 1 : 1 - Math.exp(-dt / layer.smoothing)
         const x = target.x + (spread ? layer.offset.x : 0)
         const y = target.y + (spread ? layer.offset.y : 0)
         layer.x += (x - layer.x) * t

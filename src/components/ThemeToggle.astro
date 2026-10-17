@@ -4,11 +4,14 @@ import Anchor from './Anchor.astro'
 
 <theme-toggle>
   <nav class="Controls">
-    <button class="Theme">
-      <Anchor primary="Theme" secondary="" />
+    <button class="Theme" aria-label="Dark theme">
+      <Anchor primary="" />
     </button>
-    <button class="Color">
-      <Anchor primary="Color" secondary="" />
+    <button class="Color" aria-label="Monochrome">
+      <Anchor primary="" />
+    </button>
+    <button class="Motion" aria-label="Reduce motion">
+      <Anchor primary="" />
     </button>
   </nav>
 </theme-toggle>
@@ -18,72 +21,62 @@ import Anchor from './Anchor.astro'
     constructor() {
       super()
 
-      const themeButton = this.querySelector('.Theme')
-      const colorButton = this.querySelector('.Color')
+      const toggles = [
+        {button: this.querySelector('.Theme'), className: 'theme-dark'},
+        {button: this.querySelector('.Color'), className: 'color-mono'},
+        {button: this.querySelector('.Motion'), className: 'motion-static'},
+      ]
 
-      const setTheme = ({dark, color}: {dark: boolean; color: boolean}) => {
-        const doc = document.documentElement
-        doc.classList[dark ? 'add' : 'remove']('theme-dark')
-        doc.classList[color ? 'add' : 'remove']('color-mono')
+      const doc = document.documentElement
 
-        if (themeButton) {
-          themeButton.setAttribute('aria-pressed', String(dark))
-        }
-        if (colorButton) {
-          colorButton.setAttribute('aria-pressed', String(color))
+      const sync = () => {
+        for (const {button, className} of toggles) {
+          button?.setAttribute('aria-pressed', String(doc.classList.contains(className)))
         }
       }
 
-      if (themeButton) {
-        themeButton.addEventListener('click', () =>
-          setTheme({
-            dark: !this.isDark(),
-            color: this.isColorMono(),
-          }),
-        )
+      for (const {button, className} of toggles) {
+        button?.addEventListener('click', () => {
+          doc.classList.toggle(className)
+          sync()
+        })
       }
 
-      if (colorButton) {
-        colorButton.addEventListener('click', () =>
-          setTheme({
-            dark: this.isDark(),
-            color: !this.isColorMono(),
-          }),
-        )
-      }
-
-      setTheme({
-        dark: this.isDark(),
-        color: this.isColorMono(),
-      })
-    }
-
-    isDark() {
-      return document.documentElement.classList.contains('theme-dark')
-    }
-
-    isColorMono() {
-      return document.documentElement.classList.contains('color-mono')
+      sync()
     }
   }
   customElements.define('theme-toggle', ThemeToggle)
 </script>
 
 <style>
+  /* The label is drawn from CSS so it matches the classes Head sets before
+     first paint, rather than flashing the default until this script runs. */
+  .Controls :global(.Anchor__Primary)::after {
+    content: var(--toggle-label);
+  }
+
   .Theme {
-    --anchor-secondary-content: 'Light';
+    --toggle-label: 'Light';
   }
 
   :global(.theme-dark) .Theme {
-    --anchor-secondary-content: 'Dark';
+    --toggle-label: 'Dark';
   }
 
   .Color {
-    --anchor-secondary-content: 'Auto';
+    --toggle-label: 'Colour';
   }
 
   :global(.color-mono) .Color {
-    --anchor-secondary-content: 'Mono';
+    --toggle-label: 'Mono';
+  }
+
+  .Motion {
+    --toggle-label: 'Motion';
+  }
+
+  :global(.motion-static) .Motion {
+    --toggle-label: 'Static';
   }
 
   :global(.color-mono) {
