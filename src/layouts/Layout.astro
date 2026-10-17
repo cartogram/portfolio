@@ -87,10 +87,12 @@ const {title, description, layout = 'home', color} = Astro.props
 
     <script>
       // Keep the loading bar up for at least this long, even when the page is ready
-      // sooner. With reduced motion the bar is hidden, so don't hold the page at all.
+      // sooner. With reduced motion or the Static toggle the bar is hidden, so don't
+      // hold the page at all.
       const MIN_LOAD_MS = 400
       const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
-      const minLoad = () => (reducedMotion.matches ? 0 : MIN_LOAD_MS)
+      const isStatic = () => reducedMotion.matches || document.documentElement.classList.contains('motion-static')
+      const minLoad = () => (isStatic() ? 0 : MIN_LOAD_MS)
       const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
       let firstLoad = true
 

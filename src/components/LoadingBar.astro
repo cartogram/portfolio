@@ -47,24 +47,29 @@
     translate: 0 0;
   }
 
-  /* With reduced motion there's no bar, no push and no hold (see Layout.astro). */
+  /* With reduced motion, or the Static toggle, there's no bar, no push and no hold
+     (see Layout.astro). */
   @media (prefers-reduced-motion: reduce) {
     .LoadingBar {
       display: none;
     }
   }
 
+  :global(.motion-static) .LoadingBar {
+    display: none;
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     /* The page sits below the bar while it's shown and rises with it. */
-    :global(.Main) {
+    :global(:root:not(.motion-static) .Main) {
       margin-top: var(--loading-bar-height);
     }
 
-    :global(.loaded .Main) {
+    :global(:root.loaded:not(.motion-static) .Main) {
       margin-top: 0;
     }
 
-    :global(.loaded.is-navigating .Main) {
+    :global(:root.loaded.is-navigating:not(.motion-static) .Main) {
       margin-top: var(--loading-bar-height);
     }
 
