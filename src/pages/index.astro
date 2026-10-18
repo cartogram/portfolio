@@ -118,7 +118,9 @@ const previewLayers = {min: 2, max: 4}
         <Image class="Image" src={me3} alt="Matthew Seccafien running in the Berlin Marathon 2023." />
         <div class="ImageCaption">
           <small>
-            Follow my inactivity on <a href="https://instagram.com/cartogram">Instagram</a>,{' '}
+            Follow my inactivity on
+            <br />
+            <a href="https://instagram.com/cartogram">Instagram</a>,{' '}
             <a href="https://www.strava.com/athletes/59501199">Strava</a> or{' '}
             <a href="https://letterboxd.com/cartogram/">Letterboxd</a>.
           </small>
@@ -235,7 +237,8 @@ const previewLayers = {min: 2, max: 4}
 
     @media (width > 950px) {
       .ImageContainer {
-        padding-right: 4rem;
+        /* 1rem just past the breakpoint, easing out to 4rem on wide screens. */
+        padding-right: clamp(1rem, 8vw - 4rem, 4rem);
       }
       .ContentLayout {
         grid-template-columns: 1fr 1fr;
@@ -264,7 +267,6 @@ const previewLayers = {min: 2, max: 4}
     .ImageCaption small {
       display: block;
       line-height: 1.75;
-      text-wrap: balance;
     }
 
     /* Below this the caption no longer fits beside the second photo in two lines,
