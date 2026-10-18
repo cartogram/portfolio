@@ -109,14 +109,20 @@ const previewLayers = {min: 2, max: 4}
   </Fragment>
   <div class="ContentLayout" slot="content">
     <div class="ImageContainer">
-      <Image class="Image" src={me1} alt="Matthew Seccafien and his black cat Otto standing in his Berlin apartment." />
-      <Image class="Image" src={me3} alt="Matthew Seccafien running in the Berlin Marathon 2023." />
-      <div>
-        <small>
-          Follow my inactivity on <a href="https://instagram.com/cartogram">Instagram</a>,{' '}
-          <a href="https://www.strava.com/athletes/59501199">Strava</a> or{' '}
-          <a href="https://letterboxd.com/cartogram/">Letterboxd</a>.
-        </small>
+      <div class="ImageGrid">
+        <Image
+          class="Image"
+          src={me1}
+          alt="Matthew Seccafien and his black cat Otto standing in his Berlin apartment."
+        />
+        <Image class="Image" src={me3} alt="Matthew Seccafien running in the Berlin Marathon 2023." />
+        <div class="ImageCaption">
+          <small>
+            Follow my inactivity on <a href="https://instagram.com/cartogram">Instagram</a>,{' '}
+            <a href="https://www.strava.com/athletes/59501199">Strava</a> or{' '}
+            <a href="https://letterboxd.com/cartogram/">Letterboxd</a>.
+          </small>
+        </div>
       </div>
     </div>
     <div class="ContentContainer">
@@ -216,6 +222,12 @@ const previewLayers = {min: 2, max: 4}
     }
 
     .ImageContainer {
+      /* Size to the photos rather than stretching to the About column beside it. */
+      align-self: start;
+      container-type: inline-size;
+    }
+
+    .ImageGrid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       grid-template-rows: repeat(4, 1fr);
@@ -244,14 +256,29 @@ const previewLayers = {min: 2, max: 4}
       z-index: 0;
     }
 
-    .ImageContainer div {
+    .ImageCaption {
       grid-column: 1 / 3;
       grid-row: 4 / 5;
     }
 
-    .ImageContainer small {
+    .ImageCaption small {
       display: block;
+      line-height: 1.75;
       text-wrap: balance;
+    }
+
+    /* Below this the caption no longer fits beside the second photo in two lines,
+       so give it the full width underneath. Rows size to the photos so no empty
+       row is left between them and the caption. */
+    @container (width < 440px) {
+      .ImageGrid {
+        grid-template-rows: repeat(4, auto);
+      }
+
+      .ImageCaption {
+        grid-column: 1 / -1;
+        grid-row: 5;
+      }
     }
   </style>
 </Layout>
